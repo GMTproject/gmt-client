@@ -29,9 +29,9 @@ function Nav(props) {
     </div>
     {
       mapHov && <div className="mapHov" onMouseOver={e => setMapHov(true)} onMouseLeave={e => setMapHov(false)}>
-        <p>본관</p>
-        <p>금봉관</p>
-        <p>기숙사</p>
+        <a href="/"><div>본관</div></a><hr />
+        <a href="/"><div>금봉관</div></a><hr />
+        <a href="/"><div>기숙사</div></a>
       </div>
     }
     <div className="right">
