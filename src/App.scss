@@ -1,0 +1,61 @@
+.App {
+  .navigator {
+    background-color: #fdfdfd;
+    position: relative;
+    left: -8px;
+    top: -8px;
+    border: 1px solid black;
+    width: calc(100vw - 2px);
+    height: calc(8vh - 2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .m-text {
+      display: flex;
+      height: 100%;
+
+      div {
+        height: 100%;
+
+        a {
+          display: flex;
+          align-items: center;
+          color: #121212;
+          font-size: 16px;
+          cursor: pointer;
+          text-decoration-line: none;
+          height: 100%;
+
+          &:hover {
+            color: blue;
+          }
+        }
+      }
+    }
+
+    .right {
+      position: absolute;
+      right: 30px;
+    }
+
+    .mapHov {
+      position: absolute;
+      text-align: center;
+      top: 59px;
+      margin-left: -110px;
+      justify-content: center;
+      border-radius: 0 0 10px 10px;
+      background-color: #fdfdfd;
+      width: 100px;
+    }
+  }
+
+  .map {
+    width: calc(100vw - 8px);
+  }
+
+  .teach {
+    width: calc(100vw - 8px);
+  }
+}
