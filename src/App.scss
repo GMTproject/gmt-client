@@ -76,12 +76,17 @@
     }
   }
 
-  .mapCenter {
-    width: calc(100vw - 8px);
-  }
-
   .map {
     width: calc(100vw - 8px);
+
+    .img {
+      position: absolute;
+      margin: auto;
+
+      img {
+        width: 80vw;
+      }
+    }
   }
 
   .teach {

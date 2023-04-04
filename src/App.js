@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import center1 from './imgs/본관1층.png';
 import './App.scss';
 
 function App() {
+  const [map, setMap] = useState("center"); // center, auditorium, domitory 3속성
+  const [floor, setFloor] = useState(1);
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<Navigate to={'/map/center/1'} replace />} />
-          <Route path="/map" element={<Navigate to={'/map/center/1'} replace />} />
-          <Route path="/map/center" element={<Navigate to={'/map/center/1'} replace />} />
-          <Route path="/map/auditorium" element={<Navigate to={'/map/auditorium/1'} replace />} />
-          <Route path="/map/domitory" element={<Navigate to={'/map/domitory/1'} replace />} />
-          <Route path="/map/center/1" element={<><Nav /><MapCenterFir /></>}></Route>
-          <Route path="/map/center/2" element={<><Nav /><MapCenterSec /></>}></Route>
-          <Route path="/map/center/3" element={<><Nav /><MapCenterThr /></>}></Route>
-          <Route path="/map/center/4" element={<><Nav /><MapCenterFou /></>}></Route>
-          <Route path="/map/auditorium/1" element={<><Nav /><MapAuditorium /></>}></Route>
-          <Route path="/map/domitory/1" element={<><Nav /><MapDomitori /></>}></Route>
+          <Route path="*" element={<Navigate to={'/map'} replace />} />
+          <Route path="/map" element={<><Nav /><Map location={map} floor={floor} /></>} />
           <Route path="/teach" element={<><Nav /><Teach /></>} />
           <Route path="/login" element={<><Login /></>} />
         </Routes>
@@ -57,29 +51,14 @@ function Nav(props) {
   </div >;
 }
 
-function MapCenterFir() {
-  return <div className="mapCenter">
-    Center First Floor
+function Map({ location, floor }) {
+  return <div className="map">
+    <div className="img">
+      {location === 'center' && floor === 1 && <img src={center1} alt={'center1'} />}
+    </div>
   </div>;
 }
 
-function MapCenterSec() {
-  return <div className="mapCenter">
-    Center Second Floor
-  </div>;
-}
-
-function MapCenterThr() {
-  return <div className="mapCenter">
-    Center Third Floor
-  </div>;
-}
-
-function MapCenterFou() {
-  return <div className="mapCenter">
-    Center Fourth Floor
-  </div>;
-}
 
 function Teach() {
   return <div className="teach">
@@ -90,17 +69,5 @@ function Teach() {
 function Login() {
   return <div className="login">
     login
-  </div>;
-}
-
-function MapDomitori() {
-  return <div className="mapDomitori">
-    Domitory
-  </div>;
-}
-
-function MapAuditorium() {
-  return <div className="mapAuditorium">
-    Auditorium
   </div>;
 }
