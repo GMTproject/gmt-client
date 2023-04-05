@@ -4,14 +4,14 @@ import center1 from './imgs/본관1층.png';
 import './App.scss';
 
 function App() {
-  const [map, setMap] = useState("center"); // center, auditorium, domitory 3속성
+  const [structure, setStructure] = useState("center"); // center, auditorium, domitory 3속성
   const [floor, setFloor] = useState(1);
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<Navigate to={'/map'} replace />} />
-          <Route path="/map" element={<><Nav /><Map location={map} floor={floor} /></>} />
+          <Route path="/map" element={<><Nav /><Map location={structure} floor={floor} setFloor={setFloor} setStructure={setStructure} /></>} />
           <Route path="/teach" element={<><Nav /><Teach /></>} />
           <Route path="/login" element={<><Login /></>} />
         </Routes>
@@ -51,8 +51,10 @@ function Nav(props) {
   </div >;
 }
 
-function Map({ location, floor }) {
+function Map({ location, floor, setStructure, setFloor }) {
   return <div className="map">
+    <input onChange={e => setFloor(s => parseInt(e.target.value))} />
+    <input onChange={e => setStructure(s => parseInt(e.target.value))} />
     <div className="img">
       {location === 'center' && floor === 1 && <img src={center1} alt={'center1'} />}
     </div>
