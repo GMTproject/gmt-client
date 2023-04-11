@@ -3,7 +3,7 @@
   left: 0;
   top: 0;
   background-color: #F0F1F2;
-  height: calc(97vh);
+  height: calc(100vh);
 
   .navigator {
     background-color: #fdfdfd;
@@ -81,16 +81,23 @@
     width: calc(100vw - 8px);
 
     .img {
-      position: absolute;
       margin: auto;
+      width: 80vw;
+      height: 80vh;
 
       img {
         width: 80vw;
+        height: 80vh;
+        object-fit: scale-down;
       }
     }
   }
 
   .teach {
-    width: calc(100vw - 8px);
+    width: 100vw;
+  }
+
+  .login {
+    width: 100vw;
   }
 }
