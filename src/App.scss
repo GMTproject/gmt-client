@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+}
+
 .App {
   position: absolute;
   left: 0;
@@ -14,6 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'LotteMartDream';
 
     .middle-text {
       display: flex;
@@ -37,7 +44,7 @@
         }
 
         &+div {
-          margin-left: 20px;
+          margin-left: 40px;
         }
       }
     }
@@ -51,11 +58,11 @@
       position: absolute;
       text-align: center;
       top: 59px;
-      margin-left: -90px;
+      margin-left: -100px;
       justify-content: center;
       border-radius: 0 0 10px 10px;
       background-color: #fdfdfd;
-      width: 95px;
+      width: 90px;
       z-index: 1;
 
       hr {
@@ -102,6 +109,10 @@
   }
 
   .login {
+    width: 100vw;
+  }
+
+  .welcome {
     width: 100vw;
   }
 }
