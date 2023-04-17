@@ -6,7 +6,7 @@ import center1 from './imgs/본관1층.png';
 import goldencrown1 from './imgs/금봉관1층.png';
 import domitory1 from './imgs/기숙사1층.png';
 
-function App() { // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
+export default function App() { // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
   const [structure, setStructure] = useState("center"); // center, goldencrown, domitory 3속성
   const [floor, setFloor] = useState(1);
   useEffect(e => {
@@ -42,8 +42,6 @@ function App() { // 페이지로 보여주는 부분 반드시 필요함. 임의
     </div>
   );
 }
-
-export default App;
 
 function Nav({ setStructure }) { // 네비게이션 바
   const [logined, setLogined] = useState(false);
