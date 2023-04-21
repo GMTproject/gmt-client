@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import './App.scss';
 // 이미지 불러오기
-import center1 from './imgs/본관1층.png';
-import goldencrown1 from './imgs/금봉관1층.png';
-import domitory1 from './imgs/기숙사1층.png';
+import Map from "./pages/Map";
+import Welcome from "./pages/Welcome";
+import Login from "./pages/Login";
 
 export default function App() { // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
   const [structure, setStructure] = useState("center"); // center, goldencrown, domitory 3속성
@@ -98,45 +98,8 @@ function Nav({ setStructure }) { // 네비게이션 바
   </div>;
 }
 
-function Map({ structure, floor, setStructure, setFloor }) {
-  return <div className="map">
-    &nbsp;<input onChange={e => setFloor(_ => parseInt(e.target.value))} value={floor} />
-    &nbsp;<input onChange={e => setStructure(_ => e.target.value)} value={structure} />
-    <div className="img">
-      {/* 지도를 보여주는 부분. 앞 조건이 모두 만족을 하게 되면 뒤에 있는 이미지 태그가 보이게 함 */}
-      {structure === 'center' && floor === 1 && <img src={center1} alt={'center1'} />}
-      {structure === 'goldencrown' && floor === 1 && <img src={goldencrown1} alt={'goldencrown1'} />}
-      {structure === 'domitory' && floor === 1 && <img src={domitory1} alt={'domitory1'} />}
-    </div>
-  </div>;
-}
-
 function Teach() { //선생님 페이지
   return <div className="teach">
     teach
-  </div>;
-}
-
-function Login() { //로그인 화면 페이지
-  const time = new Date();
-  return <div className="login">
-    <button onClick={e => {
-      localStorage.setItem('logininfo', 'Guest');
-      localStorage.setItem('logintime', time.toLocaleTimeString());
-      window.location.href = '/map'
-    }}>게스트 로그인</button>
-  </div>;
-}
-
-function Welcome() {
-  const time = new Date();
-  return <div className="welcome">
-    welcome
-    <button onClick={e => {
-      localStorage.setItem('logininfo', 'Guest');
-      localStorage.setItem('logintime', time.toLocaleTimeString());
-      window.location.href = '/map'
-    }}>게스트 로그인</button>
-    <button onClick={e => window.location.href = '/login'}>로그인 하러가기</button>
   </div>;
 }
