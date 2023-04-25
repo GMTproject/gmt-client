@@ -1,0 +1,36 @@
+.welcome {
+  background-color: #fdfdfd;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .main {
+    margin-top: -30px;
+
+    .img {
+      text-align: center;
+
+      img {
+        height: 25vh;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+
+      button {
+        width: 140px;
+        height: 40px;
+        font-size: 14px;
+
+        &+button {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

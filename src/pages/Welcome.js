@@ -1,5 +1,6 @@
 import React from "react";
 import logo from '../imgs/logo.png';
+import '../styles/Welcome.scss';
 
 export default function Welcome() {
   const time = new Date();
