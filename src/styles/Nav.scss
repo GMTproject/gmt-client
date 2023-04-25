@@ -2,7 +2,7 @@
   background-color: #fdfdfd;
   z-index: 3;
   position: relative;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ccccdc;
   width: calc(100vw - 2px);
   height: calc(8vh - 2px);
   display: flex;
@@ -63,6 +63,8 @@
   }
 
   .mapHov {
+    border: 0.5px solid #eaeaea;
+    border-top: none;
     position: absolute;
     text-align: center;
     top: 59px;
