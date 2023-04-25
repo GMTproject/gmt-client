@@ -10,6 +10,16 @@
   justify-content: center;
   font-family: 'LotteMartDream';
 
+  .left {
+    position: absolute;
+    left: 1.5vw;
+
+    img {
+      height: 35px;
+      cursor: pointer;
+    }
+  }
+
   .middle-text {
     display: flex;
     height: 100%;

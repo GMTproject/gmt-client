@@ -1,4 +1,6 @@
 import React from "react";
+
+import '../styles/Map.scss';
 import center1 from '../imgs/본관1층.png';
 import goldencrown1 from '../imgs/금봉관1층.png';
 import domitory1 from '../imgs/기숙사1층.png';
