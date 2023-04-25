@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+}
+
+.App {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #F0F1F2;
+  height: calc(100vh);
+  width: 100vw;
+
+  .left {
+    position: absolute;
+    left: 1.5vw;
+
+    img {
+      height: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .map {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    background-color: #fdfdfd;
+
+    .main {
+      position: absolute;
+      top: 15vh;
+      width: 100vw;
+      height: 85vh;
+      display: flex;
+
+      .sideleft {
+        overflow-y: hidden;
+        // height: 100vh;
+        width: 20vw;
+        margin-left: 3vw;
+        text-align: center;
+
+        input {
+          width: 95%;
+        }
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      .img {
+        position: absolute;
+        right: 3vw;
+        bottom: 3vw;
+        background-color: #F0F1F2;
+        border-radius: 30px;
+        // width: 70vw;
+        height: 600px;
+
+        img {
+          width: 70vw;
+          height: 70vh;
+          object-fit: scale-down;
+        }
+      }
+    }
+  }
+
+  .teach {
+    width: 100vw;
+  }
+
+  .login {
+    width: 100vw;
+  }
+
+  .welcome {
+    background-color: #fdfdfd;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .main {
+      margin-top: -30px;
+
+      .img {
+        text-align: center;
+
+        img {
+          height: 25vh;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+
+        button {
+          width: 140px;
+          height: 40px;
+          font-size: 14px;
+
+          &+button {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

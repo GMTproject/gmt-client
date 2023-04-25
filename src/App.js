@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate, Link } from 'react-router-dom'
-import './App.scss';
+import './styles/App.scss';
+import './styles/Nav.scss';
 import Map from "./pages/Map";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
@@ -52,7 +53,7 @@ function Nav({ setStructure }) { // 네비게이션 바
     if (localStorage.getItem('logininfo') !== 'Guest') {
       setLogined(localStorage.getItem('logininfo'));
     }
-    else if (localStorage.getItem('logininfo') === 'Guest') {
+    else {
       setLogined(false);
     }
   }, []);
