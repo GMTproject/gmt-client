@@ -129,7 +129,7 @@
       }
     }
 
-    .img {
+    .canvas {
       position: absolute;
       display: flex;
       align-items: center;
@@ -140,10 +140,22 @@
       border-radius: 15px;
       border: 1px solid #ccccdc;
       width: 70vw;
+      justify-content: center;
+
+      .img {
+        overflow-x: scroll;
+        overflow-y: scroll;
+
+        img {
+          // width: 100vw;
+          object-fit: contain;
+        }
+      }
 
       .move {
         position: absolute;
         top: 0;
+        left: 0;
         display: flex;
         margin-top: 20px;
         margin-left: 15px;
@@ -182,11 +194,6 @@
           border-right: 1px solid black;
           margin: 0 10px;
         }
-      }
-
-      img {
-        width: 70vw;
-        object-fit: fill;
       }
     }
   }

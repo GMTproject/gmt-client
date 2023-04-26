@@ -16,7 +16,7 @@ import search from '../imgs/search.png';
 export default function Map({ structure, floor, setStructure, setFloor }) {
   const [searching, setSearching] = useState('');
   const [isfloorClicked, setIsfloorClicked] = useState(false);
-  const [imgsize, setImgsize] = useState('100%');
+  const [imgsize, setImgsize] = useState(100);
   let infos = [
     {
       name: '홍길동',
@@ -27,8 +27,14 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
   ];
   function sizing(e) {
     let y = e.nativeEvent.wheelDeltaY;
-    console.log(y);
-
+    if (y > 0 && imgsize > 19) { //down
+      setImgsize(e => e - 5);
+      console.log('down');
+    }
+    else if (y < 0 && imgsize <= 60) {//up
+      setImgsize(e => e + 5);
+      console.log('up');
+    }
   }
   return <div className="map">
     <div className="main">
@@ -63,7 +69,7 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
           })}
         </div>
       </div>
-      <div className="img" onWheel={e => sizing(e)}>
+      <div className="canvas" onWheel={e => sizing(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
@@ -78,16 +84,18 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
             }
           }}>기숙사</button>
         </div>
-        {structure === 'center' && floor === 1 && <img src={center1} alt={'center1'} />}
-        {structure === 'center' && floor === 2 && <img src={center2} alt={'center2'} />}
-        {structure === 'center' && floor === 3 && <img src={center3} alt={'center3'} />}
-        {structure === 'center' && floor === 4 && <img src={center4} alt={'center4'} />}
-        {structure === 'goldencrown' && floor === 1 && <img src={goldencrown1} alt={'goldencrown1'} />}
-        {structure === 'goldencrown' && floor === 2 && <img src={goldencrown2} alt={'goldencrown2'} />}
-        {structure === 'goldencrown' && floor === 3 && <img src={goldencrown3} alt={'goldencrown3'} />}
-        {structure === 'goldencrown' && floor === 4 && <img src={goldencrown4} alt={'goldencrown4'} />}
-        {structure === 'domitory' && floor === 1 && <img src={domitory1} alt={'domitory1'} />}
-        {structure === 'domitory' && floor === 2 && <img src={domitory2} alt={'domitory2'} />}
+        <div className="img">
+          {structure === 'center' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={center1} alt={'center1'} />}
+          {structure === 'center' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={center2} alt={'center2'} />}
+          {structure === 'center' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={center3} alt={'center3'} />}
+          {structure === 'center' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={center4} alt={'center4'} />}
+          {structure === 'goldencrown' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={goldencrown1} alt={'goldencrown1'} />}
+          {structure === 'goldencrown' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={goldencrown2} alt={'goldencrown2'} />}
+          {structure === 'goldencrown' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={goldencrown3} alt={'goldencrown3'} />}
+          {structure === 'goldencrown' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={goldencrown4} alt={'goldencrown4'} />}
+          {structure === 'domitory' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={domitory1} alt={'domitory1'} />}
+          {structure === 'domitory' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={domitory2} alt={'domitory2'} />}
+        </div>
       </div>
     </div>
   </div>;
