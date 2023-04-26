@@ -21,7 +21,7 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
     {
       name: '홍길동',
       job: '1학년 5반 담임교사',
-      location: '행정실', contact: '010-1111-2222',
+      location: '행정실', contact: '010-1111-22222',
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
