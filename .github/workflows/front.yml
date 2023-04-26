@@ -12,11 +12,8 @@ jobs:
         with:
           ref: feature/map
       - name: Merge to dev branch
+        if: contains(github.ref, '@D')
         run: |
           git checkout dev
           git merge feature/map
           git push origin dev
-
-
-  
-  
