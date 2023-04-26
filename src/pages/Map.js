@@ -11,29 +11,37 @@ import goldencrown3 from '../imgs/금봉관3층.png';
 import goldencrown4 from '../imgs/금봉관4층.png';
 import domitory1 from '../imgs/기숙사1층.png';
 import domitory2 from '../imgs/기숙사2층.png';
+import pin from '../imgs/pin.png';
+import phone from '../imgs/phone.png';
 import search from '../imgs/search.png';
 
 export default function Map({ structure, floor, setStructure, setFloor }) {
   const [searching, setSearching] = useState('');
   const [isfloorClicked, setIsfloorClicked] = useState(false);
-  const [imgsize, setImgsize] = useState(100);
+  const [imgsize, setImgsize] = useState(72);
   let infos = [
     {
+      type: "teach",
       name: '홍길동',
       job: '1학년 5반 담임교사',
-      location: '행정실', contact: '010-1111-22322',
+      location: '행정실', contact: 'chun@gmail.com',
+      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+    },
+    {
+      type: "teach",
+      name: '홍길동',
+      job: '1학년 5반 담임교사',
+      location: '행정실', contact: 'chun@gmail.com',
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
   function sizing(e) {
     let y = e.nativeEvent.wheelDeltaY;
-    if (y > 0 && imgsize > 19) { //down
+    if (y < 0 && imgsize > 19) { //down
       setImgsize(e => e - 5);
-      console.log('down');
     }
-    else if (y < 0 && imgsize <= 60) {//up
+    else if (y > 0 && imgsize <= 72) {//up
       setImgsize(e => e + 5);
-      console.log('up');
     }
   }
   return <div className="map">
@@ -48,24 +56,32 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
         </div>
         <div className="infos">
           {infos.map((i, n) => {
-            return <div className="info" key={n}>
-              <div className="header">
-                <div className="flex">
-                  <div className="name">{i.name}</div>
-                  <div className="job">{i.job}</div>
+            if (i.type === 'teach') {
+              return <div className="info" key={n}>
+                <div className="header">
+                  <div className="flex">
+                    <div className="name">{i.name}</div>
+                    <div className="job">{i.job}</div>
+                  </div>
+                  <div className="flex">
+                    <div className="location"><img src={pin} alt="pin" /> {i.location}&nbsp;</div>
+                    <div className="contact"><img src={phone} alt="phone" /> {i.contact}</div>
+                  </div>
                 </div>
-                <div className="flex">
-                  <div className="location">{i.location}</div>
-                  <div className="contact">{i.contact}</div>
+                <hr />
+                <div className="tags">
+                  {i.tags.map((i, n) => {
+                    return <div className="tag" key={n}>{i}</div>;
+                  })}
                 </div>
-              </div>
-              <hr />
-              <div className="tags">
-                {i.tags.map((i, n) => {
-                  return <div className="tag" key={n}>{i}</div>;
-                })}
-              </div>
-            </div>;
+              </div>;
+            }
+            else if (i.type === 'location') {
+              return <div className="location" key={n}></div>;
+            }
+            else {
+              return <></>;
+            }
           })}
         </div>
       </div>
