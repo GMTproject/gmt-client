@@ -21,37 +21,7 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
     {
       name: '홍길동',
       job: '1학년 5반 담임교사',
-      location: '행정실', contact: '행정실',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: '행정실',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: '행정실',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: '행정실',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: '행정실',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: '행정실',
+      location: '행정실', contact: '010-1111-2222',
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
@@ -74,11 +44,11 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
           {infos.map((i, n) => {
             return <div className="info" key={n}>
               <div className="header">
-                <div>
+                <div className="flex">
                   <div className="name">{i.name}</div>
                   <div className="job">{i.job}</div>
                 </div>
-                <div>
+                <div className="flex">
                   <div className="location">{i.location}</div>
                   <div className="contact">{i.contact}</div>
                 </div>

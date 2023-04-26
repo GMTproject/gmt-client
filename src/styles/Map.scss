@@ -51,8 +51,24 @@
           .header {
             margin-top: 3%;
 
+            .flex {
+              display: flex;
+              margin-left: 20px;
+              align-items: end;
+            }
+
+            div {
+              &+div {
+                margin-left: 5px;
+              }
+            }
+
             .name {
               font-size: 20px;
+            }
+
+            .job {
+              color: #2971FC;
             }
           }
 
@@ -170,7 +186,7 @@
 
       img {
         width: 70vw;
-        // object-fit: cover;
+        object-fit: fill;
       }
     }
   }
