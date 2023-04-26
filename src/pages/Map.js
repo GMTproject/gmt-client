@@ -23,7 +23,37 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
       job: '1학년 5반 담임교사',
       location: '행정실', contact: '행정실',
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    }
+    },
+    {
+      name: '홍길동',
+      job: '1학년 5반 담임교사',
+      location: '행정실', contact: '행정실',
+      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+    },
+    {
+      name: '홍길동',
+      job: '1학년 5반 담임교사',
+      location: '행정실', contact: '행정실',
+      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+    },
+    {
+      name: '홍길동',
+      job: '1학년 5반 담임교사',
+      location: '행정실', contact: '행정실',
+      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+    },
+    {
+      name: '홍길동',
+      job: '1학년 5반 담임교사',
+      location: '행정실', contact: '행정실',
+      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+    },
+    {
+      name: '홍길동',
+      job: '1학년 5반 담임교사',
+      location: '행정실', contact: '행정실',
+      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+    },
   ];
   function sizing(e) {
     let y = e.nativeEvent.wheelDeltaY;
@@ -37,23 +67,31 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='    찾고 싶은 실을 검색해 보세요.' />
           <button onClick={e => { }}><img src={search} alt='search' /></button>
         </div>
-        <hr />
-        {infos.map((i, n) => {
-          return <div className="infos" key={n}>
-            <div className="header">
-              <div>{i.name}</div>
-              <div>{i.job}</div>
-              <div>{i.location}</div>
-              <div>{i.contact}</div>
-            </div>
-            <hr />
-            <div className="tags">
-              {i.tags.map((i, n) => {
-                return <div className="tag" key={n}>{i}</div>;
-              })}
-            </div>
-          </div>;
-        })}
+        <div className="hr">
+          <hr />
+        </div>
+        <div className="infos">
+          {infos.map((i, n) => {
+            return <div className="info" key={n}>
+              <div className="header">
+                <div>
+                  <div className="name">{i.name}</div>
+                  <div className="job">{i.job}</div>
+                </div>
+                <div>
+                  <div className="location">{i.location}</div>
+                  <div className="contact">{i.contact}</div>
+                </div>
+              </div>
+              <hr />
+              <div className="tags">
+                {i.tags.map((i, n) => {
+                  return <div className="tag" key={n}>{i}</div>;
+                })}
+              </div>
+            </div>;
+          })}
+        </div>
       </div>
       <div className="img" onWheel={e => sizing(e)}>
         <div className="move">
