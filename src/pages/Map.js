@@ -14,19 +14,20 @@ import domitory2 from '../imgs/기숙사2층.png';
 import search from '../imgs/search.png';
 
 export default function Map({ structure, floor, setStructure, setFloor }) {
-  const [info, setInfo] = useState('');
+  const [searching, setSearching] = useState('');
+  const [isfloorClicked, setIsfloorClicked] = useState(false);
   return <div className="map">
     <div className="main">
       <div className="sideleft">
         <div className="head">
-          <input onChange={e => setInfo(e.target.value)} value={info} placeholder='    찾고 싶은 실을 검색해 보세요.' />
+          <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='    찾고 싶은 실을 검색해 보세요.' />
           <button><img src={search} alt='search' /></button>
         </div>
         <hr />
       </div>
       <div className="img">
         <div className="move">
-          <div className="floor">
+          <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
           </div>
           <div className="hr"></div>
