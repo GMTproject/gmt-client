@@ -1,0 +1,23 @@
+name: TAG Commit Action Front
+on: 
+  push:
+    branches:
+      - featuer/map
+jobs: 
+  merge_to_dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: CheckOut featuer/map branch
+        uses: actions/checkout@v2
+        with: 
+          ref: feature/map
+      - name: Merge To dev branch
+        if : contains(github.ref, 'refs/tags/') && contains(github.ref, '@D')
+        run: 
+          git checkout dev
+          git merge feature/map
+          git push origin dev
+
+
+  
+  
