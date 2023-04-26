@@ -16,16 +16,46 @@ import search from '../imgs/search.png';
 export default function Map({ structure, floor, setStructure, setFloor }) {
   const [searching, setSearching] = useState('');
   const [isfloorClicked, setIsfloorClicked] = useState(false);
+  const [imgsize, setImgsize] = useState('100%');
+  let infos = [
+    {
+      name: '홍길동',
+      job: '1학년 5반 담임교사',
+      location: '행정실', contact: '행정실',
+      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+    }
+  ];
+  function sizing(e) {
+    let y = e.nativeEvent.wheelDeltaY;
+    console.log(y);
+
+  }
   return <div className="map">
     <div className="main">
       <div className="sideleft">
         <div className="head">
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='    찾고 싶은 실을 검색해 보세요.' />
-          <button><img src={search} alt='search' /></button>
+          <button onClick={e => { }}><img src={search} alt='search' /></button>
         </div>
         <hr />
+        {infos.map((i, n) => {
+          return <div className="infos" key={n}>
+            <div className="header">
+              <div>{i.name}</div>
+              <div>{i.job}</div>
+              <div>{i.location}</div>
+              <div>{i.contact}</div>
+            </div>
+            <hr />
+            <div className="tags">
+              {i.tags.map((i, n) => {
+                return <div className="tag" key={n}>{i}</div>;
+              })}
+            </div>
+          </div>;
+        })}
       </div>
-      <div className="img">
+      <div className="img" onWheel={e => sizing(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
