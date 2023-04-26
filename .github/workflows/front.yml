@@ -1,4 +1,4 @@
-name: TAG Commit Action Front
+name: feature Merge to dev
 on:
   push:
     branches:
