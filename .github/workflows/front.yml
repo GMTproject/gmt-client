@@ -1,20 +1,27 @@
-name: merge-to-dev-on-tag
+name: TAG Commit Action Front
 
 on:
   push:
     branches:
       - feature/map
-    tags:
-      - '@D'
 
 jobs:
   merge_to_dev:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout feature/map branch
         uses: actions/checkout@v2
-      - name: Merge to dev
+        with:
+          ref: feature/map
+      - name: Merge feature/map to dev branch
+        if: contains(github.ref, 'refs/tags/') && contains(github.ref, '@D')
         run: |
           git checkout dev
-          git merge feature/map
+          git merge feature/map --no-commit --no-ff
+          git checkout feature/map src/
+          git add src/
+          git commit -m "Move feature/map/src/ to dev/src/"
+          git checkout dev
+          git merge feature/map --no-ff
           git push origin dev
+          git push --follow-tags
