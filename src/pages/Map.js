@@ -90,6 +90,14 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
           </div>
+          {isfloorClicked && <div className="floorHov" onMouseOver={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)} onClick={e => setIsfloorClicked(false)}>
+            <div className="floor" onClick={e => setFloor(1)}>1F</div>
+            <div className="floor" onClick={e => setFloor(2)}>2F</div>
+            {structure !== 'domitory' && <>
+              <div className="floor" onClick={e => setFloor(3)}>3F</div>
+              <div className="floor" onClick={e => setFloor(4)}>4F</div></>
+            }
+          </div>}
           <div className="hr"></div>
           <button className={structure === 'center' ? 'current' : ''} onClick={e => setStructure('center')}>본관</button>
           <button className={structure === 'goldencrown' ? 'current' : ''} onClick={e => setStructure('goldencrown')}>금봉관</button>

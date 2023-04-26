@@ -54,7 +54,7 @@
             .flex {
               display: flex;
               margin-left: 20px;
-              align-items: end;
+              align-items: flex-end;
               margin-bottom: 10px;
             }
 
@@ -180,6 +180,14 @@
           cursor: pointer;
         }
 
+        .floorHov {
+          position: absolute;
+          top: 30px;
+
+          div {
+            margin-top: 10px;
+          }
+        }
 
         button {
           margin: 0 10px;
