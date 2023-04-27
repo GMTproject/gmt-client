@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate, Link } from 'react-router-dom'
-import './App.scss';
+import './styles/App.scss';
+import './styles/Nav.scss';
 import Map from "./pages/Map";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Teach from './pages/Teach';
 import logo from './imgs/logo.png';
+import Detail from "./pages/Detail";
 
 export default function App() { // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
   const [structure, setStructure] = useState("center"); // center, goldencrown, domitory 3속성
@@ -38,6 +40,7 @@ export default function App() { // 페이지로 보여주는 부분 반드시 �
           <Route path="/teach" element={navTo(<><Nav setStructure={setStructure} /><Teach /></>, false)} />
           <Route path="/login" element={<><Login /></>} />
           <Route path="/welcome" element={<><Welcome /></>} />
+          <Route path="/detail" element={<><Detail /></>} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -52,7 +55,7 @@ function Nav({ setStructure }) { // 네비게이션 바
     if (localStorage.getItem('logininfo') !== 'Guest') {
       setLogined(localStorage.getItem('logininfo'));
     }
-    else if (localStorage.getItem('logininfo') === 'Guest') {
+    else {
       setLogined(false);
     }
   }, []);
@@ -64,7 +67,9 @@ function Nav({ setStructure }) { // 네비게이션 바
 
   return <div className="navigator">
     <div className="left">
-      <img src={logo} alt="Logo" />
+      <Link to={'/detail'}>
+        <img src={logo} alt="Logo" />
+      </Link>
     </div>
     <div className="middle-text">
       {/* 페이지 이동이 가능하게 하는 버튼 */}
