@@ -27,13 +27,6 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
       location: '행정실', contact: 'chun@gmail.com',
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
   ];
   function sizing(e) {
     let y = e.nativeEvent.wheelDeltaY;
