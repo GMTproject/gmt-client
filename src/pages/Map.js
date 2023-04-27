@@ -104,7 +104,7 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
           <button className={structure === 'domitory' ? 'current' : ''} onClick={e => {
             setStructure('domitory');
             if (floor > 2) {
-              floor = 2;
+              setFloor(2);
             }
           }}>기숙사</button>
         </div>
