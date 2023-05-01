@@ -100,14 +100,29 @@ export default function Teach() { //선생님 페이지
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
-  const [currentposi, setCurrentposi] = useState(0);
+  const [infolen, setInfolen] = useState([]);
+  const [posi, setPosi] = useState(0);
   const [infos, setInfos] = useState([]);
+  function pushes(position) {
+    let crntposi = infoarr.length - (12 * position);
+    setInfos(e => {
+      let topush = [];
+      for (let i = 1; i < 13; i++) {
+        topush.push((crntposi - i >= 0) && infoarr[crntposi - i]);
+      }
+      return topush;
+    });
+    setInfolen(e => {
+      let len = [];
+      for (let i = 0; i <= (infoarr.length - 1) / 12; i++) {
+        len.push(i);
+      }
+      return len;
+    });
+  }
   useEffect(e => {
-    let arr = [];
-    for (let i = currentposi * 5; i < infoarr.length; i++) {
-      arr[i] = infoarr[i];
-    }
-    setInfos(arr);
+    pushes(0);
+    //eslint-disable-next-line
   }, []);
   return <div className="teach">
     <div className='head'>
@@ -167,6 +182,14 @@ export default function Teach() { //선생님 페이지
           return <></>;
         }
       }) : ''}
+    </div>
+    <div className='labels'>
+      {infolen.map((i, n) => {
+        return <label key={n} className={posi === i ? 'bold' : ''}
+          onClick={e => { setPosi(i); pushes(i); }}>
+          {i + 1}
+        </label>
+      })}
     </div>
   </div>;
 }
