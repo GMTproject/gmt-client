@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../styles/Teach.scss';
 import pin from '../imgs/pin.png';
@@ -7,10 +7,7 @@ import abcsort from '../imgs/abcsort.png';
 import search1 from '../imgs/search1.png';
 
 export default function Teach() { //선생님 페이지
-  useEffect(e => {
-
-  }, []);
-  let infos = [
+  let infoarr = [
     {
       type: "teach",
       name: '홍길동',
@@ -103,6 +100,15 @@ export default function Teach() { //선생님 페이지
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
+  const [currentposi, setCurrentposi] = useState(0);
+  const [infos, setInfos] = useState([]);
+  useEffect(e => {
+    let arr = [];
+    for (let i = currentposi * 5; i < infoarr.length; i++) {
+      arr[i] = infoarr[i];
+    }
+    setInfos(arr);
+  }, []);
   return <div className="teach">
     <div className='head'>
       <div className='left'>
@@ -133,7 +139,7 @@ export default function Teach() { //선생님 페이지
     </div>
     <hr />
     <div className='infos'>
-      {infos.map((i, n) => {
+      {infos ? infos.map((i, n) => {
         if (i.type === 'teach') {
           return <div className="info" key={n}>
             <div className="header">
@@ -160,7 +166,7 @@ export default function Teach() { //선생님 페이지
         else {
           return <></>;
         }
-      })}
+      }) : ''}
     </div>
   </div>;
 }
