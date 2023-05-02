@@ -26,11 +26,26 @@
         width: 140px;
         height: 40px;
         font-size: 14px;
+        background-color: #fdfdfd;
+        border-radius: 3px;
+        border: none;
+        box-shadow: 0 0 7px 2px #dfdfdf;
+        color: #2971fc;
 
-        &+button {
+        & + button {
           margin-left: 10px;
+        }
+        &:hover {
+          background-color: #2971fc;
+          color: #dfdfdf;
         }
       }
     }
+  }
+  .about {
+    position: absolute;
+    color: #999999;
+    bottom: 12px;
+    right: 20px;
   }
 }
