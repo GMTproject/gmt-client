@@ -1,6 +1,7 @@
 .teach {
   width: 90vw;
   margin: auto;
+  overflow-y: visible;
 
   .head {
     margin: 30px 0;
@@ -25,7 +26,7 @@
 
       .sortleft {
         button {
-          margin: 0 10px;
+          margin: 3px 10px;
           border-radius: 10px;
           border: none;
           background-color: #e5e5ec;
@@ -40,7 +41,7 @@
 
       .sortright {
         button {
-          margin: 0 10px;
+          margin: 3px 10px;
           border-radius: 10px;
           border: none;
           background-color: #e5e5ec;
@@ -87,7 +88,7 @@
 
     .info {
       width: 21.5vw;
-      height: 20vh;
+      // height: 20vh;
       background-color: #fdfdfd;
       border: 1px solid #d9d9d9;
       border-radius: 10px;
@@ -133,10 +134,27 @@
           color: #3A3251;
           background-color: #f2f2f2;
           margin-left: 1vw;
-          margin-bottom: 2%;
+          margin-bottom: 3%;
           padding: 1px 7px;
           border-radius: 10px;
         }
+      }
+    }
+  }
+
+  .labels {
+    display: flex;
+    justify-content: center;
+
+    .bold {
+      font-weight: bolder;
+    }
+
+    label {
+      cursor: pointer;
+
+      &+label {
+        margin-left: 10px;
       }
     }
   }
