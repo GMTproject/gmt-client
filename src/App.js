@@ -10,7 +10,7 @@ import logo from "./imgs/logo.png";
 import About from "./pages/About";
 
 export default function App() {
-  // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것
+  // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
   const [structure, setStructure] = useState("center"); // center, goldencrown, domitory 3속성
   const [floor, setFloor] = useState(1);
   useEffect((e) => {
