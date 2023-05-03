@@ -28,7 +28,9 @@ export default function Welcome() {
         </div>
       </div>
       <div className="about">
-        GMT 더 알아보러 가기<img src={arrow} alt="asdf"></img>
+        <a href="./about">
+          GMT 더 알아보러 가기<img src={arrow} alt="asdf"></img>
+        </a>
       </div>
     </div>
   );

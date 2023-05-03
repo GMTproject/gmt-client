@@ -31,6 +31,7 @@
         border: none;
         box-shadow: 0 0 7px 2px #dfdfdf;
         color: #2971fc;
+        cursor: pointer;
 
         & + button {
           margin-left: 10px;
@@ -47,5 +48,9 @@
     color: #999999;
     bottom: 12px;
     right: 20px;
+    a {
+      text-decoration-line: none;
+      color: #999999;
+    }
   }
 }
