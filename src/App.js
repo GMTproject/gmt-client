@@ -45,41 +45,14 @@ export default function App() {
       <BrowserRouter>
         {/* 페이지 이동하는 부분 가급적 건드리지 마시오. */}
         <Routes>
-          <Route path="*" element={navTo("/map", true)} />
-          <Route
-            path="/map"
-            element={
-              <>
-                {/* 이쪽은 로그인 변환용으로 일단 냅둠 */}
-                <Nav setStructure={setStructure} />
-                <Map
-                  structure={structure}
-                  floor={floor}
-                  setFloor={setFloor}
-                  setStructure={setStructure}
-                />
-              </>
-            }
-          />
-          <Route
-            path="/teach"
-            element={navTo(
-              <>
-                <Nav setStructure={setStructure} />
-                <Teach />
-              </>,
-              false
-            )}
-          />
-          <Route
-            path="/login"
-            element={
-              <>
-                <Login />
-              </>
-            }
-          />
-          <Route path="/welcome" element={<Welcome />} />
+          <Route path="*" element={navTo('/map', true)} />
+          <Route path="/map" element={<> {/* 이쪽은 로그인 변환용으로 일단 냅둠 */}
+            <Nav setStructure={setStructure} />
+            <Map structure={structure} floor={floor} setFloor={setFloor} setStructure={setStructure} />
+          </>} />
+          <Route path="/teach" element={navTo(<><Nav setStructure={setStructure} /><Teach /></>, false)} />
+          <Route path="/login" element={<><Login /></>} />
+          <Route path="/welcome" element={<><Welcome /></>} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
@@ -110,6 +83,10 @@ function Nav({ setStructure }) {
     <div className="navigator">
       <div className="left">
         <img src={logo} alt="Logo" />
+    <div className="middle-text">
+      {/* 페이지 이동이 가능하게 하는 버튼 */}
+      <div onMouseOver={e => setMapHov(true)} onMouseLeave={e => { setMapHov(false) }}>
+        <a href={"/map"}>학교 지도</a>
       </div>
       <div className="middle-text">
         {/* 페이지 이동이 가능하게 하는 버튼 */}

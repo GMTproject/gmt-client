@@ -1,0 +1,9 @@
+name: Hello Job
+on:
+  push: 
+jobs:
+  hello1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Hello, GitHub Actions!' > hello.txt
+      - run: cat hello.txt
