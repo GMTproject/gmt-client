@@ -144,7 +144,15 @@
     }
   }
 
+  .small {
+    position: absolute;
+    left: 0;
+    bottom: 25px;
+    width: 100vw;
+  }
+
   .labels {
+
     display: flex;
     justify-content: center;
 

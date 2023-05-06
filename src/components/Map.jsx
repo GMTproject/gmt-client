@@ -1,19 +1,7 @@
 import React, { useState } from "react";
 
 import '../styles/Map.scss';
-const center1 = 'imgs/본관1층.png';
-const center2 = 'imgs/본관2층.png';
-const center3 = 'imgs/본관3층.png';
-const center4 = 'imgs/본관4층.png';
-const goldencrown1 = 'imgs/금봉관1층.png';
-const goldencrown2 = 'imgs/금봉관2층.png';
-const goldencrown3 = 'imgs/금봉관3층.png';
-const goldencrown4 = 'imgs/금봉관4층.png';
-const domitory1 = 'imgs/기숙사1층.png';
-const domitory2 = 'imgs/기숙사2층.png';
-const pin = 'imgs/pin.png';
-const phone = 'imgs/phone.png';
-const search = 'imgs/search.png';
+import * as l from "./imgs";
 
 const Map = ({ structure, floor, setStructure, setFloor }) => {
   const [searching, setSearching] = useState('');
@@ -42,7 +30,7 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
       <div className="sideleft">
         <div className="head">
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
-          <button onClick={e => { }}><img src={search} alt='search' /></button>
+          <button onClick={e => { }}><img src={l.search} alt='search' /></button>
         </div>
         <div className="hr">
           <hr />
@@ -57,8 +45,8 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
                     <div className="job">{i.job}</div>
                   </div>
                   <div className="flex">
-                    <div className="location"><img src={pin} alt="pin" /> {i.location}&nbsp;</div>
-                    <div className="contact"><img src={phone} alt="phone" /> {i.contact}</div>
+                    <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
+                    <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
                   </div>
                 </div>
                 <hr />
@@ -102,16 +90,16 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
           }}>기숙사</button>
         </div>
         <div className="img">
-          {structure === 'center' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={center1} alt={'center1'} />}
-          {structure === 'center' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={center2} alt={'center2'} />}
-          {structure === 'center' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={center3} alt={'center3'} />}
-          {structure === 'center' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={center4} alt={'center4'} />}
-          {structure === 'goldencrown' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={goldencrown1} alt={'goldencrown1'} />}
-          {structure === 'goldencrown' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={goldencrown2} alt={'goldencrown2'} />}
-          {structure === 'goldencrown' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={goldencrown3} alt={'goldencrown3'} />}
-          {structure === 'goldencrown' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={goldencrown4} alt={'goldencrown4'} />}
-          {structure === 'domitory' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={domitory1} alt={'domitory1'} />}
-          {structure === 'domitory' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={domitory2} alt={'domitory2'} />}
+          {structure === 'center' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.center1} alt={'center1'} />}
+          {structure === 'center' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.center2} alt={'center2'} />}
+          {structure === 'center' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={l.center3} alt={'center3'} />}
+          {structure === 'center' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={l.center4} alt={'center4'} />}
+          {structure === 'goldencrown' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.goldencrown1} alt={'goldencrown1'} />}
+          {structure === 'goldencrown' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.goldencrown2} alt={'goldencrown2'} />}
+          {structure === 'goldencrown' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={l.goldencrown3} alt={'goldencrown3'} />}
+          {structure === 'goldencrown' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={l.goldencrown4} alt={'goldencrown4'} />}
+          {structure === 'domitory' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.domitory1} alt={'domitory1'} />}
+          {structure === 'domitory' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.domitory2} alt={'domitory2'} />}
         </div>
       </div>
     </div>

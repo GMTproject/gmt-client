@@ -1,105 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import '../styles/Teach.scss';
+import ex from "../ex.json";
 const pin = '../imgs/pin.png';
 const phone = '../imgs/phone.png';
 const abcsort = '../imgs/abcsort.png';
 const search1 = '../imgs/search1.png';
 
 const Teach = () => { //선생님 페이지
-  let infoarr = [
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-    {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
-  ];
+  let infoarr = ex;
   const [infolen, setInfolen] = useState([]);
   const [posi, setPosi] = useState(0);
   const [infos, setInfos] = useState([]);
@@ -108,7 +17,9 @@ const Teach = () => { //선생님 페이지
     setInfos(e => {
       let topush = [];
       for (let i = 1; i < 13; i++) {
-        topush.push((crntposi - i >= 0) && infoarr[crntposi - i]);
+        if ((crntposi - i >= 0) && infoarr[crntposi - i]) {
+          topush.push((crntposi - i >= 0) && infoarr[crntposi - i]);
+        }
       }
       return topush;
     });
@@ -183,7 +94,7 @@ const Teach = () => { //선생님 페이지
         }
       }) : ''}
     </div>
-    <div className='labels'>
+    <div className={`labels ${(infos.length <= 8 ? "small" : '')}`}>
       {infolen.map((i, n) => {
         return <label key={n} className={posi === i ? 'bold' : ''}
           onClick={e => { setPosi(i); pushes(i); }}>

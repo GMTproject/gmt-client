@@ -1,0 +1,13 @@
+export const center1 = 'imgs/본관1층.png';
+export const center2 = 'imgs/본관2층.png';
+export const center3 = 'imgs/본관3층.png';
+export const center4 = 'imgs/본관4층.png';
+export const goldencrown1 = 'imgs/금봉관1층.png';
+export const goldencrown2 = 'imgs/금봉관2층.png';
+export const goldencrown3 = 'imgs/금봉관3층.png';
+export const goldencrown4 = 'imgs/금봉관4층.png';
+export const domitory1 = 'imgs/기숙사1층.png';
+export const domitory2 = 'imgs/기숙사2층.png';
+export const pin = 'imgs/pin.png';
+export const phone = 'imgs/phone.png';
+export const search = 'imgs/search.png';

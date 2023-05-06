@@ -7,6 +7,7 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Teach from "./components/Teach";
 import About from "./components/About";
+const logo = "imgs/logo.png";
 
 export default function App() {
   // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
@@ -79,7 +80,7 @@ const Nav = ({ setStructure }) => {
   return (
     <div className="navigator">
       <div className="left">
-        <img src={"imgs/logo.png"} alt="Logo" />
+        <img src={logo} alt="Logo" />
       </div>
       <div className="middle-text">
         {/* 페이지 이동이 가능하게 하는 버튼 */}
