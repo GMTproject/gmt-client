@@ -41,7 +41,7 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
     <div className="main">
       <div className="sideleft">
         <div className="head">
-          <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='    찾고 싶은 실을 검색해 보세요.' />
+          <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
           <button onClick={e => { }}><img src={search} alt='search' /></button>
         </div>
         <div className="hr">
