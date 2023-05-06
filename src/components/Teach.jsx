@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import '../styles/Teach.scss';
-import pin from '../imgs/pin.png';
-import phone from '../imgs/phone.png';
-import abcsort from '../imgs/abcsort.png';
-import search1 from '../imgs/search1.png';
+const pin = '../imgs/pin.png';
+const phone = '../imgs/phone.png';
+const abcsort = '../imgs/abcsort.png';
+const search1 = '../imgs/search1.png';
 
 const Teach = () => { //선생님 페이지
   let infoarr = [

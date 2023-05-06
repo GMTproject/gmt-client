@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 
 import '../styles/Map.scss';
-import center1 from '../imgs/본관1층.png';
-import center2 from '../imgs/본관2층.png';
-import center3 from '../imgs/본관3층.png';
-import center4 from '../imgs/본관4층.png';
-import goldencrown1 from '../imgs/금봉관1층.png';
-import goldencrown2 from '../imgs/금봉관2층.png';
-import goldencrown3 from '../imgs/금봉관3층.png';
-import goldencrown4 from '../imgs/금봉관4층.png';
-import domitory1 from '../imgs/기숙사1층.png';
-import domitory2 from '../imgs/기숙사2층.png';
-import pin from '../imgs/pin.png';
-import phone from '../imgs/phone.png';
-import search from '../imgs/search.png';
+const center1 = 'imgs/본관1층.png';
+const center2 = 'imgs/본관2층.png';
+const center3 = 'imgs/본관3층.png';
+const center4 = 'imgs/본관4층.png';
+const goldencrown1 = 'imgs/금봉관1층.png';
+const goldencrown2 = 'imgs/금봉관2층.png';
+const goldencrown3 = 'imgs/금봉관3층.png';
+const goldencrown4 = 'imgs/금봉관4층.png';
+const domitory1 = 'imgs/기숙사1층.png';
+const domitory2 = 'imgs/기숙사2층.png';
+const pin = 'imgs/pin.png';
+const phone = 'imgs/phone.png';
+const search = 'imgs/search.png';
 
 const Map = ({ structure, floor, setStructure, setFloor }) => {
   const [searching, setSearching] = useState('');
