@@ -20,7 +20,7 @@ export default function App() {
     }
   }, []);
 
-  function navTo(component, isRedirect) {
+  const navTo = (component, isRedirect) => {
     // 원하는 위치로 리다이렉트 or 컴포넌트를 보여주기 or 웰컴페이지로 돌아가기
     if (localStorage.getItem("logininfo") && localStorage.getItem("logininfo") !== "Guest" && isRedirect) {
       // 리다이렉트를 하고 싶을 때
@@ -56,7 +56,7 @@ export default function App() {
   );
 }
 
-function Nav({ setStructure }) {
+const Nav = ({ setStructure }) => {
   // 네비게이션 바
   const [logined, setLogined] = useState(false);
   const [mapHov, setMapHov] = useState(false);
@@ -69,7 +69,7 @@ function Nav({ setStructure }) {
     }
   }, []);
 
-  function setHere(structure) {
+  const setHere = (structure) => {
     // 로컬스토리지에 저장하고 페이지 이동하는 함수
     setStructure((e) => structure);
     localStorage.setItem("structure", structure);

@@ -15,7 +15,7 @@ import pin from '../imgs/pin.png';
 import phone from '../imgs/phone.png';
 import search from '../imgs/search.png';
 
-export default function Map({ structure, floor, setStructure, setFloor }) {
+const Map = ({ structure, floor, setStructure, setFloor }) => {
   const [searching, setSearching] = useState('');
   const [isfloorClicked, setIsfloorClicked] = useState(false);
   const [imgsize, setImgsize] = useState(72);
@@ -117,3 +117,5 @@ export default function Map({ structure, floor, setStructure, setFloor }) {
     </div>
   </div>;
 }
+
+export default Map;

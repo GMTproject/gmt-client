@@ -3,7 +3,7 @@ import logo from "../imgs/logo.png";
 import arrow from "../imgs/화살표.png";
 import "../styles/Welcome.scss";
 
-export default function Welcome() {
+const Welcome = () => {
   const time = new Date();
   return (
     <div className="welcome">
@@ -35,3 +35,5 @@ export default function Welcome() {
     </div>
   );
 }
+
+export default Welcome;

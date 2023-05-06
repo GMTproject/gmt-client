@@ -6,7 +6,7 @@ import phone from '../imgs/phone.png';
 import abcsort from '../imgs/abcsort.png';
 import search1 from '../imgs/search1.png';
 
-export default function Teach() { //선생님 페이지
+const Teach = () => { //선생님 페이지
   let infoarr = [
     {
       type: "teach",
@@ -193,3 +193,5 @@ export default function Teach() { //선생님 페이지
     </div>
   </div>;
 }
+
+export default Teach;

@@ -1,4 +1,4 @@
-function About() {
+const About = () => {
   return <div className="about">asdf</div>;
 }
 export default About;
