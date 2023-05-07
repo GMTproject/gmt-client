@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
-import "./styles/App.scss";
-import "./styles/Nav.scss";
-import Map from "./components/Map";
-import Welcome from "./components/Welcome";
-import Login from "./components/Login";
-import Teach from "./components/Teach";
-import About from "./components/About";
+import "styles/App.scss";
+import "styles/Nav.scss";
+import Map from "components/Map";
+import Welcome from "components/Welcome";
+import Login from "components/Login";
+import Teach from "components/Teach";
+import About from "components/About";
 const logo = "imgs/logo.png";
 
 export default function App() {

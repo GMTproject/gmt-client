@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
 
-import '../styles/Teach.scss';
-import ex from "../ex.json";
-const pin = '../imgs/pin.png';
-const phone = '../imgs/phone.png';
-const abcsort = '../imgs/abcsort.png';
-const search1 = '../imgs/search1.png';
+import 'styles/Teach.scss';
+import datas from "ex.json";
+const pin = 'imgs/pin.png';
+const phone = 'imgs/phone.png';
+const abcsort = 'imgs/abcsort.png';
+const search1 = 'imgs/search1.png';
 
 const Teach = () => { //선생님 페이지
-  let infoarr = ex;
   const [infolen, setInfolen] = useState([]);
   const [posi, setPosi] = useState(0);
   const [infos, setInfos] = useState([]);
   function pushes(position) {
-    let crntposi = infoarr.length - (12 * position);
+    let crntposi = datas.length - (12 * position);
     setInfos(e => {
       let topush = [];
       for (let i = 1; i < 13; i++) {
-        if ((crntposi - i >= 0) && infoarr[crntposi - i]) {
-          topush.push((crntposi - i >= 0) && infoarr[crntposi - i]);
+        if ((crntposi - i >= 0) && datas[crntposi - i]) {
+          topush.push((crntposi - i >= 0) && datas[crntposi - i]);
         }
       }
       return topush;
     });
     setInfolen(e => {
       let len = [];
-      for (let i = 0; i <= (infoarr.length - 1) / 12; i++) {
+      for (let i = 0; i <= (datas.length - 1) / 12; i++) {
         len.push(i);
       }
       return len;

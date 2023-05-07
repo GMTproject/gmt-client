@@ -6,7 +6,7 @@ import * as l from "./imgs";
 const Map = ({ structure, floor, setStructure, setFloor }) => {
   const [searching, setSearching] = useState('');
   const [isfloorClicked, setIsfloorClicked] = useState(false);
-  const [imgsize, setImgsize] = useState(72);
+  const [imgsize, setImgsize] = useState(20);
   let infos = [
     {
       type: "teach",

@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Welcome.scss";
+import "styles/Welcome.scss";
 const logo = `imgs/logo.png`;
 const arrow = `imgs/화살표.png`
 
