@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import 'styles/Teach.scss';
 import datas from "ex.json";
-const pin = 'imgs/pin.png';
-const phone = 'imgs/phone.png';
-const abcsort = 'imgs/abcsort.png';
-const search1 = 'imgs/search1.png';
+import * as l from 'components/imgs.jsx';
 
 const Teach = () => { //선생님 페이지
   const [infolen, setInfolen] = useState([]);
@@ -38,7 +35,7 @@ const Teach = () => { //선생님 페이지
     <div className='head'>
       <div className='left'>
         <div className='sortimg'>
-          <img src={abcsort} alt={'sort'} />
+          <img src={l.abcsort} alt={'sort'} />
         </div>
         <hr />
         <div className='sortleft'>
@@ -59,7 +56,7 @@ const Teach = () => { //선생님 페이지
       </div>
       <div className='right'>
         <input />
-        <button><img src={search1} alt='search' /></button>
+        <button><img src={l.search1} alt='search' /></button>
       </div>
     </div>
     <hr />
@@ -73,8 +70,8 @@ const Teach = () => { //선생님 페이지
                 <div className="job">{i.job}</div>
               </div>
               <div className="flex">
-                <div className="location"><img src={pin} alt="pin" /> {i.location}&nbsp;</div>
-                <div className="contact"><img src={phone} alt="phone" /> {i.contact}</div>
+                <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
+                <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
               </div>
             </div>
             <hr />

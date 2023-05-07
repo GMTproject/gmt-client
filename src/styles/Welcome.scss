@@ -33,9 +33,10 @@
         color: #2971fc;
         cursor: pointer;
 
-        & + button {
+        &+button {
           margin-left: 10px;
         }
+
         &:hover {
           background-color: #2971fc;
           color: #dfdfdf;
@@ -43,11 +44,14 @@
       }
     }
   }
+
   .about {
     position: absolute;
     color: #999999;
+    text-align: right;
     bottom: 12px;
     right: 20px;
+
     a {
       text-decoration-line: none;
       color: #999999;

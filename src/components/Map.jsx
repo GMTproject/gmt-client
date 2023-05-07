@@ -19,10 +19,10 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
   function sizing(e) {
     let y = e.nativeEvent.wheelDeltaY;
     if (y < 0 && imgsize > 19) { //down
-      setImgsize(e => e - 5);
+      setImgsize(e => e - 3);
     }
     else if (y > 0 && imgsize <= 72) {//up
-      setImgsize(e => e + 5);
+      setImgsize(e => e + 3);
     }
   }
   return <div className="map">

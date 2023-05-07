@@ -1,0 +1,16 @@
+.about {
+  width: 100vw;
+
+  .header {
+    justify-content: center;
+    display: flex;
+    padding: 10vw;
+
+    .block {
+      img {
+        width: 10vw;
+        object-fit: scale-down;
+      }
+    }
+  }
+}

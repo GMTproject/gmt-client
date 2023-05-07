@@ -80,7 +80,9 @@ const Nav = ({ setStructure }) => {
   return (
     <div className="navigator">
       <div className="left">
-        <img src={logo} alt="Logo" />
+        <Link to='/about'>
+          <img src={logo} alt="Logo" />
+        </Link>
       </div>
       <div className="middle-text">
         {/* 페이지 이동이 가능하게 하는 버튼 */}
