@@ -9,10 +9,11 @@ const Teach = () => { //선생님 페이지
   const [posi, setPosi] = useState(0);
   const [infos, setInfos] = useState([]);
   function pushes(position) {
-    let crntposi = datas.length - (12 * position);
+    let size = 9;
+    let crntposi = datas.length - (size * position);
     setInfos(e => {
       let topush = [];
-      for (let i = 1; i < 13; i++) {
+      for (let i = 1; i < 1 + size; i++) {
         if ((crntposi - i >= 0) && datas[crntposi - i]) {
           topush.push((crntposi - i >= 0) && datas[crntposi - i]);
         }
@@ -21,7 +22,7 @@ const Teach = () => { //선생님 페이지
     });
     setInfolen(e => {
       let len = [];
-      for (let i = 0; i <= (datas.length - 1) / 12; i++) {
+      for (let i = 0; i <= (datas.length - 1) / size; i++) {
         len.push(i);
       }
       return len;
@@ -92,9 +93,8 @@ const Teach = () => { //선생님 페이지
     </div>
     <div className={`labels ${(infos.length <= 8 ? "small" : '')}`}>
       {infolen.map((i, n) => {
-        return <label key={n} className={posi === i ? 'bold' : ''}
-          onClick={e => { setPosi(i); pushes(i); }}>
-          {i + 1}
+        return <label key={n} onClick={e => { setPosi(i); pushes(i); }}>
+          <div className={`dot ${posi === i ? 'bold' : ''}`} />
         </label>
       })}
     </div>
