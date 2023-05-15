@@ -84,7 +84,7 @@
 
   .infos {
     margin-top: 15px;
-    padding: 0 5vw;
+    padding: 0 4vw;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -144,16 +144,13 @@
     }
   }
 
-  .small {
+  .labels {
+    display: flex;
+    justify-content: center;
     position: absolute;
     left: 0;
     bottom: 25px;
     width: 100vw;
-  }
-
-  .labels {
-    display: flex;
-    justify-content: center;
 
     .dot {
       border-radius: 10px;

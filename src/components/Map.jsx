@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { setStructures } from "redux/mapstore";
 
 import '../styles/Map.scss';
 import * as l from "./imgs";
 
-const Map = ({ structure, floor, setStructure, setFloor }) => {
+const Map = ({ structure, floor, setStructure, setFloor, setCenter, setDomitory, setGoldencrown }) => {
   const [searching, setSearching] = useState('');
   const [isfloorClicked, setIsfloorClicked] = useState(false);
   const [imgsize, setImgsize] = useState(20);
@@ -16,6 +18,24 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
+  useEffect(e => {
+    initsetting();
+    //eslint-disable-next-line
+  }, []);
+  const initsetting = () => {
+    switch (localStorage.getItem('structure')) {
+      case "center":
+        setCenter();
+        break;
+      case "goldencrown":
+        setGoldencrown();
+        break;
+      case "domitory":
+        setDomitory();
+        break;
+      default:
+    }
+  }
   function sizing(e) {
     let y = e.nativeEvent.wheelDeltaY;
     if (y < 0 && imgsize > 19) { //down
@@ -68,22 +88,22 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
       </div>
       <div className="canvas" onWheel={e => sizing(e)}>
         <div className="move">
-          <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
+          <div className="floor" onClick={setIsfloorClicked(true)} onMouseLeave={setIsfloorClicked(false)}>
             {floor}F
           </div>
-          {isfloorClicked && <div className="floorHov" onMouseOver={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)} onClick={e => setIsfloorClicked(false)}>
-            <div className="floor" onClick={e => setFloor(1)}>1F</div>
-            <div className="floor" onClick={e => setFloor(2)}>2F</div>
+          {isfloorClicked && <div className="floorHov" onMouseOver={e => setIsfloorClicked(true)} onMouseLeave={setIsfloorClicked(false)} onClick={setIsfloorClicked(false)}>
+            <div className="floor" onClick={setFloor(1)}>1F</div>
+            <div className="floor" onClick={setFloor(2)}>2F</div>
             {structure !== 'domitory' && <>
-              <div className="floor" onClick={e => setFloor(3)}>3F</div>
-              <div className="floor" onClick={e => setFloor(4)}>4F</div></>
+              <div className="floor" onClick={setFloor(3)}>3F</div>
+              <div className="floor" onClick={setFloor(4)}>4F</div></>
             }
           </div>}
           <div className="hr"></div>
-          <button className={structure === 'center' ? 'current' : ''} onClick={e => setStructure('center')}>본관</button>
-          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={e => setStructure('goldencrown')}>금봉관</button>
+          <button className={structure === 'center' ? 'current' : ''} onClick={setCenter()}>본관</button>
+          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={setGoldencrown()}>금봉관</button>
           <button className={structure === 'domitory' ? 'current' : ''} onClick={e => {
-            setStructure('domitory');
+            setDomitory();
             if (floor > 2) {
               setFloor(2);
             }
@@ -106,4 +126,16 @@ const Map = ({ structure, floor, setStructure, setFloor }) => {
   </div>;
 }
 
-export default Map;
+const mapStateToProps = structure => {
+  return { structure };
+}
+
+const mapDispach = (dispatch, oprops) => {
+  return {
+    setDomitory: e => dispatch(setStructures('domitory')),
+    setCenter: e => dispatch(setStructures('center')),
+    setGoldencrown: e => dispatch(setStructures('goldencrown'))
+  };
+}
+
+export default connect(mapStateToProps, mapDispach)(Map);

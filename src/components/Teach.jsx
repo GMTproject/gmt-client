@@ -91,14 +91,19 @@ const Teach = () => { //선생님 페이지
         }
       }) : ''}
     </div>
-    <div className={`labels ${(infos.length <= 8 ? "small" : '')}`}>
-      {infolen.map((i, n) => {
-        return <label key={n} onClick={e => { setPosi(i); pushes(i); }}>
-          <div className={`dot ${posi === i ? 'bold' : ''}`} />
-        </label>
-      })}
+    <div className={`labels`}>
+      {
+        infolen.map((i, n) => {
+          return <label key={n} onClick={e => {
+            setPosi(i);
+            pushes(i);
+          }}>
+            <div className={`dot ${posi === i ? 'bold' : ''}`} />
+          </label>
+        })
+      }
     </div>
-  </div>;
+  </div >;
 }
 
 export default Teach;
