@@ -94,7 +94,10 @@ const Teach = () => { //선생님 페이지
     <div className={`labels`}>
       {
         infolen.map((i, n) => {
-          return <label key={n} onClick={e => { setPosi(i); pushes(i); }}>
+          return <label key={n} onClick={e => {
+            setPosi(i);
+            pushes(i);
+          }}>
             <div className={`dot ${posi === i ? 'bold' : ''}`} />
           </label>
         })

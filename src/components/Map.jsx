@@ -88,20 +88,20 @@ const Map = ({ structure, floor, setStructure, setFloor, setCenter, setDomitory,
       </div>
       <div className="canvas" onWheel={e => sizing(e)}>
         <div className="move">
-          <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
+          <div className="floor" onClick={setIsfloorClicked(true)} onMouseLeave={setIsfloorClicked(false)}>
             {floor}F
           </div>
-          {isfloorClicked && <div className="floorHov" onMouseOver={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)} onClick={e => setIsfloorClicked(false)}>
-            <div className="floor" onClick={e => setFloor(1)}>1F</div>
-            <div className="floor" onClick={e => setFloor(2)}>2F</div>
+          {isfloorClicked && <div className="floorHov" onMouseOver={e => setIsfloorClicked(true)} onMouseLeave={setIsfloorClicked(false)} onClick={setIsfloorClicked(false)}>
+            <div className="floor" onClick={setFloor(1)}>1F</div>
+            <div className="floor" onClick={setFloor(2)}>2F</div>
             {structure !== 'domitory' && <>
-              <div className="floor" onClick={e => setFloor(3)}>3F</div>
-              <div className="floor" onClick={e => setFloor(4)}>4F</div></>
+              <div className="floor" onClick={setFloor(3)}>3F</div>
+              <div className="floor" onClick={setFloor(4)}>4F</div></>
             }
           </div>}
           <div className="hr"></div>
-          <button className={structure === 'center' ? 'current' : ''} onClick={e => setCenter()}>본관</button>
-          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={e => setGoldencrown()}>금봉관</button>
+          <button className={structure === 'center' ? 'current' : ''} onClick={setCenter()}>본관</button>
+          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={setGoldencrown()}>금봉관</button>
           <button className={structure === 'domitory' ? 'current' : ''} onClick={e => {
             setDomitory();
             if (floor > 2) {
