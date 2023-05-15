@@ -6,7 +6,7 @@ import '../styles/Map.scss';
 import * as l from "./imgs";
 
 const Map = ({ structure, floor, setStructure, setFloor, setCenter, setDomitory, setGoldencrown }) => {
-  const [searching, setSearching] = useState('');
+  const [searching, setSearching] = useState("");
   const [isfloorClicked, setIsfloorClicked] = useState(false);
   const [imgsize, setImgsize] = useState(20);
   let infos = [
