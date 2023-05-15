@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { setStructures } from "redux/mapstore";
 import { logo } from "./imgs";
 
-const Nav = ({ setStructure, setCenter, setGoldencrown, setDomitory }) => {
+const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
   // 네비게이션 바
   const [logined, setLogined] = useState(false);
   const [mapHov, setMapHov] = useState(false);
@@ -40,7 +40,6 @@ const Nav = ({ setStructure, setCenter, setGoldencrown, setDomitory }) => {
       </div>
       {mapHov && (<div className="mapHov"
         onMouseOver={(e) => setMapHov(true)} onMouseLeave={(e) => setMapHov(false)}>
-        {/* 로컬스토리지에 위치 값을 저장하는 버튼 */}
         <Link to="/map" onClick={(e) => setCenter()}>
           <div>본관</div>
         </Link><hr />

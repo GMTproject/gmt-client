@@ -144,16 +144,13 @@
     }
   }
 
-  .small {
+  .labels {
+    display: flex;
+    justify-content: center;
     position: absolute;
     left: 0;
     bottom: 25px;
     width: 100vw;
-  }
-
-  .labels {
-    display: flex;
-    justify-content: center;
 
     .dot {
       border-radius: 10px;

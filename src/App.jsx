@@ -47,10 +47,10 @@ function App() {
         <Routes>
           <Route path="*" element={navTo("/map", true)} />
           <Route path="/map" element={<>{/* 이쪽은 로그인 변환용으로 일단 냅둠 */}
-            <Nav setStructure={setStructure} />
+            <Nav />
             <Map structure={structure} floor={floor} setFloor={setFloor} />
           </>} />
-          <Route path="/teach" element={navTo(<> <Nav setStructure={setStructure} /><Teach /></>, false)} />
+          <Route path="/teach" element={navTo(<><Nav /><Teach /></>, false)} />
           <Route path="/login" element={<><Login /></>}
           />
           <Route path="/welcome" element={<><Welcome /></>} />
