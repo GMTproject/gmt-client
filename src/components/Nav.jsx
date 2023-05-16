@@ -9,13 +9,17 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
   const [logined, setLogined] = useState(false);
   const [mapHov, setMapHov] = useState(false);
   const time = new Date(); // 로그인 시간 저장
-  useEffect((e) => {
+  const setstorage = e => {
     if (localStorage.getItem("logininfo") !== "Guest") {
       setLogined(localStorage.getItem("logininfo"));
     } else {
       setLogined(false);
     }
+  }
+  useEffect((e) => {
+    setstorage();
   }, []);
+  window.addEventListener('storage', setstorage);
 
   return (
     <div className="navigator">
