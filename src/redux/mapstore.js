@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const slice = createSlice({
+const mapslice = createSlice({
   name: 'mapslice',
   initialState: [],
   reducers: {
@@ -11,7 +11,7 @@ const slice = createSlice({
   }
 })
 
-export const { setStructures } = slice.actions;
+export const { setStructures } = mapslice.actions;
 
 
-export default configureStore({ reducer: slice.reducer });
+export default configureStore({ reducer: mapslice.reducer });

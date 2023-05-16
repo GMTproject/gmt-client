@@ -84,16 +84,16 @@
           }
 
           .tags {
-            width: 90%;
+            padding-right: 5%;
             display: inline-flex;
             flex-wrap: wrap;
 
             .tag {
               color: #3A3251;
               background-color: #f2f2f2;
-              margin-right: 10px;
-              margin-bottom: 5%;
-              padding: 3px 10px;
+              margin-left: 1vw;
+              margin-bottom: 3%;
+              padding: 1px 7px;
               border-radius: 10px;
             }
           }

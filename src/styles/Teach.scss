@@ -63,6 +63,7 @@
       right: 5vw;
 
       input {
+        padding-left: 15px;
         width: 15vw;
         height: 30px;
         border-radius: 10px 0 0 10px;
@@ -97,18 +98,18 @@
       margin-bottom: 20px;
 
       .header {
-        margin-top: 3%;
+        margin-top: 1.5vh;
 
         .flex {
           display: flex;
-          margin-left: 20px;
+          margin-left: 1.5vw;
           align-items: flex-end;
-          margin-bottom: 10px;
+          margin-bottom: 1.2vh;
         }
 
         div {
           &+div {
-            margin-left: 2px;
+            margin-left: 0.3vh;
           }
         }
 
@@ -122,8 +123,8 @@
       }
 
       hr {
-        margin-top: 2%;
-        margin-bottom: 2%;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
         width: 90%;
       }
 
