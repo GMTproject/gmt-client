@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { setStructures } from "redux/mapstore";
 
@@ -6,6 +6,7 @@ import '../styles/Map.scss';
 import * as l from "./imgs";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown }) => {
+  const canvas = useRef();
   const [searching, setSearching] = useState("");
   const [isfloorClicked, setIsfloorClicked] = useState(false);
   const [imgsize, setImgsize] = useState(20);
@@ -46,7 +47,9 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
+  document.getElementsByClassName('canvas')
   useEffect(e => {
+    canvas.current.addEventListener('wheel', sizing, { passive: false });
     initsetting();
     //eslint-disable-next-line
   }, []);
@@ -65,12 +68,18 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     }
   }
   function sizing(e) {
-    let y = e.nativeEvent.wheelDeltaY;
-    if (y < 0 && imgsize > 19) { //down
-      setImgsize(e => e - 3);
+    if (e.ctrlKey) {
+      e.preventDefault();
     }
-    else if (y > 0 && imgsize <= 72) {//up
+    let y = e.deltaY;
+    if (y > 0 && imgsize > 19) { //up
+      setImgsize(e => { return e - 3 });
+    }
+    else if (y < 0 && imgsize < 72) {//down
       setImgsize(e => e + 3);
+    }
+    else {
+      setImgsize(imgsize);
     }
   }
   return <div className="map">
@@ -114,7 +123,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           })}
         </div>
       </div>
-      <div className="canvas" onWheel={e => sizing(e)}>
+      <div className="canvas" ref={canvas} onWheel={e => sizing(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
@@ -138,7 +147,11 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           }}>기숙사</button>
         </div>
         <div className="img">
-          {structure === 'center' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.center1} alt={'center1'} />}
+          {structure === 'center' && floor === 1 && <>
+            <img style={{ height: `${imgsize}vh` }} src={l.center1} alt={'center1'} />
+            <span>보건실</span>
+          </>
+          }
           {structure === 'center' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.center2} alt={'center2'} />}
           {structure === 'center' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={l.center3} alt={'center3'} />}
           {structure === 'center' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={l.center4} alt={'center4'} />}
@@ -151,7 +164,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         </div>
       </div>
     </div>
-  </div>;
+  </div >;
 }
 
 const mapStateToProps = structure => {
