@@ -8,6 +8,8 @@ import Nav from "./Nav";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown }) => {
   const canvas = useRef();
+  const textWarningRef = useRef();
+  const backgroundWarningRef = useRef();
   const [searching, setSearching] = useState("");
   const [isfloorClicked, setIsfloorClicked] = useState(false);
   const [sizingWarning, setSizingWarning] = useState(false);
@@ -50,12 +52,28 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
-  document.getElementsByClassName('canvas');
+  window.addEventListener('keydown', e => setoffWarningAll(e));
   useEffect(e => {
     canvas.current.addEventListener('wheel', sizing, { passive: false });
+    textWarningRef.current.addEventListener('wheel', e => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+    backgroundWarningRef.current.addEventListener('wheel', e => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
     initsetting();
     //eslint-disable-next-line
   }, []);
+  const setoffWarningAll = e => {
+    if (e?.key === 'Escape' || e?.type === 'click') {
+      setSizingWarning(false);
+      setSearchWarning(false);
+    }
+  }
   const initsetting = () => {
     switch (localStorage.getItem('structure')) {
       case "center":
@@ -75,14 +93,18 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       e.preventDefault();
     }
     let y = e.deltaY;
-    if (y > 0 && imgsize > 19) { //up
-      setImgsize(e => { return e - 3 });
-    }
-    else if (y < 0 && imgsize < 72) {//down
-      setImgsize(e => e + 3);
-    }
-    else {
-      setImgsize(imgsize);
+    let x = e.deltaX;
+    if ((y > 0 ? y : y * -1) > (x > 0 ? x : x * -1)) {
+      if (y > 0 && imgsize > 19) { //up
+        setImgsize(e => { return e - 3 });
+      }
+      else if (y < 0 && imgsize < 72) {//down
+        setImgsize(e => e + 3);
+      }
+      else {
+        setSizingWarning(true);
+        setImgsize(imgsize);
+      }
     }
   }
   function clicksizing(type) {
@@ -105,7 +127,6 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           <button onClick={e => {
             if (searching === '') {
               setSearchWarning(true);
-              console.log(searching, searchWarning);
             }
           }}><img src={l.search} alt='search' /></button>
         </div>
@@ -192,12 +213,11 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         </div>
       </div>
     </div>
-    <div className="sizingwarning" style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => {
-      setSizingWarning(false);
-      setSearchWarning(false);
+    <div className="sizingwarning" ref={textWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => {
+      setoffWarningAll(e);
     }} />
-    <div className="alert" style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
-      {sizingWarning && (imgsize < 30 ? "지도를 더이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
+    <div className="alert" ref={backgroundWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
+      {sizingWarning && (imgsize < 30 ? "지도를 더 이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
       {searchWarning && "못찾았소용"}
     </div>
   </div >;
