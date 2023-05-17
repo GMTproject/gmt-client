@@ -148,6 +148,10 @@
       justify-content: center;
 
       .img {
+        img {
+          -webkit-user-drag: none;
+        }
+
         overflow-x: scroll;
         overflow-y: scroll;
         text-align: center;
@@ -161,6 +165,32 @@
         &::-webkit-scrollbar-thumb {
           background-color: #2971FC;
           border-radius: 10px;
+        }
+      }
+
+      .sizing {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        display: flex;
+
+        button {
+          cursor: pointer;
+          background-color: #cdcdcd;
+          color: white;
+          border: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 40px;
+          font-size: 28px;
+
+          &:active {
+            background-color: #2F50C6;
+          }
+
+          &+button {
+            margin-left: 10px;
+          }
         }
       }
 
@@ -216,5 +246,46 @@
         }
       }
     }
+  }
+
+  .sizingwarning {
+    width: 100vw;
+    z-index: 3;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(#000000, 0.25);
+    display: flex;
+    justify-content: center;
+  }
+
+  @keyframes movingAlert {
+    0% {
+      margin-top: -100px;
+    }
+
+    100% {
+      margin-top: 10px;
+    }
+  }
+
+  .alert {
+    font-family: 'LotteMartDream';
+    z-index: 4;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 35%;
+    top: 0;
+    border-radius: 20px;
+    animation-name: movingAlert;
+    animation-duration: ease;
+    animation-duration: 0.5s;
+    margin-top: 10px;
+    width: 30vw;
+    height: 30vh;
+    background-color: #fdfdfd;
   }
 }

@@ -4,11 +4,13 @@ import { setStructures } from "redux/mapstore";
 
 import '../styles/Map.scss';
 import * as l from "./imgs";
+import Nav from "./Nav";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown }) => {
   const canvas = useRef();
   const [searching, setSearching] = useState("");
   const [isfloorClicked, setIsfloorClicked] = useState(false);
+  const [sizingWarning, setSizingWarning] = useState(false);
   const [imgsize, setImgsize] = useState(20);
   let infos = [
     {
@@ -47,7 +49,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
-  document.getElementsByClassName('canvas')
+  document.getElementsByClassName('canvas');
   useEffect(e => {
     canvas.current.addEventListener('wheel', sizing, { passive: false });
     initsetting();
@@ -82,7 +84,19 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       setImgsize(imgsize);
     }
   }
+  function clicksizing(type) {
+    if (type === "increase" && imgsize < 70) {
+      setImgsize(e => e + 9);
+    }
+    else if (type === "decrease" && imgsize > 19) {
+      setImgsize(e => e - 9);
+    }
+    else {
+      setSizingWarning(true);
+    }
+  }
   return <div className="map">
+    <Nav />
     <div className="main">
       <div className="sideleft">
         <div className="head">
@@ -149,7 +163,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         <div className="img">
           {structure === 'center' && floor === 1 && <>
             <img style={{ height: `${imgsize}vh` }} src={l.center1} alt={'center1'} />
-            <span>보건실</span>
+            <span></span>
           </>
           }
           {structure === 'center' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.center2} alt={'center2'} />}
@@ -162,7 +176,19 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           {structure === 'domitory' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.domitory1} alt={'domitory1'} />}
           {structure === 'domitory' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.domitory2} alt={'domitory2'} />}
         </div>
+        <div className="sizing">
+          <button onClick={e => clicksizing('increase')}>
+            +
+          </button>
+          <button onClick={e => clicksizing('decrease')}>
+            -
+          </button>
+        </div>
       </div>
+    </div>
+    <div className="sizingwarning" style={{ display: `${sizingWarning ? "" : "none"}` }} onClick={e => setSizingWarning(false)} />
+    <div className="alert" style={{ display: `${sizingWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
+      {imgsize < 30 ? "지도를 더이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다."}
     </div>
   </div >;
 }
