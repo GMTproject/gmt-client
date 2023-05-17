@@ -11,6 +11,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   const [searching, setSearching] = useState("");
   const [isfloorClicked, setIsfloorClicked] = useState(false);
   const [sizingWarning, setSizingWarning] = useState(false);
+  const [searchWarning, setSearchWarning] = useState(false);
   const [imgsize, setImgsize] = useState(20);
   let infos = [
     {
@@ -101,7 +102,12 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       <div className="sideleft">
         <div className="head">
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
-          <button onClick={e => { }}><img src={l.search} alt='search' /></button>
+          <button onClick={e => {
+            if (searching === '') {
+              setSearchWarning(true);
+              console.log(searching, searchWarning);
+            }
+          }}><img src={l.search} alt='search' /></button>
         </div>
         <div className="hr">
           <hr />
@@ -186,9 +192,13 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         </div>
       </div>
     </div>
-    <div className="sizingwarning" style={{ display: `${sizingWarning ? "" : "none"}` }} onClick={e => setSizingWarning(false)} />
-    <div className="alert" style={{ display: `${sizingWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
-      {imgsize < 30 ? "지도를 더이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다."}
+    <div className="sizingwarning" style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => {
+      setSizingWarning(false);
+      setSearchWarning(false);
+    }} />
+    <div className="alert" style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
+      {sizingWarning && (imgsize < 30 ? "지도를 더이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
+      {searchWarning && "못찾았소용"}
     </div>
   </div >;
 }
