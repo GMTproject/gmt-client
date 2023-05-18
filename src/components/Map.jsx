@@ -89,17 +89,19 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     }
   }
   function sizing(e) {
-    if (e.ctrlKey) {
-      e.preventDefault();
-    }
     let y = e.deltaY;
     let x = e.deltaX;
+    if (e.ctrlKey) {
+      e.preventDefault();
+      x *= 3;
+      y *= 3;
+    }
     if ((y > 0 ? y : y * -1) > (x > 0 ? x : x * -1)) {
       if (y > 0 && imgsize > 19) { //up
-        setImgsize(e => { return e - 3 });
+        setImgsize(e => { return e - 0.02 * y });
       }
       else if (y < 0 && imgsize < 72) {//down
-        setImgsize(e => e + 3);
+        setImgsize(e => e - 0.02 * y);
       }
       else {
         setSizingWarning(true);
