@@ -17,41 +17,65 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   const [imgsize, setImgsize] = useState(20);
   let infos = [
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실',
-      contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님1",
+      "contact": "010-0000-0000",
+      "department": "테스트 부서1",
+      "location": "테스트 위치1",
+      "position": "3학년 4반 담암교사",
+      "subject": "테스트 과목1",
+      "free": "자율 동아리1",
+      "major": null,
+      "skill": "사설 동아리1",
+      "classes": "테스트 방과후1"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님2",
+      "contact": "010-1111-1111",
+      "department": "테스트 부서2",
+      "location": "테스트 위치2",
+      "position": "교사",
+      "subject": "테스트 과목2",
+      "free": "자율 동아리2",
+      "major": "전공동아리1",
+      "skill": "사설 동아리2",
+      "classes": "테스트 방과후2"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님3",
+      "contact": "테스트#0000",
+      "department": "테스트 부서2",
+      "location": "테스트 위치3",
+      "position": "1학년 2반 담임교사",
+      "subject": "테스트 과목3",
+      "free": null,
+      "major": "전공동아리2",
+      "skill": null,
+      "classes": "테스트 방과후3"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님4",
+      "contact": "테스트#1111",
+      "department": "테스트 부서3",
+      "location": "테스트 위치4",
+      "position": "1학년 2반 부담임교사",
+      "subject": "테스트 과목4",
+      "free": null,
+      "major": null,
+      "skill": null,
+      "classes": "테스트 방과후4"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
+      "name": "테스트 선생님5",
+      "contact": "test1234@spring.com",
+      "department": "테스트 부서4",
+      "location": "테스트 위치5",
+      "position": "교사",
+      "subject": "테스트 과목5",
+      "free": "자율 동아리3",
+      "major": "전공동아리5",
+      "skill": "사설 동아리3",
+      "classes": "테스트 방과후5"
+    }
   ];
   window.addEventListener('keydown', e => setoffWarningAll(e));
   useEffect(e => {
@@ -138,32 +162,26 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         </div>
         <div className="infos">
           {infos.map((i, n) => {
-            if (i.type === 'teach') {
-              return <div className="info" key={n}>
-                <div className="header">
-                  <div className="flex">
-                    <div className="name">{i.name}</div>
-                    <div className="job">{i.job}</div>
-                  </div>
-                  <div className="flex">
-                    <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
-                    <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
-                  </div>
+            return <div className="info" key={n}>
+              <div className="header">
+                <div className="flex">
+                  <div className="name">{i.name}</div>
+                  <div className="job">{i.department}</div>
                 </div>
-                <hr />
-                <div className="tags">
-                  {i.tags.map((i, n) => {
-                    return <div className="tag" key={n}>{i}</div>;
-                  })}
+                <div className="flex">
+                  <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
+                  <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
                 </div>
-              </div>;
-            }
-            else if (i.type === 'location') {
-              return <div className="location" key={n}></div>;
-            }
-            else {
-              return <></>;
-            }
+              </div>
+              <hr />
+              <div className="tags">
+                {i?.position && <div className='tag'>{i?.position}</div>}
+                {i?.free && <div className='tag'>{i?.free}</div>}
+                {i?.major && <div className='tag'>{i?.major}</div>}
+                {i?.skill && <div className='tag'>{i?.skill}</div>}
+                {i?.classes && <div className='tag'>{i?.classes}</div>}
+              </div>
+            </div>;
           })}
         </div>
       </div>

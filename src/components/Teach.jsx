@@ -67,7 +67,7 @@ const Teach = () => { //선생님 페이지
           <div className="header">
             <div className="flex">
               <div className="name">{i.name}</div>
-              <div className="job">{i.job}</div>
+              <div className="job">{i.department}</div>
             </div>
             <div className="flex">
               <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
@@ -76,9 +76,6 @@ const Teach = () => { //선생님 페이지
           </div>
           <hr />
           <div className="tags">
-            {i.tags?.map((i, n) => {
-              return <div className="tag" key={n}>{i}</div>;
-            })}
             {i?.position && <div className='tag'>{i?.position}</div>}
             {i?.free && <div className='tag'>{i?.free}</div>}
             {i?.major && <div className='tag'>{i?.major}</div>}
