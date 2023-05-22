@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { setStructures } from "redux/mapstore";
 
 import '../styles/Map.scss';
 import * as l from "./imgs";
+import Nav from "./Nav";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown }) => {
+  const canvas = useRef();
+  const textWarningRef = useRef();
+  const backgroundWarningRef = useRef();
   const [searching, setSearching] = useState("");
   const [isfloorClicked, setIsfloorClicked] = useState(false);
+  const [sizingWarning, setSizingWarning] = useState(false);
+  const [searchWarning, setSearchWarning] = useState(false);
   const [imgsize, setImgsize] = useState(20);
   let infos = [
     {
       type: "teach",
       name: '홍길동',
       job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
+      location: '행정실',
+      contact: 'chun@gmail.com',
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
     {
@@ -46,10 +53,28 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
   ];
+  window.addEventListener('keydown', e => setoffWarningAll(e));
   useEffect(e => {
+    canvas.current.addEventListener('wheel', sizing, { passive: false });
+    textWarningRef.current.addEventListener('wheel', e => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+    backgroundWarningRef.current.addEventListener('wheel', e => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
     initsetting();
     //eslint-disable-next-line
   }, []);
+  const setoffWarningAll = e => {
+    if (e?.key === 'Escape' || e?.type === 'click') {
+      setSizingWarning(false);
+      setSearchWarning(false);
+    }
+  }
   const initsetting = () => {
     switch (localStorage.getItem('structure')) {
       case "center":
@@ -65,20 +90,48 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     }
   }
   function sizing(e) {
-    let y = e.nativeEvent.wheelDeltaY;
-    if (y < 0 && imgsize > 19) { //down
-      setImgsize(e => e - 3);
+    let y = e.deltaY;
+    let x = e.deltaX;
+    if (e.ctrlKey) {
+      e.preventDefault();
+      x *= 3;
+      y *= 3;
     }
-    else if (y > 0 && imgsize <= 72) {//up
-      setImgsize(e => e + 3);
+    if ((y > 0 ? y : y * -1) > (x > 0 ? x : x * -1)) {
+      if (y > 0 && imgsize > 19) { //up
+        setImgsize(e => { return e - 0.02 * y });
+      }
+      else if (y < 0 && imgsize < 72) {//down
+        setImgsize(e => e - 0.02 * y);
+      }
+      else {
+        // setSizingWarning(true);
+        setImgsize(imgsize);
+      }
+    }
+  }
+  function clicksizing(type) {
+    if (type === "increase" && imgsize < 70) {
+      setImgsize(e => e + 9);
+    }
+    else if (type === "decrease" && imgsize > 19) {
+      setImgsize(e => e - 9);
+    }
+    else {
+      setSizingWarning(true);
     }
   }
   return <div className="map">
+    <Nav />
     <div className="main">
       <div className="sideleft">
         <div className="head">
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
-          <button onClick={e => { }}><img src={l.search} alt='search' /></button>
+          <button onClick={e => {
+            if (searching === '') {
+              setSearchWarning(true);
+            }
+          }}><img src={l.search} alt='search' /></button>
         </div>
         <div className="hr">
           <hr />
@@ -114,7 +167,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           })}
         </div>
       </div>
-      <div className="canvas" onWheel={e => sizing(e)}>
+      <div className="canvas" ref={canvas} onWheel={e => sizing(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
@@ -133,12 +186,16 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           <button className={structure === 'domitory' ? 'current' : ''} onClick={e => {
             setDomitory();
             if (floor > 2) {
-              setFloor(2);
+              setFloor(1);
             }
           }}>기숙사</button>
         </div>
         <div className="img">
-          {structure === 'center' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.center1} alt={'center1'} />}
+          {structure === 'center' && floor === 1 && <>
+            <img style={{ height: `${imgsize}vh` }} src={l.center1} alt={'center1'} />
+            <span></span>
+          </>
+          }
           {structure === 'center' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.center2} alt={'center2'} />}
           {structure === 'center' && floor === 3 && <img style={{ height: `${imgsize}vh` }} src={l.center3} alt={'center3'} />}
           {structure === 'center' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={l.center4} alt={'center4'} />}
@@ -149,9 +206,24 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           {structure === 'domitory' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.domitory1} alt={'domitory1'} />}
           {structure === 'domitory' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.domitory2} alt={'domitory2'} />}
         </div>
+        <div className="sizing">
+          <button onClick={e => clicksizing('increase')}>
+            +
+          </button>
+          <button onClick={e => clicksizing('decrease')}>
+            -
+          </button>
+        </div>
       </div>
     </div>
-  </div>;
+    <div className="sizingwarning" ref={textWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => {
+      setoffWarningAll(e);
+    }} />
+    <div className="alert" ref={backgroundWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
+      {sizingWarning && (imgsize < 30 ? "지도를 더 이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
+      {searchWarning && "못찾았소용"}
+    </div>
+  </div >;
 }
 
 const mapStateToProps = structure => {

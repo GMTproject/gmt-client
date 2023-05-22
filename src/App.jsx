@@ -46,10 +46,7 @@ function App() {
         {/* 페이지 이동하는 부분 가급적 건드리지 마시오. */}
         <Routes>
           <Route path="*" element={navTo("/map", true)} />
-          <Route path="/map" element={<>{/* 이쪽은 로그인 변환용으로 일단 냅둠 */}
-            <Nav />
-            <Map structure={structure} floor={floor} setFloor={setFloor} />
-          </>} />
+          <Route path="/map" element={<Map structure={structure} floor={floor} setFloor={setFloor} />} />
           <Route path="/teach" element={navTo(<><Nav /><Teach /></>, false)} />
           <Route path="/login" element={<><Login /></>}
           />
