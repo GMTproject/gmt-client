@@ -20,7 +20,8 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       type: "teach",
       name: '홍길동',
       job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
+      location: '행정실',
+      contact: 'chun@gmail.com',
       tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
     },
     {
@@ -104,7 +105,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         setImgsize(e => e - 0.02 * y);
       }
       else {
-        setSizingWarning(true);
+        // setSizingWarning(true);
         setImgsize(imgsize);
       }
     }
@@ -185,7 +186,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           <button className={structure === 'domitory' ? 'current' : ''} onClick={e => {
             setDomitory();
             if (floor > 2) {
-              setFloor(2);
+              setFloor(1);
             }
           }}>기숙사</button>
         </div>
