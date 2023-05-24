@@ -1,5 +1,11 @@
 .about {
+  color: white;
+  font-family: 'LotteMartDream';
   width: 100vw;
+  height: 220vh;
+  overflow-x: hidden;
+  text-align: center;
+  background: linear-gradient(to bottom, #fcfcfc, #2E4777);
 
   .header {
     justify-content: center;
@@ -7,9 +13,35 @@
     padding: 10vw;
 
     .block {
+      width: 30vw;
+
       img {
         width: 10vw;
         object-fit: scale-down;
+      }
+    }
+  }
+
+  .introduces {
+    margin: auto;
+    width: 60vw;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .introduce {
+      width: 22vw;
+
+      .img {
+        margin: 50px auto;
+        width: 15vw;
+        height: 15vw;
+        border-radius: 100vw;
+        background-color: #d9d9d9;
+      }
+
+      p {
+        margin-bottom: 30px;
       }
     }
   }
