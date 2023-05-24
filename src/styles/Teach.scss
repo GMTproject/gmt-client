@@ -88,10 +88,11 @@
     padding: 0 4vw;
     display: inline-flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: left;
 
     .info {
       width: 25vw;
+      margin-left: 2vw;
       background-color: #fdfdfd;
       border: 1px solid #d9d9d9;
       border-radius: 10px;

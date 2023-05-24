@@ -149,14 +149,17 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     <Nav />
     <div className="main">
       <div className="sideleft">
-        <div className="head">
+        <form className="head" onSubmit={e => {
+          e.preventDefault();
+          if (searching === '') {
+            setSearchWarning(true);
+            return false;
+          }
+          console.log(searching);
+        }}>
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
-          <button onClick={e => {
-            if (searching === '') {
-              setSearchWarning(true);
-            }
-          }}><img src={l.search} alt='search' /></button>
-        </div>
+          <button><img src={l.search} alt='search' /></button>
+        </form>
         <div className="hr">
           <hr />
         </div>
@@ -238,8 +241,13 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       setoffWarningAll(e);
     }} />
     <div className="alert" ref={backgroundWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
-      {sizingWarning && (imgsize < 30 ? "지도를 더 이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
-      {searchWarning && "못찾았소용"}
+      <div>
+        {sizingWarning && (imgsize < 30 ? "지도를 더 이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
+        {searchWarning && "못찾았소용"}
+        <div>
+          클릭이나 Esc를 눌러 확인
+        </div>
+      </div>
     </div>
   </div >;
 }
