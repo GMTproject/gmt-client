@@ -5,6 +5,7 @@ import { setStructures } from "redux/mapstore";
 import '../styles/Map.scss';
 import * as l from "./imgs";
 import Nav from "./Nav";
+import axios from "axios";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown }) => {
   const canvas = useRef();
@@ -165,13 +166,16 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     <Nav />
     <div className="main">
       <div className="sideleft">
-        <form className="head" onSubmit={e => {
+        <form className="head" onSubmit={async e => {
           e.preventDefault();
           if (searching === '') {
             setSearchWarning(true);
             return false;
           }
           console.log(searching);
+          await axios.post("", { id: searching }).then(e => {
+
+          });
         }}>
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
           <button><img src={l.search} alt='search' /></button>
