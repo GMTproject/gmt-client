@@ -118,28 +118,44 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     let x = e.deltaX;
     if (e.ctrlKey) {
       e.preventDefault();
-      x *= 3;
-      y *= 3;
+      x *= 4;
+      y *= 4;
     }
     if ((y > 0 ? y : y * -1) > (x > 0 ? x : x * -1)) {
       if (y > 0 && imgsize > 19) { //up
-        setImgsize(e => { return e - 0.02 * y });
+        setImgsize(e => {
+          if (e - 0.02 * y >= 19) {
+            return e - 0.02 * y;
+          }
+          return 19;
+        });
       }
-      else if (y < 0 && imgsize < 72) {//down
-        setImgsize(e => e - 0.02 * y);
-      }
-      else {
-        // setSizingWarning(true);
-        setImgsize(imgsize);
+      else if (y < 0 && imgsize < 70) {//down
+        setImgsize(e => {
+          if (e - 0.02 * y <= 70) {
+            return e - 0.02 * y;
+          }
+          return 70;
+        });
       }
     }
   }
   function clicksizing(type) {
     if (type === "increase" && imgsize < 70) {
-      setImgsize(e => e + 9);
+      setImgsize(e => {
+        if (imgsize + 9 <= 70) {
+          return e + 9;
+        }
+        return 70;
+      });
     }
     else if (type === "decrease" && imgsize > 19) {
-      setImgsize(e => e - 9);
+      setImgsize(e => {
+        if (imgsize - 9 >= 19) {
+          return e - 9
+        }
+        return 19;
+      });
     }
     else {
       setSizingWarning(true);
