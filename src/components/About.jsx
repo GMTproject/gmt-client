@@ -42,6 +42,7 @@ const About = () => {
       {datas.map((i, n) => {
         return <div className="introduce" key={n}>
           <h1>{i?.title}</h1>
+          <div className="hr" />
           <p>{(i?.text)}</p>
           <div className="img">
             <img src={i?.imgpath} alt="profile_img" />
