@@ -62,34 +62,28 @@ const Teach = () => { //선생님 페이지
     </div>
     <hr />
     <div className='infos'>
-      {infos ? infos.map((i, n) => {
-        if (i.type === 'teach') {
-          return <div className="info" key={n}>
-            <div className="header">
-              <div className="flex">
-                <div className="name">{i.name}</div>
-                <div className="job">{i.job}</div>
-              </div>
-              <div className="flex">
-                <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
-                <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
-              </div>
+      {infos?.map((i, n) => {
+        return <div className="info" key={n}>
+          <div className="header">
+            <div className="flex">
+              <div className="name">{i.name}</div>
+              <div className="job">{i.department}</div>
             </div>
-            <hr />
-            <div className="tags">
-              {i.tags.map((i, n) => {
-                return <div className="tag" key={n}>{i}</div>;
-              })}
+            <div className="flex">
+              <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
+              <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
             </div>
-          </div>;
-        }
-        else if (i.type === 'location') {
-          return <div className="location" key={n}></div>;
-        }
-        else {
-          return <></>;
-        }
-      }) : ''}
+          </div>
+          <hr />
+          <div className="tags">
+            {i?.position && <div className='tag'>{i?.position}</div>}
+            {i?.free && <div className='tag'>{i?.free}</div>}
+            {i?.major && <div className='tag'>{i?.major}</div>}
+            {i?.skill && <div className='tag'>{i?.skill}</div>}
+            {i?.classes && <div className='tag'>{i?.classes}</div>}
+          </div>
+        </div>;
+      })}
     </div>
     <div className={`labels`}>
       {

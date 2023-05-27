@@ -159,18 +159,20 @@
 
         &::-webkit-scrollbar {
           width: 0;
-          height: 5px;
+          height: 45px;
         }
 
         &::-webkit-scrollbar-thumb {
           background-color: #2971FC;
-          border-radius: 10px;
+          border: 20px solid transparent;
+          background-clip: padding-box;
+          border-radius: 1000px;
         }
       }
 
       .sizing {
         position: absolute;
-        bottom: 10px;
+        bottom: 18px;
         left: 20px;
         display: flex;
 
@@ -289,5 +291,11 @@
     width: 30vw;
     height: 30vh;
     background-color: #fdfdfd;
+
+    div {
+      margin-top: 10px;
+      text-align: center;
+      display: block;
+    }
   }
 }

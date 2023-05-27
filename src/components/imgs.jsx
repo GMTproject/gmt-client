@@ -14,3 +14,7 @@ export const search = 'imgs/search.png';
 export const abcsort = 'imgs/abcsort.png';
 export const search1 = 'imgs/search1.png';
 export const logo = 'imgs/logo.png';
+export const Gangggg = 'imgs/Gangggg.png';
+export const SON = 'imgs/SON.png';
+export const 능이버섯 = 'imgs/능이버섯.png';
+export const hyee = 'imgs/hyee.png';

@@ -5,6 +5,7 @@ import { setStructures } from "redux/mapstore";
 import '../styles/Map.scss';
 import * as l from "./imgs";
 import Nav from "./Nav";
+import axios from "axios";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown }) => {
   const canvas = useRef();
@@ -17,41 +18,65 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   const [imgsize, setImgsize] = useState(20);
   let infos = [
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실',
-      contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님1",
+      "contact": "010-0000-0000",
+      "department": "테스트 부서1",
+      "location": "테스트 위치1",
+      "position": "3학년 4반 담암교사",
+      "subject": "테스트 과목1",
+      "free": "자율 동아리1",
+      "major": null,
+      "skill": "사설 동아리1",
+      "classes": "테스트 방과후1"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님2",
+      "contact": "010-1111-1111",
+      "department": "테스트 부서2",
+      "location": "테스트 위치2",
+      "position": "교사",
+      "subject": "테스트 과목2",
+      "free": "자율 동아리2",
+      "major": "전공동아리1",
+      "skill": "사설 동아리2",
+      "classes": "테스트 방과후2"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님3",
+      "contact": "테스트#0000",
+      "department": "테스트 부서2",
+      "location": "테스트 위치3",
+      "position": "1학년 2반 담임교사",
+      "subject": "테스트 과목3",
+      "free": null,
+      "major": "전공동아리2",
+      "skill": null,
+      "classes": "테스트 방과후3"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
+      "name": "테스트 선생님4",
+      "contact": "테스트#1111",
+      "department": "테스트 부서3",
+      "location": "테스트 위치4",
+      "position": "1학년 2반 부담임교사",
+      "subject": "테스트 과목4",
+      "free": null,
+      "major": null,
+      "skill": null,
+      "classes": "테스트 방과후4"
     },
     {
-      type: "teach",
-      name: '홍길동',
-      job: '1학년 5반 담임교사',
-      location: '행정실', contact: 'chun@gmail.com',
-      tags: ['담임교사', '영어 교과', '시청각실', '클라우드 기능반', '춘사모 동아리']
-    },
+      "name": "테스트 선생님5",
+      "contact": "test1234@spring.com",
+      "department": "테스트 부서4",
+      "location": "테스트 위치5",
+      "position": "교사",
+      "subject": "테스트 과목5",
+      "free": "자율 동아리3",
+      "major": "전공동아리5",
+      "skill": "사설 동아리3",
+      "classes": "테스트 방과후5"
+    }
   ];
   window.addEventListener('keydown', e => setoffWarningAll(e));
   useEffect(e => {
@@ -94,28 +119,44 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     let x = e.deltaX;
     if (e.ctrlKey) {
       e.preventDefault();
-      x *= 3;
-      y *= 3;
+      x *= 4;
+      y *= 4;
     }
     if ((y > 0 ? y : y * -1) > (x > 0 ? x : x * -1)) {
       if (y > 0 && imgsize > 19) { //up
-        setImgsize(e => { return e - 0.02 * y });
+        setImgsize(e => {
+          if (e - 0.02 * y >= 19) {
+            return e - 0.02 * y;
+          }
+          return 19;
+        });
       }
-      else if (y < 0 && imgsize < 72) {//down
-        setImgsize(e => e - 0.02 * y);
-      }
-      else {
-        // setSizingWarning(true);
-        setImgsize(imgsize);
+      else if (y < 0 && imgsize < 70) {//down
+        setImgsize(e => {
+          if (e - 0.02 * y <= 70) {
+            return e - 0.02 * y;
+          }
+          return 70;
+        });
       }
     }
   }
   function clicksizing(type) {
     if (type === "increase" && imgsize < 70) {
-      setImgsize(e => e + 9);
+      setImgsize(e => {
+        if (imgsize + 9 <= 70) {
+          return e + 9;
+        }
+        return 70;
+      });
     }
     else if (type === "decrease" && imgsize > 19) {
-      setImgsize(e => e - 9);
+      setImgsize(e => {
+        if (imgsize - 9 >= 19) {
+          return e - 9
+        }
+        return 19;
+      });
     }
     else {
       setSizingWarning(true);
@@ -125,45 +166,45 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     <Nav />
     <div className="main">
       <div className="sideleft">
-        <div className="head">
+        <form className="head" onSubmit={async e => {
+          e.preventDefault();
+          if (searching === '') {
+            setSearchWarning(true);
+            return false;
+          }
+          console.log(searching);
+          await axios.post("", { id: searching }).then(e => {
+
+          });
+        }}>
           <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
-          <button onClick={e => {
-            if (searching === '') {
-              setSearchWarning(true);
-            }
-          }}><img src={l.search} alt='search' /></button>
-        </div>
+          <button><img src={l.search} alt='search' /></button>
+        </form>
         <div className="hr">
           <hr />
         </div>
         <div className="infos">
           {infos.map((i, n) => {
-            if (i.type === 'teach') {
-              return <div className="info" key={n}>
-                <div className="header">
-                  <div className="flex">
-                    <div className="name">{i.name}</div>
-                    <div className="job">{i.job}</div>
-                  </div>
-                  <div className="flex">
-                    <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
-                    <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
-                  </div>
+            return <div className="info" key={n}>
+              <div className="header">
+                <div className="flex">
+                  <div className="name">{i.name}</div>
+                  <div className="job">{i.department}</div>
                 </div>
-                <hr />
-                <div className="tags">
-                  {i.tags.map((i, n) => {
-                    return <div className="tag" key={n}>{i}</div>;
-                  })}
+                <div className="flex">
+                  <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
+                  <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
                 </div>
-              </div>;
-            }
-            else if (i.type === 'location') {
-              return <div className="location" key={n}></div>;
-            }
-            else {
-              return <></>;
-            }
+              </div>
+              <hr />
+              <div className="tags">
+                {i?.position && <div className='tag'>{i?.position}</div>}
+                {i?.free && <div className='tag'>{i?.free}</div>}
+                {i?.major && <div className='tag'>{i?.major}</div>}
+                {i?.skill && <div className='tag'>{i?.skill}</div>}
+                {i?.classes && <div className='tag'>{i?.classes}</div>}
+              </div>
+            </div>;
           })}
         </div>
       </div>
@@ -220,8 +261,13 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       setoffWarningAll(e);
     }} />
     <div className="alert" ref={backgroundWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => setSizingWarning(true)}>
-      {sizingWarning && (imgsize < 30 ? "지도를 더 이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
-      {searchWarning && "못찾았소용"}
+      <div>
+        {sizingWarning && (imgsize < 30 ? "지도를 더 이상 줄일 수 없습니다." : "지도를 더 이상 키울 수 없습니다.")}
+        {searchWarning && "못찾았소용"}
+        <div>
+          클릭이나 Esc를 눌러 확인
+        </div>
+      </div>
     </div>
   </div >;
 }
