@@ -38,7 +38,11 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
         >
           <Link to={"/map"}>학교 지도</Link>
         </div>
-        <div>
+        <div onClick={e => {
+          if (localStorage.getItem("logininfo") === "Guest") {
+            alert("asdf");
+          }
+        }}>
           <Link to={"/teach"}>학교 교사</Link>
         </div>
       </div>
