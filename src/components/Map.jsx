@@ -222,9 +222,16 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
             }
           </div>}
           <div className="hr"></div>
-          <button className={structure === 'center' ? 'current' : ''} onClick={e => setCenter()}>본관</button>
-          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={e => setGoldencrown()}>금봉관</button>
+          <button className={structure === 'center' ? 'current' : ''} onClick={e => {
+            setCenter();
+            setImgsize(20);
+          }}>본관</button>
+          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={e => {
+            setGoldencrown();
+            setImgsize(20);
+          }}>금봉관</button>
           <button className={structure === 'domitory' ? 'current' : ''} onClick={e => {
+            setImgsize(20);
             setDomitory();
             if (floor > 2) {
               setFloor(1);
