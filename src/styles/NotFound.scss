@@ -1,0 +1,46 @@
+.notfound {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fdfdfd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'LotteMartDream';
+  text-align: center;
+
+  .header {
+    .n404 {
+      color: #3A3251;
+      font-size: 150px;
+    }
+
+    .message {
+      color: #2758B6;
+      font-size: 75px;
+    }
+  }
+
+  .title {
+    color: #3C3B3B;
+  }
+
+  .description {
+    color: #A6A5A5;
+  }
+
+  button {
+    cursor: pointer;
+    box-shadow: 0 0 5px 1px #D9D9D9;
+    background-color: white;
+    color: #2758B6;
+    padding: 15px 5vw;
+    border: none;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #2758B6;
+      color: white;
+      font-weight: bold;
+    }
+  }
+}

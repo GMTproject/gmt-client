@@ -8,6 +8,7 @@ import Login from "components/Login";
 import Teach from "components/Teach";
 import About from "components/About";
 import Nav from "components/Nav";
+import NotFound from "components/404";
 
 function App() {
   // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
@@ -22,11 +23,7 @@ function App() {
 
   const navTo = (component, isRedirect) => {
     // 원하는 위치로 리다이렉트 or 컴포넌트를 보여주기 or 웰컴페이지로 돌아가기
-    if (
-      localStorage.getItem("logininfo") &&
-      localStorage.getItem("logininfo") !== "Guest" &&
-      isRedirect
-    ) {
+    if (localStorage.getItem("logininfo") && localStorage.getItem("logininfo") !== "Guest" && isRedirect) {
       // 리다이렉트를 하고 싶을 때
       return <Navigate to={component} replace />;
     } else if (
@@ -45,7 +42,7 @@ function App() {
       <BrowserRouter>
         {/* 페이지 이동하는 부분 가급적 건드리지 마시오. */}
         <Routes>
-          <Route path="*" element={navTo("/map", true)} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/map" element={<Map structure={structure} floor={floor} setFloor={setFloor} />} />
           <Route path="/teach" element={navTo(<><Nav /><Teach /></>, false)} />
           <Route path="/login" element={<><Login /></>}
