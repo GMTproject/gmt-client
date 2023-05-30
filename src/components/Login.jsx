@@ -7,8 +7,8 @@ const Login = () => { //로그인 화면 페이지
     <button onClick={e => {
       localStorage.setItem('logininfo', 'User');
       localStorage.setItem('logintime', time.toLocaleTimeString());
-      window.location.href = '/map'
-    }}>게스트 로그인</button>
+      window.location.href = '/map';
+    }}>일반 로그인</button>
   </div>;
 }
 

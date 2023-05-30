@@ -7,7 +7,7 @@ import * as l from "./imgs";
 import Nav from "./Nav";
 import axios from "axios";
 
-const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown }) => {
+const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown, setInit }) => {
   const canvas = useRef();
   const textWarningRef = useRef();
   const backgroundWarningRef = useRef();
@@ -112,6 +112,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         setDomitory();
         break;
       default:
+        setInit();
     }
   }
   function sizing(e) {
@@ -222,10 +223,17 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
             }
           </div>}
           <div className="hr"></div>
-          <button className={structure === 'center' ? 'current' : ''} onClick={e => setCenter()}>본관</button>
-          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={e => setGoldencrown()}>금봉관</button>
+          <button className={structure === 'center' ? 'current' : ''} onClick={e => {
+            structure === 'center' ? setInit() : setCenter();
+            setImgsize(20);
+          }}>본관</button>
+          <button className={structure === 'goldencrown' ? 'current' : ''} onClick={e => {
+            structure === 'goldencrown' ? setInit() : setGoldencrown();
+            setImgsize(20);
+          }}>금봉관</button>
           <button className={structure === 'domitory' ? 'current' : ''} onClick={e => {
-            setDomitory();
+            setImgsize(20);
+            structure === 'domitory' ? setInit() : setDomitory();
             if (floor > 2) {
               setFloor(1);
             }
@@ -246,6 +254,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           {structure === 'goldencrown' && floor === 4 && <img style={{ height: `${imgsize}vh` }} src={l.goldencrown4} alt={'goldencrown4'} />}
           {structure === 'domitory' && floor === 1 && <img style={{ height: `${imgsize}vh` }} src={l.domitory1} alt={'domitory1'} />}
           {structure === 'domitory' && floor === 2 && <img style={{ height: `${imgsize}vh` }} src={l.domitory2} alt={'domitory2'} />}
+          {structure === '' && <img style={{ height: `${imgsize}vh` }} src={l.all} alt={'all'} />}
         </div>
         <div className="sizing">
           <button onClick={e => clicksizing('increase')}>
@@ -280,7 +289,8 @@ const mapDispach = (dispatch, oprops) => {
   return {
     setDomitory: e => dispatch(setStructures('domitory')),
     setCenter: e => dispatch(setStructures('center')),
-    setGoldencrown: e => dispatch(setStructures('goldencrown'))
+    setGoldencrown: e => dispatch(setStructures('goldencrown')),
+    setInit: e => dispatch(setStructures(''))
   };
 }
 
