@@ -1,98 +1,183 @@
 .navigator {
-  background-color: #fdfdfd;
-  z-index: 3;
-  position: relative;
-  border-bottom: 1px solid #ccccdc;
-  width: calc(100vw - 2px);
-  height: calc(8vh - 2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: 'LotteMartDream';
+  background-color: #fdfdfd;
 
-  .left {
-    position: absolute;
-    left: 1.5vw;
+  @media screen and (max-width:500px) {
+    .clientinfo {
+      margin-top: 10px;
+      width: 99vw;
+      text-align: right;
 
-    img {
-      height: 35px;
-      cursor: pointer;
+      button {
+        border: 0.5px solid #d9d9d9;
+        border-radius: 3px;
+        box-shadow: 0 0 10px 1px #dfdfdf;
+        width: 70px;
+        height: 25px;
+        color: #2971FC;
+        cursor: pointer;
+      }
     }
-  }
 
-  .middle-text {
-    display: flex;
-    height: 100%;
+    .header {
+      z-index: 3;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
 
-    div {
-      height: 100%;
+      img {
+        margin-left: 10px;
+        height: 35px;
+        cursor: pointer;
+      }
+
+      .inputs {
+        margin-left: 10px;
+        display: flex;
+
+        input {
+          padding-left: 10px;
+          width: 60vw;
+          border-radius: 10px 0 0 10px;
+        }
+      }
+
+      .imgs {
+        border-radius: 0 100px 100px 0;
+        border: #121212 1px solid;
+        border-left: none;
+        padding-right: 5px;
+
+        img {
+          margin-left: 3px;
+        }
+      }
+    }
+
+    hr {
+      margin-top: 20px;
+    }
+
+    .nav {
+      display: flex;
+      height: 2vh;
+      width: 50vw;
+      margin: auto;
+      justify-content: space-between;
+      align-items: center;
 
       a {
-        display: flex;
-        align-items: center;
-        color: #121212;
-        font-size: 16px;
-        cursor: pointer;
         text-decoration-line: none;
-        height: 100%;
+        color: #121212;
 
         &:hover {
           color: #2971FC;
         }
-      }
 
-      &+div {
-        margin-left: 40px;
+        div {
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          height: 35px;
+        }
       }
     }
   }
 
-  .right {
-    position: absolute;
-    right: 30px;
-
-    button {
-      border: 0.5px solid #d9d9d9;
-      border-radius: 3px;
-      box-shadow: 0 0 10px 1px #dfdfdf;
-      width: 70px;
-      height: 25px;
-      color: #2971FC;
-      cursor: pointer;
-    }
-  }
-
-  .mapHov {
-    border: 0.5px solid #eaeaea;
-    border-top: none;
-    position: absolute;
-    text-align: center;
-    top: calc(8vh - 1px);
-    margin-left: -100px;
+  @media screen and (min-width:500px) {
+    z-index: 3;
+    position: relative;
+    border-bottom: 1px solid #ccccdc;
+    width: calc(100vw - 2px);
+    height: calc(8vh - 2px);
+    display: flex;
+    align-items: center;
     justify-content: center;
-    border-radius: 0 0 10px 10px;
-    background-color: #fdfdfd;
-    width: 90px;
-    z-index: 1;
 
-    hr {
-      margin: 0 auto;
-      width: 90%;
+    .left {
+      position: absolute;
+      left: 1.5vw;
+
+      img {
+        height: 35px;
+        cursor: pointer;
+      }
     }
 
-    a {
-      text-decoration-line: none;
-      color: #121212;
-
-      &:hover {
-        color: #2971FC;
-      }
+    .middle-text {
+      display: flex;
+      height: 100%;
 
       div {
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        height: 35px;
+        height: 100%;
+
+        a {
+          display: flex;
+          align-items: center;
+          color: #121212;
+          font-size: 16px;
+          cursor: pointer;
+          text-decoration-line: none;
+          height: 100%;
+
+          &:hover {
+            color: #2971FC;
+          }
+        }
+
+        &+div {
+          margin-left: 40px;
+        }
+      }
+    }
+
+    .right {
+      position: absolute;
+      right: 30px;
+
+      button {
+        border: 0.5px solid #d9d9d9;
+        border-radius: 3px;
+        box-shadow: 0 0 10px 1px #dfdfdf;
+        width: 70px;
+        height: 25px;
+        color: #2971FC;
+        cursor: pointer;
+      }
+    }
+
+    .mapHov {
+      border: 0.5px solid #eaeaea;
+      border-top: none;
+      position: absolute;
+      text-align: center;
+      top: calc(8vh - 1px);
+      margin-left: -100px;
+      justify-content: center;
+      border-radius: 0 0 10px 10px;
+      background-color: #fdfdfd;
+      width: 90px;
+      z-index: 1;
+
+      hr {
+        margin: 0 auto;
+        width: 90%;
+      }
+
+      a {
+        text-decoration-line: none;
+        color: #121212;
+
+        &:hover {
+          color: #2971FC;
+        }
+
+        div {
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          height: 35px;
+        }
       }
     }
   }
