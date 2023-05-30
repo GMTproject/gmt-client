@@ -31,7 +31,7 @@ const About = () => {
   return <div className="about">
     <div className="header">
       <div className="block">
-        <Link to={'/map'}>
+        <Link to={localStorage.getItem("logininfo") ? '/map' : '/welcome'}>
           <img src={l.logo} alt="logo" />
         </Link>
         <p>GMT는 신입생들이나 저희 학교에 처음 방문하시는 분들을 위해 각 선생님들의 연락처와 학교 시설의

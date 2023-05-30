@@ -8,6 +8,7 @@ export const goldencrown3 = 'imgs/금봉관3층.png';
 export const goldencrown4 = 'imgs/금봉관4층.png';
 export const domitory1 = 'imgs/기숙사1층.png';
 export const domitory2 = 'imgs/기숙사2층.png';
+export const all = 'imgs/전체.png';
 export const pin = 'imgs/pin.png';
 export const phone = 'imgs/phone.png';
 export const search = 'imgs/search.png';
