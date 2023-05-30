@@ -40,7 +40,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
         </div>
         <div onClick={e => {
           if (localStorage.getItem("logininfo") === "Guest") {
-            alert("asdf");
+            alert("인증이 필요한 서비스 입니다.");
           }
         }}>
           <Link to={"/teach"}>학교 교사</Link>
