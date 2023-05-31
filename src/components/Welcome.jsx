@@ -28,7 +28,7 @@ const Welcome = () => {
       </div>
       <div className="abouts">
         <a href="./about">
-          GMT 더 알아보러 가기<img src={arrow} alt="asdf"></img>
+          GMT 더 알아보러 가기&nbsp;<img src={arrow} alt="asdf"></img>
         </a>
       </div>
     </div>

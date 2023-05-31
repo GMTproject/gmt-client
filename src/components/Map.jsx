@@ -15,6 +15,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   const [isfloorClicked, setIsfloorClicked] = useState(false);
   const [sizingWarning, setSizingWarning] = useState(false);
   const [searchWarning, setSearchWarning] = useState(false);
+  const [winWid, setWinWid] = useState(document.body.clientWidth);
   const [imgsize, setImgsize] = useState(20);
   let infos = [
     {
@@ -79,6 +80,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     }
   ];
   window.addEventListener('keydown', e => setoffWarningAll(e));
+  window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
   useEffect(e => {
     canvas.current.addEventListener('wheel', sizing, { passive: false });
     textWarningRef.current.addEventListener('wheel', e => {
@@ -124,6 +126,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       y *= 4;
     }
     if ((y > 0 ? y : y * -1) > (x > 0 ? x : x * -1)) {
+      const isThirty = winWid >= 500 ? 70 : 33;
       if (y > 0 && imgsize > 19) { //up
         setImgsize(e => {
           if (e - 0.02 * y >= 19) {
@@ -132,12 +135,12 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           return 19;
         });
       }
-      else if (y < 0 && imgsize < 70) {//down
+      else if (y < 0 && imgsize < isThirty) {//down
         setImgsize(e => {
-          if (e - 0.02 * y <= 70) {
+          if (e - 0.02 * y <= isThirty) {
             return e - 0.02 * y;
           }
-          return 70;
+          return isThirty;
         });
       }
     }
@@ -166,49 +169,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   return <div className="map">
     <Nav />
     <div className="main">
-      <div className="sideleft">
-        <form className="head" onSubmit={async e => {
-          e.preventDefault();
-          if (searching === '') {
-            setSearchWarning(true);
-            return false;
-          }
-          console.log(searching);
-          await axios.post("", { id: searching }).then(e => {
-
-          });
-        }}>
-          <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
-          <button><img src={l.search} alt='search' /></button>
-        </form>
-        <div className="hr">
-          <hr />
-        </div>
-        <div className="infos">
-          {infos.map((i, n) => {
-            return <div className="info" key={n}>
-              <div className="header">
-                <div className="flex">
-                  <div className="name">{i.name}</div>
-                  <div className="job">{i.department}</div>
-                </div>
-                <div className="flex">
-                  <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
-                  <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
-                </div>
-              </div>
-              <hr />
-              <div className="tags">
-                {i?.position && <div className='tag'>{i?.position}</div>}
-                {i?.free && <div className='tag'>{i?.free}</div>}
-                {i?.major && <div className='tag'>{i?.major}</div>}
-                {i?.skill && <div className='tag'>{i?.skill}</div>}
-                {i?.classes && <div className='tag'>{i?.classes}</div>}
-              </div>
-            </div>;
-          })}
-        </div>
-      </div>
+      {winWid >= 500 && <Side searching={searching} setSearching={setSearching} setWinWid={setWinWid} infos={infos} winWid={winWid} />}
       <div className="canvas" ref={canvas} onWheel={e => sizing(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
@@ -265,6 +226,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           </button>
         </div>
       </div>
+      {winWid <= 500 && <Side searching={searching} setSearching={setSearching} setWinWid={setWinWid} infos={infos} winWid={winWid} />}
     </div>
     <div className="sizingwarning" ref={textWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => {
       setoffWarningAll(e);
@@ -279,6 +241,52 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       </div>
     </div>
   </div >;
+}
+
+const Side = ({ searching, setSearchWarning, setSearching, infos, winWid }) => {
+  return <div className="sideleft">
+    {winWid >= 500 && <form className="head" onSubmit={async e => {
+      e.preventDefault();
+      if (searching === '') {
+        setSearchWarning(true);
+        return false;
+      }
+      console.log(searching);
+      await axios.post("", { id: searching }).then(e => {
+
+      });
+    }}>
+      <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
+      <button><img src={l.search} alt='search' /></button>
+    </form>}
+    <div className="hr">
+      <hr />
+    </div>
+    <div className="infos">
+      {infos.map((i, n) => {
+        return <div className="info" key={n}>
+          <div className="header">
+            <div className="flex">
+              <div className="name">{i.name}</div>
+              <div className="job">{i.department}</div>
+            </div>
+            <div className="flex">
+              <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
+              <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
+            </div>
+          </div>
+          <hr />
+          <div className="tags">
+            {i?.position && <div className='tag'>{i?.position}</div>}
+            {i?.free && <div className='tag'>{i?.free}</div>}
+            {i?.major && <div className='tag'>{i?.major}</div>}
+            {i?.skill && <div className='tag'>{i?.skill}</div>}
+            {i?.classes && <div className='tag'>{i?.classes}</div>}
+          </div>
+        </div>;
+      })}
+    </div>
+  </div>
 }
 
 const mapStateToProps = structure => {

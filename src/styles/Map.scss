@@ -4,7 +4,6 @@
   height: 100vh;
   top: 0;
   z-index: 0;
-  display: flex;
   background-color: #fdfdfd;
 
   .main {
@@ -13,13 +12,27 @@
     width: 100vw;
     height: 85vh;
     display: flex;
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    @media screen and (max-width:500px) {
+      justify-content: center;
+      margin-top: 40px;
+      height: 80vh;
+    }
 
     .sideleft {
       overflow-y: scroll;
-      // height: 100vh;
       width: 22vw;
+      height: 85vh;
       margin-left: 3vw;
       text-align: center;
+
+      @media screen and (max-width:500px) {
+        width: 90vw;
+        margin-left: 0;
+        height: 40vh;
+      }
 
       .head {
         width: 22vw;
@@ -37,6 +50,11 @@
         width: 22vw;
         margin-top: 30px;
         background-color: #fdfdfd;
+
+        @media screen and (max-width:500px) {
+          margin-top: 0px;
+          width: 90vw;
+        }
 
         hr {
           margin-bottom: 0;
@@ -146,6 +164,13 @@
       border: 1px solid #ccccdc;
       width: 70vw;
       justify-content: center;
+
+      @media screen and (max-width:500px) {
+        position: relative;
+        width: 90vw;
+        height: 40vh;
+        right: 0;
+      }
 
       .img {
         img {
