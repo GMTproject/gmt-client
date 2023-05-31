@@ -65,6 +65,10 @@
       .infos {
         margin-top: 80px;
 
+        @media screen and (max-width:500px) {
+          margin-top: 60px;
+        }
+
         .info {
           border: 1px solid #d9d9d9;
           border-radius: 10px;
