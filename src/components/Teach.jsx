@@ -8,6 +8,8 @@ const Teach = () => { //선생님 페이지
   const [infolen, setInfolen] = useState([]);
   const [posi, setPosi] = useState(0);
   const [infos, setInfos] = useState([]);
+  const [winWid, setWinWid] = useState(document.body.clientWidth);
+  window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
   function pushes(position) {
     let size = 9;
     let crntposi = datas.length - (size * position);
@@ -55,10 +57,10 @@ const Teach = () => { //선생님 페이지
           <button>사설동아리</button>
         </div>
       </div>
-      <div className='right'>
+      {winWid >= 500 && <div className='right'>
         <input />
         <button><img src={l.search1} alt='search' /></button>
-      </div>
+      </div>}
     </div>
     <hr />
     <div className='infos'>
