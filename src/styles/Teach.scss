@@ -7,6 +7,10 @@
     margin: 30px 0;
     display: flex;
 
+    @media screen and (max-width:500px) {
+      margin: 10px 0;
+    }
+
     button {
       cursor: pointer;
     }
@@ -14,6 +18,15 @@
     .left {
       width: 65vw;
       display: flex;
+
+      @media screen and (max-width:500px) {
+        width: 90vw;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
 
       .sortimg {
         text-align: center;
@@ -27,12 +40,17 @@
       }
 
       .sortleft {
+        @media screen and (max-width:500px) {
+          display: flex;
+        }
+
         button {
           margin: 3px 10px;
           border-radius: 10px;
           border: none;
           background-color: #e5e5ec;
           padding: 7px 20px;
+          white-space: pre;
 
           &:hover {
             background-color: #2971FC;
@@ -42,10 +60,15 @@
       }
 
       .sortright {
+        @media screen and (max-width:500px) {
+          display: flex;
+        }
+
         button {
           margin: 3px 10px;
           border-radius: 10px;
           border: none;
+          white-space: pre;
           background-color: #e5e5ec;
           padding: 7px 10px;
 

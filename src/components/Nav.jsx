@@ -47,7 +47,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
               alert("인증이 필요한 서비스 입니다.");
             }
           }}>
-            <Link to={"/teach"}>학교 교사</Link>
+            <Link to={"/teachers"}>학교 교사</Link>
           </div>
         </div>
         {mapHov && (<div className="mapHov"
@@ -176,7 +176,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
                 alert("인증이 필요한 서비스 입니다.");
               }
             }}>
-              <Link to={"/teach"}>학교 교사</Link>
+              <Link to={"/teachers"}>학교 교사</Link>
             </div>
           </div>
           <hr />
