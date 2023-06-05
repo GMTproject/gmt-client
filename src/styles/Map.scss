@@ -318,6 +318,13 @@
     height: 30vh;
     background-color: #fdfdfd;
 
+    @media screen and (max-width:520px) {
+      width: 70vw;
+      height: 18vh;
+      top: 40px;
+      left: 15%;
+    }
+
     div {
       margin-top: 10px;
       text-align: center;

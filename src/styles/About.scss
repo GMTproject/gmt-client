@@ -14,9 +14,18 @@
     .block {
       width: 30vw;
 
+      @media screen and (max-width:520px) {
+        width: 70vw;
+        color: #434343;
+      }
+
       img {
         width: 10vw;
         object-fit: scale-down;
+
+        @media screen and (max-width:520px) {
+          width: 20vw;
+        }
       }
     }
 
@@ -35,6 +44,10 @@
     .introduce {
       width: 21vw;
 
+      @media screen and (max-width:520px) {
+        width: 60vw;
+      }
+
       .hr {
         background-color: #FF4848;
         margin: auto;
@@ -49,9 +62,18 @@
         border-radius: 100vw;
         background-color: #d9d9d9;
 
+        @media screen and (max-width:520px) {
+          width: 30vw;
+          height: 30vw;
+        }
+
         img {
           width: 15vw;
           object-fit: scale-down;
+
+          @media screen and (max-width:520px) {
+            width: 30vw;
+          }
         }
       }
 
