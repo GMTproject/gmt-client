@@ -7,7 +7,7 @@ const Login = () => { //로그인 화면 페이지
     <button onClick={e => {
       localStorage.setItem('logininfo', 'User');
       localStorage.setItem('logintime', time.toLocaleTimeString());
-      window.location.href = '/map';
+      window.location.href = '/success';
     }}>일반 로그인</button>
   </div>;
 }

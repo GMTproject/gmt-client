@@ -9,6 +9,7 @@ import Teach from "components/Teach";
 import About from "components/About";
 import Nav from "components/Nav";
 import NotFound from "components/404";
+import Success from "components/success";
 
 function App() {
   // 페이지로 보여주는 부분 반드시 필요함. 임의로 삭제하거나 수정하지 말 것.
@@ -46,10 +47,10 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/map" element={<Map structure={structure} floor={floor} setFloor={setFloor} />} />
           <Route path="/teachers" element={navTo(<><Nav /><Teach /></>, false)} />
-          <Route path="/login" element={<><Login /></>}
-          />
+          <Route path="/login" element={<><Login /></>} />
           <Route path="/welcome" element={<><Welcome /></>} />
           <Route path="/about" element={<About />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </BrowserRouter>
     </div>

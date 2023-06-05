@@ -150,10 +150,6 @@
         border: 1px solid #ccccdc;
         margin-top: 30px;
       }
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
     }
 
     .canvas {
@@ -305,6 +301,7 @@
 
   .alert {
     font-family: 'LotteMartDream';
+    font-weight: lighter;
     z-index: 4;
     position: absolute;
     display: flex;
@@ -320,6 +317,13 @@
     width: 30vw;
     height: 30vh;
     background-color: #fdfdfd;
+
+    @media screen and (max-width:520px) {
+      width: 70vw;
+      height: 18vh;
+      top: 40px;
+      left: 15%;
+    }
 
     div {
       margin-top: 10px;

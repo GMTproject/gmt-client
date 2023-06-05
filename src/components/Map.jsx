@@ -146,12 +146,13 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     }
   }
   function clicksizing(type) {
-    if (type === "increase" && imgsize < 70) {
+    const isThirty = winWid >= 500 ? 70 : 33;
+    if (type === "increase" && imgsize < isThirty) {
       setImgsize(e => {
-        if (imgsize + 9 <= 70) {
+        if (imgsize + 9 <= isThirty) {
           return e + 9;
         }
-        return 70;
+        return isThirty;
       });
     }
     else if (type === "decrease" && imgsize > 19) {

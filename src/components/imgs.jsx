@@ -19,3 +19,4 @@ export const Gangggg = 'imgs/Gangggg.png';
 export const SON = 'imgs/SON.png';
 export const 능이버섯 = 'imgs/능이버섯.png';
 export const hyee = 'imgs/hyee.png';
+export const checked = 'imgs/checked.png';

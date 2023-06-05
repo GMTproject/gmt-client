@@ -153,8 +153,8 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
                 if (cloca === 'map') {
                   console.log('map');
                 }
-                else if (cloca === 'teach') {
-
+                else if (cloca === 'teachers') {
+                  console.log('teachers');
                 }
               }}>
                 <img src={search} alt="search" />

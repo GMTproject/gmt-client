@@ -113,6 +113,11 @@
     flex-wrap: wrap;
     justify-content: left;
 
+    @media screen and (max-width: 520px) {
+      overflow-y: scroll;
+      height: 70vh;
+    }
+
     .info {
       width: 25vw;
       margin-left: 2vw;
@@ -120,6 +125,10 @@
       border: 1px solid #d9d9d9;
       border-radius: 10px;
       margin-bottom: 20px;
+
+      @media screen and (max-width: 520px) {
+        width: 80vw;
+      }
 
       .header {
         margin-top: 1.5vh;
