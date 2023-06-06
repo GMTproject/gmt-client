@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import 'styles/Teach.scss';
-import datas from "ex.json";
+// import datas from "ex.json";
 import * as l from 'components/imgs.jsx';
+import axios from 'axios';
+const url = 'http://3.38.254.195:8080/teachers';
 
 const Teach = () => { //선생님 페이지
   const [infolen, setInfolen] = useState([]);
@@ -10,24 +12,27 @@ const Teach = () => { //선생님 페이지
   const [infos, setInfos] = useState([]);
   const [winWid, setWinWid] = useState(document.body.clientWidth);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
-  function pushes(position) {
-    let size = 9;
-    let crntposi = datas.length - (size * position);
-    setInfos(e => {
-      let topush = [];
-      for (let i = 1; i < 1 + size; i++) {
-        if ((crntposi - i >= 0) && datas[crntposi - i]) {
-          topush.push((crntposi - i >= 0) && datas[crntposi - i]);
+  async function pushes(position) {
+    await axios.get(url).then(e => {
+      let size = 9;
+      const datas = e.data;
+      let crntposi = datas.length - (size * position);
+      setInfos(e => {
+        let topush = [];
+        for (let i = 1; i < 1 + size; i++) {
+          if ((crntposi - i >= 0) && datas[crntposi - i]) {
+            topush.push((crntposi - i >= 0) && datas[crntposi - i]);
+          }
         }
-      }
-      return topush;
-    });
-    setInfolen(e => {
-      let len = [];
-      for (let i = 0; i <= (datas.length - 1) / size; i++) {
-        len.push(i);
-      }
-      return len;
+        return topush;
+      });
+      setInfolen(e => {
+        let len = [];
+        for (let i = 0; i <= (datas.length - 1) / size; i++) {
+          len.push(i);
+        }
+        return len;
+      });
     });
   }
   useEffect(e => {
