@@ -4,7 +4,7 @@ import 'styles/Teach.scss';
 // import datas from "ex.json";
 import * as l from 'components/imgs.jsx';
 import axios from 'axios';
-const url = 'http://3.38.254.195:8080/teachers';
+const url = 'http://3.38.254.195:8080';
 
 const Teach = () => { //선생님 페이지
   const [infolen, setInfolen] = useState([]);
@@ -13,7 +13,7 @@ const Teach = () => { //선생님 페이지
   const [winWid, setWinWid] = useState(document.body.clientWidth);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
   async function pushes(position) {
-    await axios.get(url).then(e => {
+    await axios.get(`${url}/teachers`).then(e => {
       let size = 9;
       const datas = e.data;
       let crntposi = datas.length - (size * position);
