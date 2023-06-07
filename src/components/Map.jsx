@@ -5,7 +5,6 @@ import { setStructures } from "redux/mapstore";
 import '../styles/Map.scss';
 import * as l from "./imgs";
 import Nav from "./Nav";
-import axios from "axios";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown, setInit }) => {
   const canvas = useRef();
@@ -126,7 +125,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       y *= 4;
     }
     if ((y > 0 ? y : y * -1) > (x > 0 ? x : x * -1)) {
-      const isThirty = winWid >= 500 ? 70 : 33;
+      const isThirty = document.body.clientWidth >= 500 ? 70 : 33;
       if (y > 0 && imgsize > 19) { //up
         setImgsize(e => {
           if (e - 0.02 * y >= 19) {
@@ -171,7 +170,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     <Nav />
     <div className="main">
       {winWid >= 500 && <Side searching={searching} setSearching={setSearching} setWinWid={setWinWid} infos={infos} winWid={winWid} />}
-      <div className="canvas" ref={canvas} onWheel={e => sizing(e)}>
+      <div className="canvas" ref={canvas} onWheel={e => sizing(e)} onTouchMove={e => console.log(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
@@ -253,9 +252,6 @@ const Side = ({ searching, setSearchWarning, setSearching, infos, winWid }) => {
         return false;
       }
       console.log(searching);
-      await axios.post("", { id: searching }).then(e => {
-
-      });
     }}>
       <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
       <button><img src={l.search} alt='search' /></button>
@@ -286,6 +282,7 @@ const Side = ({ searching, setSearchWarning, setSearching, infos, winWid }) => {
           </div>
         </div>;
       })}
+      {!(infos?.length > 0) && "올바른 검색결과를 찾지 못했습니다."}
     </div>
   </div>
 }

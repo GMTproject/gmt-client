@@ -25,7 +25,6 @@ const Teach = () => { //선생님 페이지
     await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
     &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
       let size = 9;
-      console.log(e.data);
       const datas = e.data;
       let crntposi = datas.length - (size * position);
       setInfos(e => {
@@ -68,22 +67,22 @@ const Teach = () => { //선생님 페이지
         <hr />
         <div className='sortright'>
           <button>교과 교사</button>
-          <button className={query.grade1 && "clicked"} onClick={e => {
+          <button className={query.grade1 ? "clicked" : ''} onClick={e => {
             setQuery({ ...query, grade1: !query.grade1 })
           }}>1학년</button>
-          <button className={query.grade2 && "clicked"} onClick={e => {
+          <button className={query.grade2 ? "clicked" : ''} onClick={e => {
             setQuery({ ...query, grade2: !query.grade2 })
           }}>2학년</button>
-          <button className={query.grade3 && "clicked"} onClick={e => {
+          <button className={query.grade3 ? "clicked" : ''} onClick={e => {
             setQuery({ ...query, grade3: !query.grade3 })
           }}>3학년</button>
-          <button className={query.major && "clicked"} onClick={e => {
+          <button className={query.major ? "clicked" : ''} onClick={e => {
             setQuery({ ...query, major: !query.major })
           }}>전공동아리</button>
-          <button className={query.free && "clicked"} onClick={e => {
+          <button className={query.free ? "clicked" : ''} onClick={e => {
             setQuery({ ...query, free: !query.free })
           }}>자율동아리</button>
-          <button className={query.skill && "clicked"} onClick={e => {
+          <button className={query.skill ? "clicked" : ''} onClick={e => {
             setQuery({ ...query, skill: !query.skill })
           }}>사설동아리</button>
         </div>
@@ -109,14 +108,15 @@ const Teach = () => { //선생님 페이지
           </div>
           <hr />
           <div className="tags">
-            {i?.position && <div className='tag'>{i?.position}</div>}
-            {i?.free && <div className='tag'>{i?.free}</div>}
-            {i?.major && <div className='tag'>{i?.major}</div>}
-            {i?.skill && <div className='tag'>{i?.skill}</div>}
-            {i?.classes && <div className='tag'>{i?.classes}</div>}
+            {i?.position && <div className='tag position'>{i?.position}</div>}
+            {i?.free && <div className='tag free'>{i?.free}</div>}
+            {i?.major && <div className='tag major'>{i?.major}</div>}
+            {i?.skill && <div className='tag skill'>{i?.skill}</div>}
+            {i?.classes && <div className='tag classes'>{i?.classes}</div>}
           </div>
         </div>;
       })}
+      {!(infos?.length > 0) && "올바른 검색결과를 찾지 못했습니다."}
     </div>
     <div className={`labels`}>
       {
