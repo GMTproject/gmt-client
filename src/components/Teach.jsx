@@ -4,17 +4,28 @@ import 'styles/Teach.scss';
 // import datas from "ex.json";
 import * as l from 'components/imgs.jsx';
 import axios from 'axios';
-const url = 'http://3.38.254.195:8080/teachers';
+const url = 'http://3.38.254.195:8080';
 
 const Teach = () => { //선생님 페이지
   const [infolen, setInfolen] = useState([]);
   const [posi, setPosi] = useState(0);
   const [infos, setInfos] = useState([]);
+  const [query, setQuery] = useState({
+    free: false,
+    grade1: false,
+    grade2: false,
+    grade3: false,
+    major: false,
+    skill: false
+  });
   const [winWid, setWinWid] = useState(document.body.clientWidth);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
   async function pushes(position) {
-    await axios.get(url).then(e => {
+    const toggle = query.free || query.grade1 || query.grade2 || query.grade3 || query.major || query.skill;
+    await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
+    &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
       let size = 9;
+      console.log(e.data);
       const datas = e.data;
       let crntposi = datas.length - (size * position);
       setInfos(e => {
@@ -36,9 +47,12 @@ const Teach = () => { //선생님 페이지
     });
   }
   useEffect(e => {
-    pushes(0);
-    //eslint-disable-next-line
+    // pushes(0);
   }, []);
+  useEffect(e => {
+    pushes(posi);
+    //eslint-disable-next-line
+  }, [query]);
   return <div className="teach">
     <div className='head'>
       <div className='left'>
@@ -54,12 +68,24 @@ const Teach = () => { //선생님 페이지
         <hr />
         <div className='sortright'>
           <button>교과 교사</button>
-          <button>1학년</button>
-          <button>2학년</button>
-          <button>3학년</button>
-          <button>전공동아리</button>
-          <button>자율동아리</button>
-          <button>사설동아리</button>
+          <button className={query.grade1 && "clicked"} onClick={e => {
+            setQuery({ ...query, grade1: !query.grade1 })
+          }}>1학년</button>
+          <button className={query.grade2 && "clicked"} onClick={e => {
+            setQuery({ ...query, grade2: !query.grade2 })
+          }}>2학년</button>
+          <button className={query.grade3 && "clicked"} onClick={e => {
+            setQuery({ ...query, grade3: !query.grade3 })
+          }}>3학년</button>
+          <button className={query.major && "clicked"} onClick={e => {
+            setQuery({ ...query, major: !query.major })
+          }}>전공동아리</button>
+          <button className={query.free && "clicked"} onClick={e => {
+            setQuery({ ...query, free: !query.free })
+          }}>자율동아리</button>
+          <button className={query.skill && "clicked"} onClick={e => {
+            setQuery({ ...query, skill: !query.skill })
+          }}>사설동아리</button>
         </div>
       </div>
       {winWid >= 500 && <div className='right'>
