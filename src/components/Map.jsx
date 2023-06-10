@@ -169,7 +169,10 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   return <div className="map">
     <Nav />
     <div className="main">
-      {winWid >= 500 && <Side searching={searching} setSearching={setSearching} setWinWid={setWinWid} infos={infos} winWid={winWid} />}
+      {winWid >= 500 && <Side searching={searching}
+        setSearching={setSearching}
+        setWinWid={setWinWid} infos={infos} winWid={winWid}
+        setFloor={setFloor} setDomitory={setDomitory} setCenter={setCenter} setGoldencrown={setGoldencrown} setSearchWarning={setSearchWarning} />}
       <div className="canvas" ref={canvas} onWheel={e => sizing(e)} onTouchMove={e => console.log(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
@@ -226,7 +229,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           </button>
         </div>
       </div>
-      {winWid <= 500 && <Side searching={searching} setSearching={setSearching} setWinWid={setWinWid} infos={infos} winWid={winWid} />}
+      {winWid <= 500 && <Side searching={searching} setSearching={setSearching} setWinWid={setWinWid} infos={infos} winWid={winWid} setFloor={setFloor} setDomitory={setDomitory} setCenter={setCenter} setGoldencrown={setGoldencrown} setSearchWarning={setSearchWarning} />}
     </div>
     <div className="sizingwarning" ref={textWarningRef} style={{ display: `${sizingWarning || searchWarning ? "" : "none"}` }} onClick={e => {
       setoffWarningAll(e);
@@ -243,7 +246,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   </div >;
 }
 
-const Side = ({ searching, setSearchWarning, setSearching, infos, winWid }) => {
+const Side = ({ searching, setSearchWarning, setSearching, setFloor, setCenter, setDomitory, setGoldencrown, infos, winWid }) => {
   return <div className="sideleft">
     {winWid >= 500 && <form className="head" onSubmit={async e => {
       e.preventDefault();
@@ -251,7 +254,17 @@ const Side = ({ searching, setSearchWarning, setSearching, infos, winWid }) => {
         setSearchWarning(true);
         return false;
       }
-      console.log(searching);
+      switch (searching) {
+        case '빅데이터실':
+        case '빅데이터분석학습실':
+        case '사물인터넷실':
+        case '사물인터넷서비스기획실습실':
+          setFloor(1);
+          setDomitory();
+          break;
+        default:
+          console.log('찾지못함');
+      }
     }}>
       <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
       <button><img src={l.search} alt='search' /></button>
@@ -284,7 +297,7 @@ const Side = ({ searching, setSearchWarning, setSearching, infos, winWid }) => {
       })}
       {!(infos?.length > 0) && "올바른 검색결과를 찾지 못했습니다."}
     </div>
-  </div>
+  </div>;
 }
 
 const mapStateToProps = structure => {

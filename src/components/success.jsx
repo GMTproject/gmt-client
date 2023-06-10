@@ -1,11 +1,11 @@
 import 'styles/Success.scss';
-import { checked } from './imgs';
+import * as l from 'components/imgs';
 import { Link } from 'react-router-dom';
 
 export default function Success() {
   return <div className='success'>
     <div className='inner'>
-      <img src={checked} alt='checked' />
+      <img src={l.checked} alt='checked' />
       <h1>인증에 성공하셨습니다.</h1>
       <p>GMT에서 학교내의 지도와 선생님들의<br />
         정보가 올라와 있어요 !<br />
