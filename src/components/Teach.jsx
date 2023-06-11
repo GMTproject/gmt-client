@@ -111,7 +111,7 @@ const Teach = () => { //선생님 페이지
             {i?.position && <div className='tag position'>{i?.position}</div>}
             {i?.free && <div className='tag free'>{i?.free}</div>}
             {i?.major && <div className='tag major'>{i?.major}</div>}
-            {i?.skill && <div className='tag skill'>{i?.skill}</div>}
+            {i?.skill && i?.major !== i?.skill && <div className='tag skill'>{i?.skill}</div>}
             {i?.classes && <div className='tag classes'>{i?.classes}</div>}
           </div>
         </div>;
