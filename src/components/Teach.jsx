@@ -4,7 +4,7 @@ import 'styles/Teach.scss';
 // import datas from "ex.json";
 import * as l from 'components/imgs.jsx';
 import axios from 'axios';
-const url = 'http://3.38.254.195:8080';
+const url = 'http://gmt-pmn.shop:8080';
 
 const Teach = () => { //선생님 페이지
   const [infolen, setInfolen] = useState([]);
