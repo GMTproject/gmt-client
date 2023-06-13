@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { setStructures } from "redux/mapstore";
 import { logo, search } from "./imgs";
 
-const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
+const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   // 네비게이션 바
   const [logined, setLogined] = useState(false);
   const [text, setText] = useState('');
@@ -150,8 +150,8 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory }) => {
               <input onChange={e => setText(e.target.value)} value={text} />
               <div className="imgs" onClick={e => {
                 const cloca = document.location.href.split('/')[3];
-                if (cloca === 'map') {
-                  console.log('map');
+                if (cloca === 'map' && text === '') {
+                  setSearchWarning(true);
                 }
                 else if (cloca === 'teachers') {
                   console.log('teachers');

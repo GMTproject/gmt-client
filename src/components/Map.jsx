@@ -167,7 +167,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     }
   }
   return <div className="map">
-    <Nav />
+    <Nav setSearchWarning={setSearchWarning} />
     <div className="main">
       {winWid >= 500 && <Side searching={searching}
         setSearching={setSearching}
