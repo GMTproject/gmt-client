@@ -5,6 +5,7 @@
   top: 0;
   z-index: 0;
   background-color: #fdfdfd;
+  overflow-y: hidden;
 
   .main {
     position: absolute;
@@ -32,6 +33,17 @@
         width: 90vw;
         margin-left: 0;
         height: 40vh;
+
+        &::-webkit-scrollbar {
+          width: 30px;
+          border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border: 12px solid white;
+          border-radius: 1000px;
+          background-color: #999999;
+        }
       }
 
       .head {
