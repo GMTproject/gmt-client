@@ -8,18 +8,26 @@
   .inner {
     text-align: center;
 
+    @media screen and (max-width:500px) {
+      img {
+        width: 80px;
+        object-fit: scale-down;
+      }
+    }
+
     h1 {
       font-weight: 500;
+      font-size: 32px;
     }
 
     p {
+      font-size: 12px;
       color: #A6A5A5;
     }
 
     button {
       margin-top: 50px;
-      font-weight: 200;
-      font-size: 20px;
+      font-size: 13.5px;
       height: 50px;
       width: 15vw;
       font-family: 'LotteMartDream';
@@ -28,6 +36,11 @@
       background-color: white;
       border: none;
       border-radius: 5px;
+
+      @media screen and (max-width:500px) {
+        width: 51vw;
+        margin-top: 30px;
+      }
 
       &:hover {
         background-color: #2758B6;
