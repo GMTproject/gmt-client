@@ -273,7 +273,7 @@ const Side = ({ searching, setSearchWarning, setSearching, setFloor, setCenter, 
       <hr />
     </div>
     <div className="infos">
-      {infos.map((i, n) => {
+      {localStorage.getItem('logininfo') !== 'Guest' ? infos.map((i, n) => {
         return <div className="info" key={n}>
           <div className="header">
             <div className="flex">
@@ -294,7 +294,7 @@ const Side = ({ searching, setSearchWarning, setSearching, setFloor, setCenter, 
             {i?.classes && <div className='tag'>{i?.classes}</div>}
           </div>
         </div>;
-      })}
+      }) : "더 이상의 정보를 알고 싶다면 학교 소속을 인증해 주세요!"}
       {!(infos?.length > 0) && "올바른 검색결과를 찾지 못했습니다."}
     </div>
   </div>;
