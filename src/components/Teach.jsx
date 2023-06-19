@@ -24,7 +24,7 @@ const Teach = () => { //선생님 페이지
     const toggle = query.free || query.grade1 || query.grade2 || query.grade3 || query.major || query.skill;
     await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
     &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
-      const size = 9;
+      const size = document.body.clientWidth > 520 ? 9 : 4;
       let datas = e.data.reverse();
       let crntposi = datas.length - (size * position);
       setInfos(e => {
@@ -65,22 +65,28 @@ const Teach = () => { //선생님 페이지
         <div className='sortright'>
           <button>교과 교사</button>
           <button className={query.grade1 ? "clicked" : ''} onClick={e => {
-            setQuery({ ...query, grade1: !query.grade1 })
+            setQuery({ ...query, grade1: !query.grade1 });
+            setPosi(0);
           }}>1학년</button>
           <button className={query.grade2 ? "clicked" : ''} onClick={e => {
-            setQuery({ ...query, grade2: !query.grade2 })
+            setQuery({ ...query, grade2: !query.grade2 });
+            setPosi(0);
           }}>2학년</button>
           <button className={query.grade3 ? "clicked" : ''} onClick={e => {
-            setQuery({ ...query, grade3: !query.grade3 })
+            setQuery({ ...query, grade3: !query.grade3 });
+            setPosi(0);
           }}>3학년</button>
           <button className={query.major ? "clicked" : ''} onClick={e => {
-            setQuery({ ...query, major: !query.major })
+            setQuery({ ...query, major: !query.major });
+            setPosi(0);
           }}>전공동아리</button>
           <button className={query.free ? "clicked" : ''} onClick={e => {
-            setQuery({ ...query, free: !query.free })
+            setQuery({ ...query, free: !query.free });
+            setPosi(0);
           }}>자율동아리</button>
           <button className={query.skill ? "clicked" : ''} onClick={e => {
-            setQuery({ ...query, skill: !query.skill })
+            setQuery({ ...query, skill: !query.skill });
+            setPosi(0);
           }}>사설동아리</button>
         </div>
       </div>
