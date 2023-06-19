@@ -1,7 +1,6 @@
 .teach {
   width: 90vw;
   margin: auto;
-  overflow-y: visible;
 
   .head {
     margin: 30px 0;
@@ -59,6 +58,11 @@
         }
       }
 
+      .headhr {
+        margin-top: 3px;
+        height: 80%;
+      }
+
       .sortright {
         @media screen and (max-width:500px) {
           display: flex;
@@ -71,7 +75,7 @@
 
         button {
           margin: 3px 10px;
-          border-radius: 10px;
+          border-radius: 13px;
           border: none;
           white-space: pre;
           background-color: #e5e5ec;
@@ -91,6 +95,7 @@
       right: 5vw;
 
       input {
+        padding: 3px;
         padding-left: 15px;
         width: 15vw;
         height: 30px;
@@ -101,8 +106,9 @@
       button {
         border: 1px solid #cccccc;
         border-radius: 0 10px 10px 0;
-        width: 34px;
-        height: 33px;
+        background-color: white;
+        width: 38px;
+        height: 37px;
         margin-left: -1px;
         display: flex;
         justify-content: center;
@@ -124,12 +130,14 @@
     }
 
     .info {
+      box-shadow: 0 12px 10px 0px #7090b010;
       width: 25vw;
       margin-left: 2vw;
       background-color: #fdfdfd;
       border: 1px solid #d9d9d9;
       border-radius: 10px;
       margin-bottom: 20px;
+      height: 20vh;
 
       @media screen and (max-width: 520px) {
         width: 80vw;
@@ -143,6 +151,19 @@
           margin-left: 1.5vw;
           align-items: flex-end;
           margin-bottom: 1.2vh;
+
+          .job {
+            margin-left: 10px;
+          }
+
+          .contact {
+            font-size: 14px;
+            margin-left: 10px;
+          }
+
+          .location {
+            font-size: 14px;
+          }
         }
 
         div {
@@ -176,6 +197,7 @@
           background-color: #f2f2f2;
           margin-left: 1vw;
           margin-bottom: 3%;
+          font-size: 14px;
           padding: 1px 7px;
           border-radius: 10px;
         }

@@ -24,8 +24,8 @@ const Teach = () => { //선생님 페이지
     const toggle = query.free || query.grade1 || query.grade2 || query.grade3 || query.major || query.skill;
     await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
     &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
-      let size = 9;
-      const datas = e.data;
+      const size = 9;
+      let datas = e.data.reverse();
       let crntposi = datas.length - (size * position);
       setInfos(e => {
         let topush = [];
@@ -55,13 +55,13 @@ const Teach = () => { //선생님 페이지
         <div className='sortimg'>
           <img src={l.abcsort} alt={'sort'} />
         </div>
-        <hr />
+        <hr className='headhr' />
         <div className='sortleft'>
           <button>이름별</button>
           <button>위치별</button>
           <button>교과별</button>
         </div>
-        <hr />
+        <hr className='headhr' />
         <div className='sortright'>
           <button>교과 교사</button>
           <button className={query.grade1 ? "clicked" : ''} onClick={e => {
@@ -85,7 +85,7 @@ const Teach = () => { //선생님 페이지
         </div>
       </div>
       {winWid >= 500 && <div className='right'>
-        <input />
+        <input placeholder='찾으시는 선생님을 입력해주세요.' />
         <button><img src={l.search1} alt='search' /></button>
       </div>}
     </div>

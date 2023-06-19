@@ -5,6 +5,7 @@ import { setStructures } from "redux/mapstore";
 import '../styles/Map.scss';
 import * as l from "./imgs";
 import Nav from "./Nav";
+import axios from "axios";
 
 const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrown, setInit }) => {
   const canvas = useRef();
@@ -16,68 +17,8 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
   const [searchWarning, setSearchWarning] = useState(false);
   const [winWid, setWinWid] = useState(document.body.clientWidth);
   const [imgsize, setImgsize] = useState(20);
-  let infos = [
-    {
-      "name": "테스트 선생님1",
-      "contact": "010-0000-0000",
-      "department": "테스트 부서1",
-      "location": "테스트 위치1",
-      "position": "3학년 4반 담암교사",
-      "subject": "테스트 과목1",
-      "free": "자율 동아리1",
-      "major": null,
-      "skill": "사설 동아리1",
-      "classes": "테스트 방과후1"
-    },
-    {
-      "name": "테스트 선생님2",
-      "contact": "010-1111-1111",
-      "department": "테스트 부서2",
-      "location": "테스트 위치2",
-      "position": "교사",
-      "subject": "테스트 과목2",
-      "free": "자율 동아리2",
-      "major": "전공동아리1",
-      "skill": "사설 동아리2",
-      "classes": "테스트 방과후2"
-    },
-    {
-      "name": "테스트 선생님3",
-      "contact": "테스트#0000",
-      "department": "테스트 부서2",
-      "location": "테스트 위치3",
-      "position": "1학년 2반 담임교사",
-      "subject": "테스트 과목3",
-      "free": null,
-      "major": "전공동아리2",
-      "skill": null,
-      "classes": "테스트 방과후3"
-    },
-    {
-      "name": "테스트 선생님4",
-      "contact": "테스트#1111",
-      "department": "테스트 부서3",
-      "location": "테스트 위치4",
-      "position": "1학년 2반 부담임교사",
-      "subject": "테스트 과목4",
-      "free": null,
-      "major": null,
-      "skill": null,
-      "classes": "테스트 방과후4"
-    },
-    {
-      "name": "테스트 선생님5",
-      "contact": "test1234@spring.com",
-      "department": "테스트 부서4",
-      "location": "테스트 위치5",
-      "position": "교사",
-      "subject": "테스트 과목5",
-      "free": "자율 동아리3",
-      "major": "전공동아리5",
-      "skill": "사설 동아리3",
-      "classes": "테스트 방과후5"
-    }
-  ];
+  const url = 'https://gmt-pmn.shop';
+  const [infos, setInfos] = useState([]);
   window.addEventListener('keydown', e => setoffWarningAll(e));
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
   useEffect(e => {
@@ -93,6 +34,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       }
     }, { passive: false });
     initsetting();
+    pushes();
     //eslint-disable-next-line
   }, []);
   const setoffWarningAll = e => {
@@ -100,6 +42,13 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       setSizingWarning(false);
       setSearchWarning(false);
     }
+  }
+  async function pushes() {
+    await axios.get(`${url}/teachers/`).then(e => {
+      setInfos(a => {
+        return e.data;
+      });
+    });
   }
   const initsetting = () => {
     switch (localStorage.getItem('structure')) {
@@ -273,7 +222,7 @@ const Side = ({ searching, setSearchWarning, setSearching, setFloor, setCenter, 
       <hr />
     </div>
     <div className="infos">
-      {localStorage.getItem('logininfo') !== 'Guest' ? infos.map((i, n) => {
+      {localStorage.getItem('logininfo') !== 'Guest' ? infos?.map((i, n) => {
         return <div className="info" key={n}>
           <div className="header">
             <div className="flex">
@@ -287,11 +236,11 @@ const Side = ({ searching, setSearchWarning, setSearching, setFloor, setCenter, 
           </div>
           <hr />
           <div className="tags">
-            {i?.position && <div className='tag'>{i?.position}</div>}
-            {i?.free && <div className='tag'>{i?.free}</div>}
-            {i?.major && <div className='tag'>{i?.major}</div>}
-            {i?.skill && <div className='tag'>{i?.skill}</div>}
-            {i?.classes && <div className='tag'>{i?.classes}</div>}
+            {i?.position && <div className='tag position'>{i?.position}</div>}
+            {i?.free && <div className='tag free'>{i?.free}</div>}
+            {i?.major && <div className='tag major'>{i?.major}</div>}
+            {i?.skill && i?.major !== i?.skill && <div className='tag skill'>{i?.skill}</div>}
+            {i?.classes && <div className='tag classes'>{i?.classes}</div>}
           </div>
         </div>;
       }) : "더 이상의 정보를 알고 싶다면 학교 소속을 인증해 주세요!"}
