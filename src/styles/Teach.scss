@@ -57,6 +57,15 @@
             color: white;
           }
         }
+
+        .clicked {
+          background-color: #2971FC;
+          color: white;
+
+          &:hover {
+            background-color: rgba(#2971FC, 0.9);
+          }
+        }
       }
 
       .headhr {
@@ -67,11 +76,6 @@
       .sortright {
         @media screen and (max-width:500px) {
           display: flex;
-        }
-
-        .clicked {
-          background-color: #7E7F9B;
-          color: white;
         }
 
         button {
@@ -85,6 +89,15 @@
           &:hover {
             background-color: #7E7F9B;
             color: white;
+          }
+        }
+
+        .clicked {
+          background-color: #7E7F9B;
+          color: white;
+
+          &:hover {
+            background-color: rgba(#7E7F9B, 0.7);
           }
         }
       }
@@ -127,6 +140,7 @@
 
     @media screen and (max-width: 520px) {
       overflow-y: scroll;
+      overflow-x: hidden;
       height: 70vh;
       display: block;
     }

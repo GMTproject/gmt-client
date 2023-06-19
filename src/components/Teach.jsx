@@ -11,6 +11,9 @@ const Teach = () => { //선생님 페이지
   const [posi, setPosi] = useState(0);
   const [infos, setInfos] = useState([]);
   const [query, setQuery] = useState({
+    name: true,
+    location: false,
+    subject: false,
     free: false,
     grade1: false,
     grade2: false,
@@ -20,12 +23,35 @@ const Teach = () => { //선생님 페이지
   });
   const [winWid, setWinWid] = useState(document.body.clientWidth);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
+  function sort(array) {
+    let arr = array;
+    for (let i = 0; i < arr.length; i++) {
+      let min = i;
+      for (let j = i; j < arr.length; j++) {
+        if (arr[j].name < arr[min].name && query?.name) {
+          min = j;
+        }
+        else if (arr[j].location < arr[min].location && query?.location) {
+          min = j;
+        }
+        else if (arr[j].position < arr[min].position && query?.subject) {
+          min = j;
+        }
+      }
+      const tmp = arr[i];
+      arr[i] = arr[min];
+      arr[min] = tmp;
+    }
+    console.log(arr);
+    return arr.reverse();
+  }
   async function pushes(position) {
     const toggle = query.free || query.grade1 || query.grade2 || query.grade3 || query.major || query.skill;
     await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
     &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
       const size = document.body.clientWidth > 520 ? 9 : 4;
       let datas = e.data.reverse();
+      datas = sort(datas);
       let crntposi = datas.length - (size * position);
       setInfos(e => {
         let topush = [];
@@ -48,7 +74,7 @@ const Teach = () => { //선생님 페이지
   useEffect(e => {
     pushes(posi);
     //eslint-disable-next-line
-  }, [query]);
+  }, [query, winWid]);
   return <div className="teach">
     <div className='head'>
       <div className='left'>
@@ -57,9 +83,12 @@ const Teach = () => { //선생님 페이지
         </div>
         <hr className='headhr' />
         <div className='sortleft'>
-          <button>이름별</button>
-          <button>위치별</button>
-          <button>교과별</button>
+          <button className={query.name ? "clicked" : ''}
+            onClick={e => setQuery({ ...query, name: true, location: false, subject: false })}>이름별</button>
+          <button className={query.location ? "clicked" : ''}
+            onClick={e => setQuery({ ...query, location: true, name: false, subject: false })}>위치별</button>
+          <button className={query.subject ? "clicked" : ''}
+            onClick={e => setQuery({ ...query, subject: true, name: false, location: false })}>교과별</button>
         </div>
         <hr className='headhr' />
         <div className='sortright'>
