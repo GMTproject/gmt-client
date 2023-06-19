@@ -83,29 +83,23 @@
         }
 
         .info {
-          background-color: #fdfdfd;
           border: 1px solid #d9d9d9;
           border-radius: 10px;
           margin-bottom: 20px;
-          width: 20vw;
-
-          @media screen and (max-width: 520px) {
-            width: 80vw;
-          }
 
           .header {
-            margin-top: 1.5vh;
+            margin-top: 5%;
 
             .flex {
               display: flex;
-              margin-left: 1.5vw;
+              margin-left: 20px;
               align-items: flex-end;
-              margin-bottom: 1.2vh;
+              margin-bottom: 10px;
             }
 
             div {
               &+div {
-                margin-left: 0.3vh;
+                margin-left: 5px;
               }
             }
 
@@ -119,13 +113,13 @@
           }
 
           hr {
-            margin-top: 1vh;
-            margin-bottom: 1vh;
+            margin-top: 5%;
+            margin-bottom: 5%;
             width: 90%;
           }
 
           .tags {
-            width: 90%;
+            padding-right: 5%;
             display: inline-flex;
             flex-wrap: wrap;
 
@@ -137,35 +131,6 @@
               padding: 1px 7px;
               border-radius: 10px;
             }
-          }
-        }
-      }
-
-      .labels {
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        left: 0;
-        bottom: 25px;
-        width: 100vw;
-
-        .dot {
-          border-radius: 10px;
-          width: 10px;
-          height: 10px;
-          background-color: #CCCCDC;
-        }
-
-        .bold {
-          font-weight: bolder;
-          background-color: #2971FC;
-        }
-
-        label {
-          cursor: pointer;
-
-          &+label {
-            margin-left: 10px;
           }
         }
       }
