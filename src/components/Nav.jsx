@@ -21,7 +21,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   useEffect((e) => {
     setstorage();
   }, []);
-  window.addEventListener('storage', setstorage);
+  window.addEventListener('storage', e => window.location.reload());
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
 
   return (
@@ -43,7 +43,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             <Link to={"/map"}>학교 지도</Link>
           </div>
           <div onClick={e => {
-            if (localStorage.getItem("logininfo") === "Guest") {
+            if (logined === "Guest") {
               alert("인증이 필요한 서비스 입니다.");
             }
           }}>
@@ -172,7 +172,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
               <Link to={"/map"}>학교 지도</Link>
             </div>
             <div onClick={e => {
-              if (localStorage.getItem("logininfo") === "Guest") {
+              if (logined === "Guest") {
                 alert("인증이 필요한 서비스 입니다.");
               }
             }}>
