@@ -67,7 +67,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
           {!logined ? (
             <>
               <span>Guest</span>&nbsp;&nbsp;
-              <Link to={"/login"}>
+              <Link to={"/auth"}>
                 <button
                   onClick={(e) => {
                     // 회원가입하는 버튼 (임시) 추후 페이지 이동 로그인 페이지 이동하는 버튼
@@ -106,7 +106,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
           {!logined ? (
             <>
               <span>Guest</span>&nbsp;&nbsp;
-              <Link to={"/login"}>
+              <Link to={"/auth"}>
                 <button
                   onClick={(e) => {
                     // 회원가입하는 버튼 (임시) 추후 페이지 이동 로그인 페이지 이동하는 버튼

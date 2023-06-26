@@ -47,7 +47,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/map" element={<Map structure={structure} floor={floor} setFloor={setFloor} />} />
           <Route path="/teachers" element={navTo(<><Nav /><Teach /></>, false)} />
-          <Route path="/login" element={<><Login /></>} />
+          <Route path="/auth" element={<><Login /></>} />
           <Route path="/welcome" element={<><Welcome /></>} />
           <Route path="/about" element={<About />} />
           <Route path="/success" element={<Success />} />
