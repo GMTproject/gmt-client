@@ -87,7 +87,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
                 <button
                   onClick={(e) => {
                     // 로그아웃하는 버튼
-                    if (window.confirm("정말로?")) {
+                    if (window.confirm("정말로 로그아웃 하시겠습니까?")) {
                       // 로그아웃할 건지 재확인
                       setLogined((e) => false);
                       localStorage.clear(); // 로그아웃 시 저장된 모든 정보 삭제
@@ -130,7 +130,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
                       // 로그아웃할 건지 재확인
                       setLogined((e) => false);
                       localStorage.clear(); // 로그아웃 시 저장된 모든 정보 삭제
-                      alert("로그아웃됨");
+                      alert("로그아웃 됐습니다.");
                       window.location.href = "/welcome";
                     }
                   }}
