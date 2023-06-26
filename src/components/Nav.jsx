@@ -130,7 +130,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
                       // 로그아웃할 건지 재확인
                       setLogined((e) => false);
                       localStorage.clear(); // 로그아웃 시 저장된 모든 정보 삭제
-                      alert("로그아웃됨");
+                      alert("로그아웃 됐습니다.");
                       window.location.href = "/welcome";
                     }
                   }}

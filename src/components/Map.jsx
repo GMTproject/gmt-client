@@ -211,8 +211,183 @@ const Side = ({ searching, setSearchWarning, setSearching, setFloor, setCenter, 
           setFloor(1);
           setDomitory();
           break;
+        case '프로젝트 학습실':
+        case '전문교육부':
+        case '프로그래밍 2':
+        case '프로그래밍2':
+        case '프로그래밍 2실':
+        case '프로그래밍2실':
+          setFloor(2);
+          setDomitory();
+          break;
+        case '보건실':
+        case '교장실':
+        case '행정실':
+        case '방송실':
+        case '커뮤니티존':
+        case '커뮤니티 존':
+        case '교무실':
+        case '교감실':
+        case '응프':
+        case '응용프로그래밍':
+        case '응프실':
+        case '응용프로그래밍실':
+        case '인쇄실':
+          setFloor(1);
+          setCenter();
+          break;
+        case '3학년':
+        case '3학년실':
+        case '3학년 실':
+        case '3':
+        case '온스카':
+        case '온라인스터디카페':
+        case '온라인 스터디 카페':
+        case '착용형스마트기기실습실':
+        case '사물인터넷기획실습실':
+        case '3d프린터실':
+        case '3d프린터 실':
+        case '3d 프린터실':
+        case '3d 프린터 실':
+          setFloor(2);
+          setCenter();
+          break;
+        case '2':
+        case '2학년':
+        case '네트워크실':
+        case '네트워크 실':
+        case '네트워크프로그래밍실':
+        case '네트워크 프로그래밍실':
+        case '네트워크 프로그래밍 실':
+        case '마프실':
+        case '마이크로프로세서실':
+        case '마이크로 프로세서실':
+        case '마이크로 프로세서 실':
+        case '마이스터부':
+        case '학생부':
+          setFloor(3);
+          setCenter();
+          break;
+        case '1':
+        case '1학년':
+        case '프로그래밍실습1실':
+        case '프로그래밍 실습1실':
+        case '프로그래밍실습 1실':
+        case '프로그래밍 실습 1실':
+          setFloor(4);
+          setCenter();
+          break;
+        case '시청각실':
+        case '로보틱스':
+        case "모바일 로보틱스":
+        case "로보틱스 동아리":
+        case '모바일 로보틱스 동아리':
+        case '모바일로보틱스 동아리':
+        case '모바일로보틱스동아리':
+        case '모바일로보틱스기능반':
+        case '모바일로보틱스 기능반':
+        case '모바일 로보틱스 기능반':
+        case '게임개발':
+        case '게임개발동아리':
+        case '게임개발 동아리':
+        case '클라우드':
+        case '클라우드실':
+        case '클라우드 동아리':
+        case '클라우드 동아리실':
+        case '클라우드 동아리 실':
+        case '클라우드 기능반 실':
+        case '클라우드기능반 실':
+        case '클라우드기능반실':
+        case '클라우드기능반':
+        case '사보':
+        case '사이버보안':
+        case '사이버 보안':
+        case '사이버 보안 실':
+        case '사이버 보안실':
+        case '사이버보안실':
+        case '사이버보안기능반':
+        case '사이버보안 기능반':
+        case '사이버 보안 기능반':
+        case '급식실':
+          setFloor(1);
+          setGoldencrown();
+          break;
+        case '강당':
+        case '체육관':
+        case '면접실':
+        case '면접준비실':
+        case '면접 준비실':
+        case '면접 준비 실':
+        case 'wee':
+        case "WEE":
+        case '위클래스':
+        case '위 클래스':
+        case 'wee클래스':
+        case 'wee 클래스':
+        case 'Wee클래스':
+        case 'Wee 클래스':
+        case '취진':
+        case '취진부':
+        case '취업진로부':
+        case '취업 진로부':
+        case '취업진로 부':
+        case '취업 진로 부':
+        case 'AI실':
+        case 'AI자율주행실':
+        case 'AI자율주행실습실':
+        case 'AI 자율주행실습실':
+        case 'AI 자율주행 실습실':
+        case 'AI 자율주행 실':
+        case 'ai실':
+        case 'ai자율주행실':
+        case 'ai 자율주행실':
+        case 'ai자율주행 실':
+        case 'ai 자율주행 실':
+        case 'ai자율주행실습실':
+        case 'ai 자율주행실습실':
+        case 'ai자율주행 실습실':
+        case 'ai 자율주행 실습실':
+          setFloor(2);
+          setGoldencrown();
+          break;
+        case '도서실':
+        case '여직원휴게실':
+        case '여직원 휴게실':
+        case '여직원 휴게 실':
+        case '여직원휴게 실':
+        case '컴플렉스존':
+        case '컴플렉스 존':
+        case '콤플렉스존':
+        case '콤플렉스 존':
+        case 'Complex Zone':
+        case 'ComplexZone':
+        case 'Complex zone':
+        case 'Complexzone':
+        case 'complex Zone':
+        case 'complexZone':
+        case 'complex zone':
+        case 'complexzone':
+        case '메이커스페이스':
+        case '메이커 스페이스':
+        case 'MakerSpace':
+        case 'Maker Space':
+        case 'Makerspace':
+        case 'Maker space':
+        case 'makerSpace':
+        case 'maker Space':
+        case 'makerspace':
+        case 'maker space':
+          setFloor(3);
+          setGoldencrown();
+          break;
+        case '과학실':
+        case '음악실':
+        case '옥상':
+          setFloor(4);
+          setGoldencrown();
+          break;
         default:
-          console.log('찾지못함');
+          alert('검색결과를 찾을 수 없습니다.');
       }
     }}>
       <input onChange={e => setSearching(e.target.value)} value={searching} placeholder='찾고 싶은 실을 검색해 보세요.' />
