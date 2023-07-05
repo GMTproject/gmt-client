@@ -21,7 +21,7 @@ const Welcome = () => {
             }}>
             게스트로 시작하기
           </button>
-          <button onClick={(e) => (window.location.href = "/login")}>
+          <button onClick={(e) => (window.location.href = "/auth")}>
             학교소속 인증하기
           </button>
         </div>

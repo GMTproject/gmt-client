@@ -19,9 +19,10 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     }
   }
   useEffect((e) => {
+
     setstorage();
   }, []);
-  window.addEventListener('storage', setstorage);
+  window.addEventListener('storage', e => window.location.reload());
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
 
   return (
@@ -43,7 +44,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             <Link to={"/map"}>학교 지도</Link>
           </div>
           <div onClick={e => {
-            if (localStorage.getItem("logininfo") === "Guest") {
+            if (logined === "Guest") {
               alert("인증이 필요한 서비스 입니다.");
             }
           }}>
@@ -67,7 +68,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
           {!logined ? (
             <>
               <span>Guest</span>&nbsp;&nbsp;
-              <Link to={"/login"}>
+              <Link to={"/auth"}>
                 <button
                   onClick={(e) => {
                     // 회원가입하는 버튼 (임시) 추후 페이지 이동 로그인 페이지 이동하는 버튼
@@ -106,7 +107,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
           {!logined ? (
             <>
               <span>Guest</span>&nbsp;&nbsp;
-              <Link to={"/login"}>
+              <Link to={"/auth"}>
                 <button
                   onClick={(e) => {
                     // 회원가입하는 버튼 (임시) 추후 페이지 이동 로그인 페이지 이동하는 버튼
@@ -172,7 +173,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
               <Link to={"/map"}>학교 지도</Link>
             </div>
             <div onClick={e => {
-              if (localStorage.getItem("logininfo") === "Guest") {
+              if (logined === "Guest") {
                 alert("인증이 필요한 서비스 입니다.");
               }
             }}>
