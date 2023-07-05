@@ -19,7 +19,10 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     }
   }
   useEffect((e) => {
-
+    const par = new URLSearchParams(window.location.search).get("code");
+    if (par !== null) {
+      localStorage.setItem("logininfo", par);
+    }
     setstorage();
   }, []);
   window.addEventListener('storage', e => window.location.reload());
