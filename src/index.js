@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import store from 'redux/mapstore';
 import { GauthProvider } from '@msg-team/gauth-react';
-console.log(process.env)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
