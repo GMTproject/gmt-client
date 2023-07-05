@@ -19,6 +19,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     }
   }
   useEffect((e) => {
+
     setstorage();
   }, []);
   window.addEventListener('storage', e => window.location.reload());
