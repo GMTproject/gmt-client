@@ -5,11 +5,12 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import store from 'redux/mapstore';
 import { GauthProvider } from '@msg-team/gauth-react';
+console.log(process.env)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GauthProvider
-    redirectUri='http://localhost:3000/map'
+    redirectUri={process.env.REACT_APP_REDIRECT_URL}
     clientId='d615d1682dd44e3a9b49e08cb561ef8985013e572ad14417b8b96c2ceab106f5'
     /*
       가우스 로그인 후 code를 서버로 전송후 
