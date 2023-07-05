@@ -126,6 +126,21 @@
           }
         }
 
+        div {
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          color: #121212;
+          font-size: 16px;
+          cursor: pointer;
+          text-decoration-line: none;
+          height: 100%;
+
+          &:hover {
+            color: #2971FC;
+          }
+        }
+
         &+div {
           margin-left: 40px;
         }
