@@ -10,12 +10,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GauthProvider
     redirectUri={process.env.REACT_APP_REDIRECT_URL}
-    clientId='4c2a7abb50c64ebba43e8f38e4409d9fda257fcc153b442a82afdea43c411d24'
-    onSuccess={async e => {
-      if (e) {
-        localStorage.setItem('code', e);
-      }
-    }}>
+    clientId='d615d1682dd44e3a9b49e08cb561ef8985013e572ad14417b8b96c2ceab106f5'
+    /*
+      가우스 로그인 후 code를 서버로 전송후 
+      accessToken, refreshToken, accessTokenExpireDate, refreshTokenExpireDate 
+      이들을 로컬에 저장
+      accessToken으로 서버에 기본값으로 진행
+    */
+    onSuccess={async e => localStorage.setItem('code', e)}>
     <Provider store={store}>
       <React.StrictMode>
         <App />
