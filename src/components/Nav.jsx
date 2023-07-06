@@ -67,13 +67,12 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   useEffect((e) => {
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
-      localStorage.setItem("logininfo", par);
       getTokens();
       window.location.href = '/map';
     } else {
       const t = new Date();
       const calt = t.getHours() * 100 + t.getMinutes() - localStorage.getItem('logintime');
-      if (calt >= 1 ||
+      if (calt >= 5 ||
         calt < 0) {
         console.log(calt);
         // reGetTokens();
@@ -81,7 +80,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       requestInfos();
     }
     setstorage();
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
 
