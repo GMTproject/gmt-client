@@ -68,8 +68,8 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       localStorage.setItem("logininfo", par);
-      window.location.href = '/map';
       getTokens();
+      window.location.href = '/map';
     } else {
       const t = new Date();
       const calt = t.getHours() * 100 + t.getMinutes() - localStorage.getItem('logintime');
