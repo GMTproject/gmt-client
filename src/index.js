@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GauthProvider
     redirectUri={process.env.REACT_APP_REDIRECT_URL}
-    clientId='4c2a7abb50c64ebba43e8f38e4409d9fda257fcc153b442a82afdea43c411d24'
+    clientId={process.env.REACT_APP_CLIENT_ID}
     onSuccess={async e => {
       if (e) {
         localStorage.setItem('code', e);
