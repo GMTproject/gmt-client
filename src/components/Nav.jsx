@@ -67,13 +67,12 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   useEffect((e) => {
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
-      localStorage.setItem("logininfo", par);
       getTokens();
       window.location.href = '/map';
     } else {
       const t = new Date();
       const calt = t.getHours() * 100 + t.getMinutes() - localStorage.getItem('logintime');
-      if (calt >= 1 ||
+      if (calt >= 5 ||
         calt < 0) {
         console.log(calt);
         // reGetTokens();
@@ -81,7 +80,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       requestInfos();
     }
     setstorage();
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
 
@@ -135,14 +134,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             <>
               <span>Guest</span>&nbsp;&nbsp;
               <Link to={"/auth"}>
-                <button
-                  onClick={(e) => {
-                    // 회원가입하는 버튼 (임시) 추후 페이지 이동 로그인 페이지 이동하는 버튼
-                    setLogined((e) => "Guest");
-                    localStorage.setItem("logininfo", "Guest");
-                    localStorage.setItem("logintime", time.toLocaleTimeString());
-                  }}
-                >
+                <button>
                   Login
                 </button>
               </Link>
