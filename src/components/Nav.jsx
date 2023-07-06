@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { setStructures } from "redux/mapstore";
 import { logo, search } from "./imgs";
+import axios from "axios";
 
 const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   // 네비게이션 바
@@ -18,14 +19,70 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       setLogined(false);
     }
   }
+  const getTokens = async e => {
+    try {
+      await axios.post(`https://server.gauth.co.kr/oauth/token`, {
+        "code": localStorage.getItem('code'),
+        "clientId": '4c2a7abb50c64ebba43e8f38e4409d9fda257fcc153b442a82afdea43c411d24',
+        "clientSecret": '1f621b9490a240ed93a7eb223de147d87efc37c1b64c439791d2fb8dd46bcd8b',
+        "redirectUri": process.env.REACT_APP_REDIRECT_URL
+      }).then(e => {
+        const data = e?.data;
+        console.log(data);
+        localStorage.setItem('Tokens', JSON.stringify({
+          accessToken: data?.accessToken,
+          refreshToken: data?.refreshToken
+        }));
+        localStorage.removeItem("code");
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const requestInfos = async e => {
+    try {
+      await axios.get(`https://open.gauth.co.kr/user`,
+        { headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem("Tokens")).accessToken}` } })
+        .then(e => {
+          const data = e.data;
+          localStorage.setItem('logininfo', data.name);
+          if (!localStorage.getItem('logintime')) {
+            const t = new Date();
+            localStorage.setItem('logintime', t.getHours() * 100 + t.getMinutes());
+          }
+          setstorage();
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  //eslint-disable-next-line
+  const reGetTokens = async e => {
+    await axios.patch('https://server.gauth.co.kr/oauth/token',
+      { headers: { "refreshToken": `Bearer ${JSON.parse(localStorage.getItem("Tokens")).refreshToken}` } })
+      .then(e => {
+        console.log(e);
+      });
+  }
   useEffect((e) => {
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       localStorage.setItem("logininfo", par);
+      window.location.href = '/map';
+      getTokens();
+    } else {
+      const t = new Date();
+      const calt = t.getHours() * 100 + t.getMinutes() - localStorage.getItem('logintime');
+      if (calt >= 1 ||
+        calt < 0) {
+        console.log(calt);
+        // reGetTokens();
+      }
+      requestInfos();
     }
     setstorage();
+    //eslint-disable-next-line
   }, []);
-  window.addEventListener('storage', e => window.location.reload());
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
 
   return (
