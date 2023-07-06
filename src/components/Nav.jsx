@@ -23,8 +23,8 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     try {
       await axios.post(`https://server.gauth.co.kr/oauth/token`, {
         "code": localStorage.getItem('code'),
-        "clientId": '4c2a7abb50c64ebba43e8f38e4409d9fda257fcc153b442a82afdea43c411d24',
-        "clientSecret": '1f621b9490a240ed93a7eb223de147d87efc37c1b64c439791d2fb8dd46bcd8b',
+        "clientId": process.env.REACT_APP_CLIENT_ID,
+        "clientSecret": process.env.REACT_APP_CLIENT_SECRET,
         "redirectUri": process.env.REACT_APP_REDIRECT_URL
       }).then(e => {
         const data = e?.data;
