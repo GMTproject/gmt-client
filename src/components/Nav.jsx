@@ -35,6 +35,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
         }));
         localStorage.removeItem("code");
       });
+      window.location.href = '/map';
     } catch (e) {
       console.log(e);
     }
@@ -68,7 +69,6 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       getTokens();
-      window.location.href = '/map';
     } else {
       const t = new Date();
       const calt = t.getHours() * 100 + t.getMinutes() - localStorage.getItem('logintime');
