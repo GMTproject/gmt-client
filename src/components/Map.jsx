@@ -44,11 +44,12 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     }
   }
   async function pushes() {
-    await axios.get(`${url}/teachers/`).then(e => {
-      setInfos(a => {
-        return e.data;
+    await axios.get(`${url}/teachers/`,
+      { headers: { 'Authorization': `bearer: ${JSON.parse(localStorage.getItem("Tokens")).accessToken}` } }).then(e => {
+        setInfos(a => {
+          return e.data;
+        });
       });
-    });
   }
   const initsetting = () => {
     switch (localStorage.getItem('structure')) {

@@ -135,14 +135,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             <>
               <span>Guest</span>&nbsp;&nbsp;
               <Link to={"/auth"}>
-                <button
-                  onClick={(e) => {
-                    // 회원가입하는 버튼 (임시) 추후 페이지 이동 로그인 페이지 이동하는 버튼
-                    setLogined((e) => "Guest");
-                    localStorage.setItem("logininfo", "Guest");
-                    localStorage.setItem("logintime", time.toLocaleTimeString());
-                  }}
-                >
+                <button>
                   Login
                 </button>
               </Link>
