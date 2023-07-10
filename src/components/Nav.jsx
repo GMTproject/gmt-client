@@ -21,20 +21,24 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   }
   const getTokens = async e => {
     try {
-      await axios.post(`https://server.gauth.co.kr/oauth/token`, {
-        "code": localStorage.getItem('code'),
-        "clientId": process.env.REACT_APP_CLIENT_ID,
-        "clientSecret": process.env.REACT_APP_CLIENT_SECRET,
-        "redirectUri": process.env.REACT_APP_REDIRECT_URL
-      }).then(e => {
-        const data = e?.data;
-        console.log(data);
-        localStorage.setItem('Tokens', JSON.stringify({
-          accessToken: data?.accessToken,
-          refreshToken: data?.refreshToken
-        }));
-        localStorage.removeItem("code");
-      });
+      await axios.get(`https://gmt-pmn.shop/auth/login?code=${localStorage.getItem('code')}`)
+        .then(e => {
+          console.log(e);
+        });
+      // await axios.post(`https://server.gauth.co.kr/oauth/token`, {
+      //   "code": localStorage.getItem('code'),
+      //   "clientId": process.env.REACT_APP_CLIENT_ID,
+      //   "clientSecret": process.env.REACT_APP_CLIENT_SECRET,
+      //   "redirectUri": process.env.REACT_APP_REDIRECT_URL
+      // }).then(async e => {
+      //   const data = e?.data;
+      //   console.log(data);
+      //   localStorage.setItem('Tokens', JSON.stringify({
+      //     accessToken: data?.accessToken,
+      //     refreshToken: data?.refreshToken
+      //   }));
+      //   localStorage.removeItem("code");
+      // });
       window.location.href = '/map';
     } catch (e) {
       console.log(e);
