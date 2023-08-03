@@ -11,43 +11,49 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   const [text, setText] = useState('');
   const [mapHov, setMapHov] = useState(false);
   const [winWid, setWinWid] = useState(document.body.clientWidth);
+  const url = 'https://gmt-pmn.shop';
   const time = new Date(); // 로그인 시간 저장
   const setstorage = e => {
     if (localStorage.getItem("logininfo") !== "Guest") {
-      setLogined(localStorage.getItem("logininfo"));
+      setLogined(JSON.parse(localStorage.getItem("logininfo")));
     } else {
       setLogined(false);
     }
   }
   const getTokens = async e => {
-    try {
-      await axios.get(`https://gmt-pmn.shop/auth/login?code=${localStorage.getItem('code')}`)
-        .then(e => {
-          console.log(e);
-        });
-      // await axios.post(`https://server.gauth.co.kr/oauth/token`, {
-      //   "code": localStorage.getItem('code'),
-      //   "clientId": process.env.REACT_APP_CLIENT_ID,
-      //   "clientSecret": process.env.REACT_APP_CLIENT_SECRET,
-      //   "redirectUri": process.env.REACT_APP_REDIRECT_URL
-      // }).then(async e => {
-      //   const data = e?.data;
-      //   console.log(data);
-      //   localStorage.setItem('Tokens', JSON.stringify({
-      //     accessToken: data?.accessToken,
-      //     refreshToken: data?.refreshToken
-      //   }));
-      //   localStorage.removeItem("code");
-      // });
-      window.location.href = '/map';
-    } catch (e) {
-      console.log(e);
+    if (localStorage?.getItem('code')) {
+      try {
+        await axios.get(`${url}/auth/login?code=${localStorage?.getItem('code')}`)
+          .then(e => {
+            console.log(e);
+            const data = e?.data;
+            localStorage.setItem('Tokens', JSON.stringify({
+              accessToken: data?.accessToken,
+              refreshToken: data?.refreshToken
+            }));
+            localStorage.setItem('accessExp', data?.accessExp);
+            localStorage.setItem('refreshsExp', data?.refreshExp);
+            localStorage.removeItem("code");
+            // await axios.post(`https://server.gauth.co.kr/oauth/token`, {
+            //   "code": localStorage.getItem('code'),
+            //   "clientId": process.env.REACT_APP_CLIENT_ID,
+            //   "clientSecret": process.env.REACT_APP_CLIENT_SECRET,
+            //   "redirectUri": process.env.REACT_APP_REDIRECT_URL
+            // }).then(async e => {
+            //   const data = e?.data;
+            //   console.log(data);
+            // });
+            window.location.href = '/success';
+          });
+      } catch (e) {
+        console.log('getTokens :', localStorage?.getItem('code'), e);
+      }
     }
   }
   const requestInfos = async e => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage?.getItem('Tokens'))?.accessToken}`;
     try {
-      await axios.get(`https://open.gauth.co.kr/user`,
-        { headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem("Tokens")).accessToken}` } })
+      await axios.get(`https://open.gauth.co.kr/user`)
         .then(e => {
           const data = e.data;
           localStorage.setItem('logininfo', data.name);
@@ -58,30 +64,31 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
           setstorage();
         });
     } catch (e) {
-      console.log(e);
+      console.log(e, `${axios.defaults.headers.common['Authorization']}`);
     }
   }
   //eslint-disable-next-line
   const reGetTokens = async e => {
-    await axios.patch('https://server.gauth.co.kr/oauth/token',
-      { headers: { "refreshToken": `Bearer ${JSON.parse(localStorage.getItem("Tokens")).refreshToken}` } })
+    await axios.patch(`${url}/auth`,
+      { headers: { "refreshToken": `Bearer ${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
       .then(e => {
         console.log(e);
       });
   }
   useEffect((e) => {
+    reGetTokens();
+    requestInfos();
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       getTokens();
     } else {
       const t = new Date();
-      const calt = t.getHours() * 100 + t.getMinutes() - localStorage.getItem('logintime');
+      const calt = new Date(localStorage.getItem('accessExp')) - t;
       if (calt >= 5 ||
         calt < 0) {
         console.log(calt);
         // reGetTokens();
       }
-      requestInfos();
     }
     setstorage();
     // eslint-disable-next-line
