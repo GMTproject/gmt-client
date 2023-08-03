@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { setStructures } from "redux/mapstore";
 import { logo, search } from "./imgs";
 import axios from "axios";
+const url = 'https://gmt-pmn.shop';
 
 const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   // 네비게이션 바
@@ -11,7 +12,6 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   const [text, setText] = useState('');
   const [mapHov, setMapHov] = useState(false);
   const [winWid, setWinWid] = useState(document.body.clientWidth);
-  const url = 'https://gmt-pmn.shop';
   const time = new Date(); // 로그인 시간 저장
   const setstorage = e => {
     if (localStorage.getItem("logininfo") !== "Guest") {
@@ -76,17 +76,17 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       });
   }
   useEffect((e) => {
-    reGetTokens();
-    requestInfos();
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       getTokens();
     } else {
       const t = new Date();
       const calt = new Date(localStorage.getItem('accessExp')) - t;
+      reGetTokens();
+      requestInfos();
       if (calt >= 5 ||
         calt < 0) {
-        console.log(calt);
+        console.log(calt)
         // reGetTokens();
       }
     }
