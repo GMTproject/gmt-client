@@ -34,7 +34,11 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       }
     }, { passive: false });
     initsetting();
-    pushes();
+    const par = new URLSearchParams(window.location.search).get("code");
+    if (par !== undefined) {
+      // console.log(par)
+      pushes();
+    }
     //eslint-disable-next-line
   }, []);
   const setoffWarningAll = e => {
@@ -50,7 +54,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
           console.log(e)
           setInfos(e.data);
         }).catch(e =>
-          console.log(e, axios.defaults.headers.common)
+          console.log(e)
         );
     }
   }
@@ -401,29 +405,30 @@ const Side = ({ searching, setSearchWarning, setSearching, setFloor, setCenter, 
       <hr />
     </div>
     <div className="infos">
-      {localStorage.getItem('logininfo') !== 'Guest' ? infos?.map((i, n) => {
-        return <div className="info" key={n}>
-          <div className="header">
-            <div className="flex">
-              <div className="name">{i.name}</div>
-              <div className="job">{i.department}</div>
-            </div>
-            <div className="flex">
-              <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
-              <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
-            </div>
-          </div>
-          <hr />
-          <div className="tags">
-            {i?.position && <div className='tag position'>{i?.position}</div>}
-            {i?.free && <div className='tag free'>{i?.free}</div>}
-            {i?.major && <div className='tag major'>{i?.major}</div>}
-            {i?.skill && i?.major !== i?.skill && <div className='tag skill'>{i?.skill}</div>}
-            {i?.classes && <div className='tag classes'>{i?.classes}</div>}
-          </div>
-        </div>;
-      }) : "더 이상의 정보를 알고 싶다면 학교 소속을 인증해 주세요!"}
-      {!(infos?.length > 0) && "올바른 검색결과를 찾지 못했습니다."}
+      {localStorage.getItem('logininfo') ? //로그인이 되어 있는가?
+        (!(infos?.length > 0) ? //정보가 있는가?
+          "올바른 검색결과를 찾지 못했습니다." : infos?.map((i, n) => {
+            return <div className="info" key={n}>
+              <div className="header">
+                <div className="flex">
+                  <div className="name">{i.name}</div>
+                  <div className="job">{i.department}</div>
+                </div>
+                <div className="flex">
+                  <div className="location"><img src={l.pin} alt="pin" /> {i.location}&nbsp;</div>
+                  <div className="contact"><img src={l.phone} alt="phone" /> {i.contact}</div>
+                </div>
+              </div>
+              <hr />
+              <div className="tags">
+                {i?.position && <div className='tag position'>{i?.position}</div>}
+                {i?.free && <div className='tag free'>{i?.free}</div>}
+                {i?.major && <div className='tag major'>{i?.major}</div>}
+                {i?.skill && i?.major !== i?.skill && <div className='tag skill'>{i?.skill}</div>}
+                {i?.classes && <div className='tag classes'>{i?.classes}</div>}
+              </div>
+            </div>;
+          })) : "더 이상의 정보를 알고 싶다면 학교 소속을 인증해 주세요!"}
     </div>
   </div>;
 }
