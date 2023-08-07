@@ -20,12 +20,12 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       setLogined(false);
     }
   }
+  /* 최초 로그인시 */
   const getTokens = async e => {
     if (localStorage?.getItem('code')) {
       try {
         await axios.get(`${url}/auth/login?code=${localStorage?.getItem('code')}`)
           .then(e => {
-            console.log(e);
             const data = e?.data;
             localStorage.setItem('Tokens', JSON.stringify({
               accessToken: data?.accessToken,
@@ -53,14 +53,14 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   const requestInfos = async e => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage?.getItem('Tokens'))?.accessToken}`;
     try {
-      await axios.get(`https://open.gauth.co.kr/user`)
+      await axios.get(`https://open.gauth.co.kr/user`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage?.getItem('Tokens'))?.accessToken}`
+        }
+      })
         .then(e => {
           const data = e.data;
           localStorage.setItem('logininfo', data.name);
-          if (!localStorage.getItem('logintime')) {
-            const t = new Date();
-            localStorage.setItem('logintime', t.getHours() * 100 + t.getMinutes());
-          }
           setstorage();
         });
     } catch (e) {
@@ -81,13 +81,14 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       getTokens();
     } else {
       const t = new Date();
-      const calt = new Date(localStorage.getItem('accessExp')) - t;
-      reGetTokens();
-      requestInfos();
-      if (calt >= 5 ||
-        calt < 0) {
-        console.log(calt)
-        // reGetTokens();
+      let calt = new Date(localStorage.getItem('accessExp')) - t;
+      calt /= 60000;
+      if (calt < 0) { //만료 되었을 때
+        console.log('재발급 필요');
+        reGetTokens();
+      } else {
+        console.log(Math.floor(calt) + "분 남음");
+        requestInfos();
       }
     }
     setstorage();
@@ -120,8 +121,9 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
           }}>
             {logined ? <Link to={"/teachers"}>학교 교사</Link> : <div
               onClick={e => {
-                alert("인증이 필요한 서비스입니다.");
-                window.location.href = '/welcome';
+                if (window.confirm("인증이 필요한 서비스입니다. 로그인 하시겠습니까?")) {
+                  window.location.href = '/auth';
+                }
               }}>
               학교 교사
             </div>}
