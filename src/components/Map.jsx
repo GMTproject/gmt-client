@@ -37,7 +37,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== undefined) {
       // console.log(par)
-      pushes();
+      getTeachersInfos();
     }
     //eslint-disable-next-line
   }, []);
@@ -47,14 +47,14 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       setSearchWarning(false);
     }
   }
-  async function pushes() {
-    if (JSON.parse(localStorage?.getItem("Tokens"))?.accessToken) {
+  async function getTeachersInfos() {
+    const BearerToken = JSON.parse(localStorage?.getItem("Tokens"))?.accessToken;
+    if (BearerToken) {
       await axios.get(`${url}/teachers`,
-        { headers: { 'Authorization': `Bearer ${JSON.parse(localStorage?.getItem("Tokens"))?.accessToken}` } }).then(e => {
-          console.log(e)
+        { headers: { Authorization: `Bearer ${BearerToken}` } }).then(e => {
           setInfos(e.data);
         }).catch(e =>
-          console.log(e)
+          console.log(e, `${BearerToken}`)
         );
     }
   }
