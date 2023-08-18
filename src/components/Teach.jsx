@@ -42,7 +42,6 @@ const Teach = () => { //선생님 페이지
       arr[i] = arr[min];
       arr[min] = tmp;
     }
-    console.log(arr);
     return arr.reverse();
   }
   async function pushes(position) {

@@ -24,7 +24,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   const getTokens = async e => {
     if (localStorage?.getItem('code')) {
       try {
-        await axios.get(`${url}/auth/login?code=${localStorage?.getItem('code')}`)
+        await axios.get(`${url}/auth?code=${localStorage?.getItem('code')}`)
           .then(e => {
             const data = e?.data;
             localStorage.setItem('Tokens', JSON.stringify({
@@ -34,45 +34,39 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             localStorage.setItem('accessExp', data?.accessExp);
             localStorage.setItem('refreshsExp', data?.refreshExp);
             localStorage.removeItem("code");
-            // await axios.post(`https://server.gauth.co.kr/oauth/token`, {
-            //   "code": localStorage.getItem('code'),
-            //   "clientId": process.env.REACT_APP_CLIENT_ID,
-            //   "clientSecret": process.env.REACT_APP_CLIENT_SECRET,
-            //   "redirectUri": process.env.REACT_APP_REDIRECT_URL
-            // }).then(async e => {
-            //   const data = e?.data;
-            //   console.log(data);
-            // });
             window.location.href = '/success';
           });
       } catch (e) {
-        console.log('getTokens :', localStorage?.getItem('code'), e);
+        console.log(e);
       }
     }
   }
   const requestInfos = async e => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage?.getItem('Tokens'))?.accessToken}`;
     try {
-      await axios.get(`https://open.gauth.co.kr/user`, {
+      await axios.get(`${url}/user/info`, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage?.getItem('Tokens'))?.accessToken}`
         }
       })
         .then(e => {
           const data = e.data;
-          localStorage.setItem('logininfo', data.name);
+          localStorage.setItem('logininfo', `"${data.name}"`);
           setstorage();
         });
     } catch (e) {
-      console.log(e, `${axios.defaults.headers.common['Authorization']}`);
+      console.log(e);
     }
   }
   //eslint-disable-next-line
   const reGetTokens = async e => {
     await axios.patch(`${url}/auth`,
-      { headers: { "refreshToken": `Bearer ${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
+      { headers: { "Refresh-Token": `Bearer ${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
       .then(e => {
         console.log(e);
+      })
+      .catch(e => {
+        console.log(e)
       });
   }
   useEffect((e) => {
@@ -83,11 +77,9 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       const t = new Date();
       let calt = new Date(localStorage.getItem('accessExp')) - t;
       calt /= 60000;
+      reGetTokens();
       if (calt < 0) { //만료 되었을 때
-        console.log('재발급 필요');
-        reGetTokens();
       } else {
-        console.log(Math.floor(calt) + "분 남음");
         requestInfos();
       }
     }
