@@ -61,7 +61,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   //eslint-disable-next-line
   const reGetTokens = async e => {
     await axios.patch(`${url}/auth`,
-      { headers: { "Refresh-Token": `Bearer ${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
+      { headers: { "Refresh-Token": `${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
       .then(e => {
         console.log(e);
       })
@@ -79,6 +79,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       calt /= 60000;
       reGetTokens();
       if (calt < 0) { //만료 되었을 때
+        reGetTokens();
       } else {
         requestInfos();
       }
