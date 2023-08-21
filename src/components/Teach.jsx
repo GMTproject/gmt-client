@@ -46,29 +46,34 @@ const Teach = () => { //선생님 페이지
   }
   async function pushes(position) {
     const toggle = query.free || query.grade1 || query.grade2 || query.grade3 || query.major || query.skill;
-    await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
-    &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
-      const size = document.body.clientWidth > 520 ? 9 : 4;
-      let datas = e.data.reverse();
-      datas = sort(datas);
-      let crntposi = datas.length - (size * position);
-      setInfos(e => {
-        let topush = [];
-        for (let i = 1; i < 1 + size; i++) {
-          if ((crntposi - i >= 0) && datas[crntposi - i]) {
-            topush.push((crntposi - i >= 0) && datas[crntposi - i]);
+    const t = new Date();
+    let calt = new Date(localStorage.getItem('accessExp')) - t;
+    calt /= 60000;
+    if (calt >= 0) {
+      await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
+      &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
+        const size = document.body.clientWidth > 520 ? 9 : 4;
+        let datas = e.data.reverse();
+        datas = sort(datas);
+        let crntposi = datas.length - (size * position);
+        setInfos(e => {
+          let topush = [];
+          for (let i = 1; i < 1 + size; i++) {
+            if ((crntposi - i >= 0) && datas[crntposi - i]) {
+              topush.push((crntposi - i >= 0) && datas[crntposi - i]);
+            }
           }
-        }
-        return topush;
+          return topush;
+        });
+        setInfolen(e => {
+          let len = [];
+          for (let i = 0; i <= (datas.length - 1) / size; i++) {
+            len.push(i);
+          }
+          return len;
+        });
       });
-      setInfolen(e => {
-        let len = [];
-        for (let i = 0; i <= (datas.length - 1) / size; i++) {
-          len.push(i);
-        }
-        return len;
-      });
-    });
+    }
   }
   useEffect(e => {
     pushes(posi);
