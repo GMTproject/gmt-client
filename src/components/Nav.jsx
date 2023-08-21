@@ -60,13 +60,20 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   }
   //eslint-disable-next-line
   const reGetTokens = async e => {
-    await axios.patch(`${url}/auth`,
-      { headers: { "Refresh-Token": `${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
+    await axios.patch(`${url}/auth`, {},
+      { headers: { "Refresh-Token": `Bearer ${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
       .then(e => {
         console.log(e);
+        const token = e.data;
+        localStorage.setItem('Tokens', JSON.stringify({
+          accessToken: token.accessToken,
+          refreshToken: token.refreshToken
+        }));
+        localStorage.setItem('accessExp', token?.accessExp);
+        localStorage.setItem('refreshsExp', token?.refreshExp);
       })
-      .catch(e => {
-        console.log(e)
+      .catch(err => {
+        console.log(err, "Refresh-Token", `${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}`);
       });
   }
   useEffect((e) => {
@@ -77,7 +84,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       const t = new Date();
       let calt = new Date(localStorage.getItem('accessExp')) - t;
       calt /= 60000;
-      reGetTokens();
+      // reGetTokens();
       if (calt < 0) { //만료 되었을 때
         reGetTokens();
       } else {
