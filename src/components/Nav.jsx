@@ -22,8 +22,8 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   }
   /* 최초 로그인시 */
   const getTokens = async e => {
-    if (new URLSearchParams(window.location.search).get("code")) {
-      try {
+    try {
+      if (new URLSearchParams(window.location.search).get("code")) {
         await axios.get(`${url}/auth?code=${localStorage?.getItem('code')}`)
           .then(e => {
             const data = e?.data;
@@ -35,9 +35,10 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             localStorage.setItem('refreshsExp', data?.refreshExp);
             window.location.href = '/success';
           });
-      } catch (e) {
-        console.log(e);
       }
+    } catch (e) {
+      console.log(e);
+      getTokens();
     }
   }
   const requestInfos = async e => {
