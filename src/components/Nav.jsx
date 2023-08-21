@@ -63,7 +63,6 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     await axios.patch(`${url}/auth`, {},
       { headers: { "Refresh-Token": `Bearer ${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}` } })
       .then(e => {
-        console.log(e);
         const token = e.data;
         localStorage.setItem('Tokens', JSON.stringify({
           accessToken: token.accessToken,
@@ -76,15 +75,14 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
         console.log(err, "Refresh-Token", `${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}`);
       });
   }
-  useEffect((e) => {
+  const initialize = e => {
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       getTokens();
     } else {
       const t = new Date();
       let calt = new Date(localStorage.getItem('accessExp')) - t;
-      calt /= 60000;
-      // reGetTokens();
+      calt /= 60000; //분 단위로
       if (calt < 0) { //만료 되었을 때
         reGetTokens();
       } else {
@@ -92,9 +90,15 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       }
     }
     setstorage();
+  }
+  useEffect((e) => {
+    initialize();
     // eslint-disable-next-line
   }, []);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
+  window.onload = e => {
+    initialize();
+  }
 
   return (
     <div className="navigator">
