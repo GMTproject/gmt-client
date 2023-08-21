@@ -22,7 +22,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
   }
   /* 최초 로그인시 */
   const getTokens = async e => {
-    if (localStorage?.getItem('code')) {
+    if (new URLSearchParams(window.location.search).get("code")) {
       try {
         await axios.get(`${url}/auth?code=${localStorage?.getItem('code')}`)
           .then(e => {
@@ -33,7 +33,6 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             }));
             localStorage.setItem('accessExp', data?.accessExp);
             localStorage.setItem('refreshsExp', data?.refreshExp);
-            localStorage.removeItem("code");
             window.location.href = '/success';
           });
       } catch (e) {
