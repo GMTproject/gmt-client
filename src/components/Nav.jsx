@@ -96,9 +96,6 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
     // eslint-disable-next-line
   }, []);
   window.addEventListener('resize', e => setWinWid(document.body.clientWidth));
-  // window.onload = e => {
-  //   initialize();
-  // }
 
   return (
     <div className="navigator">
