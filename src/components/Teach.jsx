@@ -45,35 +45,48 @@ const Teach = () => { //선생님 페이지
     return arr.reverse();
   }
   async function pushes(position) {
-    const toggle = query.free || query.grade1 || query.grade2 || query.grade3 || query.major || query.skill;
-    const t = new Date();
-    let calt = new Date(localStorage.getItem('accessExp')) - t;
-    calt /= 60000;
-    if (calt >= 0) {
-      await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
+    try {
+      const toggle = query.free || query.grade1 || query.grade2 || query.grade3 || query.major || query.skill;
+      const t = new Date();
+      let calt = new Date(localStorage.getItem('accessExp')) - t;
+      calt /= 60000;
+      if (calt >= 0) {
+        await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
       &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
-        const size = document.body.clientWidth > 520 ? 9 : 4;
-        let datas = e.data.reverse();
-        datas = sort(datas);
-        let crntposi = datas.length - (size * position);
-        setInfos(e => {
-          let topush = [];
-          for (let i = 1; i < 1 + size; i++) {
-            if ((crntposi - i >= 0) && datas[crntposi - i]) {
-              topush.push((crntposi - i >= 0) && datas[crntposi - i]);
+          const size = document.body.clientWidth > 520 ? 9 : 4;
+          let datas = e.data.reverse();
+          datas = sort(datas);
+          let crntposi = datas.length - (size * position);
+          setInfos(e => {
+            let topush = [];
+            for (let i = 1; i < 1 + size; i++) {
+              if ((crntposi - i >= 0) && datas[crntposi - i]) {
+                topush.push((crntposi - i >= 0) && datas[crntposi - i]);
+              }
             }
-          }
-          return topush;
+            return topush;
+          });
+          setInfolen(e => {
+            let len = [];
+            for (let i = 0; i <= (datas.length - 1) / size; i++) {
+              len.push(i);
+            }
+            return len;
+          });
         });
-        setInfolen(e => {
-          let len = [];
-          for (let i = 0; i <= (datas.length - 1) / size; i++) {
-            len.push(i);
-          }
-          return len;
-        });
-      });
+      }
+    } catch (err) {
+      console.log(err);
+      pushes(position);
     }
+  }
+  async function filter(text) {
+    await axios.get(`${url}/teacher/filter?text=${text}`)
+      .then(e => {
+        console.log(e)
+      }).catch(err => {
+        console.log(err)
+      })
   }
   useEffect(e => {
     pushes(posi);
@@ -124,7 +137,9 @@ const Teach = () => { //선생님 페이지
         </div>
       </div>
       {winWid >= 500 && <div className='right'>
-        <input placeholder='찾으시는 선생님을 입력해주세요.' />
+        <input placeholder='찾으시는 선생님을 입력해주세요.' onChange={input => {
+          filter(input.target.value)
+        }} />
         <button><img src={l.search1} alt='search' /></button>
       </div>}
     </div>

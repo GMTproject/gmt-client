@@ -6,10 +6,9 @@ import { logo, search } from "./imgs";
 import axios from "axios";
 const url = 'https://gmt-pmn.shop';
 
-const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
+const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchingAl, setsearching, searching }) => {
   // 네비게이션 바
   const [logined, setLogined] = useState(false);
-  const [text, setText] = useState('');
   const [mapHov, setMapHov] = useState(false);
   const [winWid, setWinWid] = useState(document.body.clientWidth);
   const time = new Date(); // 로그인 시간 저장
@@ -73,6 +72,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
       })
       .catch(err => {
         console.log(err, "Refresh-Token", `${JSON.parse(localStorage?.getItem("Tokens"))?.refreshToken}`);
+        reGetTokens();
       });
   }
   const initialize = e => {
@@ -217,20 +217,20 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning }) => {
             <Link to={'/about'}>
               <img src={logo} alt="logo" />
             </Link>
-            <form className="inputs" onSubmit={e => {
-              e.preventDefault();
-            }}>
-              <input onChange={e => setText(e.target.value)} value={text} />
+            <form className="inputs" onSubmit={
+              searchingAl
+            }>
+              <input onChange={e => setsearching(e.target.value)} value={searching} />
               <div className="imgs" onClick={e => {
                 const cloca = document.location.href.split('/')[3];
-                if (cloca === 'map' && text === '') {
+                if (cloca === 'map' && searching === '') {
                   setSearchWarning(true);
                 }
                 else if (cloca === 'teachers') {
                   console.log('teachers');
                 }
               }}>
-                <img src={search} alt="search" />
+                <img src={search} alt="search" onClick={searchingAl} />
               </div>
             </form>
           </div>
