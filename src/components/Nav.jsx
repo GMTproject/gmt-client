@@ -11,6 +11,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchi
   const [logined, setLogined] = useState(false);
   const [mapHov, setMapHov] = useState(false);
   const [winWid, setWinWid] = useState(document.body.clientWidth);
+  const [willout, setWillout] = useState(false);
   const time = new Date(); // 로그인 시간 저장
   const setstorage = e => {
     if (localStorage.getItem("logininfo") !== "Guest") {
@@ -160,13 +161,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchi
                 <button
                   onClick={(e) => {
                     // 로그아웃하는 버튼
-                    if (window.confirm("정말로 로그아웃 하시겠습니까?")) {
-                      // 로그아웃할 건지 재확인
-                      setLogined((e) => false);
-                      localStorage.clear(); // 로그아웃 시 저장된 모든 정보 삭제
-                      alert("로그아웃됨");
-                      window.location.href = "/welcome";
-                    }
+                    setWillout(true)
                   }}
                 >
                   Logout
@@ -198,14 +193,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchi
                 <span>{logined}</span>&nbsp;&nbsp;
                 <button
                   onClick={(e) => {
-                    // 로그아웃하는 버튼
-                    if (window.confirm("정말로 로그아웃을 하시겠습니까?")) {
-                      // 로그아웃할 건지 재확인
-                      setLogined((e) => false);
-                      localStorage.clear(); // 로그아웃 시 저장된 모든 정보 삭제
-                      alert("로그아웃 됐습니다.");
-                      window.location.href = "/welcome";
-                    }
+                    setWillout(true);
                   }}
                 >
                   Logout
@@ -256,6 +244,23 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchi
         </div>
       </>
       }
+      <div className="sizingwarning" style={{ display: `${willout ? "" : "none"}` }} onClick={e => {
+        setWillout(false);
+      }} />
+      <div className="alert" style={{ display: `${willout ? "" : "none"}` }} onClick={e => {
+        console.log(e)
+      }}>
+        <div>
+          <div>
+            <p>로그아웃 하시겠습니까?</p>
+          </div>
+          <button className="y" onClick={e => {
+            localStorage.clear();
+            window.location.href = '/welcome'
+          }}>확인</button>
+          <button className="n" onClick={e => setWillout(false)}>취소</button>
+        </div>
+      </div>
     </div >
   );
 };

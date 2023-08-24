@@ -47,20 +47,20 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
       setSearchWarning(false);
     }
   }
-  async function getTeachersInfos() {
+  const getTeachersInfos = async e => {
     const BearerToken = JSON.parse(localStorage?.getItem("Tokens"))?.accessToken;
-    try {
-      if (BearerToken) {
+    if (BearerToken) {
+      try {
         await axios.get(`${url}/teachers`,
           { headers: { Authorization: `Bearer ${BearerToken}` } }).then(e => {
             setInfos(e.data);
           }).catch(e =>
             console.log(e, `${BearerToken}`)
           );
+      } catch (e) {
+        console.log(e)
+        getTeachersInfos();
       }
-    } catch (e) {
-      console.log(e)
-      getTeachersInfos();
     }
   }
   const searchingAl = async e => {
@@ -328,7 +328,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
         setSearching={setSearching}
         setWinWid={setWinWid} infos={infos} winWid={winWid}
         setFloor={setFloor} setDomitory={setDomitory} setCenter={setCenter} setGoldencrown={setGoldencrown} setSearchWarning={setSearchWarning} />}
-      <div className="canvas" ref={canvas} onWheel={e => sizing(e)} onTouchMove={e => console.log(e)}>
+      <div className="canvas" ref={canvas} onWheel={e => sizing(e)}>
         <div className="move">
           <div className="floor" onClick={e => setIsfloorClicked(true)} onMouseLeave={e => setIsfloorClicked(false)}>
             {floor}F
