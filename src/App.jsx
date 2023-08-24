@@ -7,7 +7,6 @@ import Welcome from "components/Welcome";
 import Login from "components/Login";
 import Teach from "components/Teach";
 import About from "components/About";
-import Nav from "components/Nav";
 import NotFound from "components/404";
 import Success from "components/success";
 
@@ -46,7 +45,7 @@ function App() {
           <Route path="/" element={navTo('/map', true)} />
           <Route path="*" element={<NotFound />} />
           <Route path="/map" element={<Map structure={structure} floor={floor} setFloor={setFloor} />} />
-          <Route path="/teachers" element={<><Nav /><Teach /></>} />
+          <Route path="/teachers" element={<><Teach /></>} />
           <Route path="/auth" element={<><Login /></>} />
           <Route path="/welcome" element={<><Welcome /></>} />
           <Route path="/about" element={<About />} />
