@@ -23,7 +23,7 @@
     }
 
     .sideleft {
-      overflow-y: scroll;
+      overflow-y: auto;
       width: 22vw;
       height: 85vh;
       margin-left: 3vw;
@@ -48,8 +48,8 @@
 
       .head {
         width: 22vw;
-        position: static;
-        z-index: 3;
+        position: fixed;
+        z-index: 1;
         background-color: #fdfdfd;
 
         input {

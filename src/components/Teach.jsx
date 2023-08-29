@@ -92,7 +92,9 @@ const Teach = () => { //선생님 페이지
       })
   }
   useEffect(e => {
+    // if (localStorage?.getItem("logininfo")) {
     pushes(posi);
+    // }
     //eslint-disable-next-line
   }, [query, winWid]);
   return <>
