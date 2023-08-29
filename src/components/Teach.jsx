@@ -54,7 +54,7 @@ const Teach = () => { //선생님 페이지
       calt /= 60000;
       if (calt >= 0) {
         await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
-      &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : ''}`).then(e => {
+      &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : '?name='}`).then(e => {
           const size = document.body.clientWidth > 520 ? 9 : 4;
           let datas = e.data.reverse();
           datas = sort(datas);
@@ -85,8 +85,7 @@ const Teach = () => { //선생님 페이지
   async function searchingFilter(text) {
     await axios.get(`${url}/teachers?name=${text}`)
       .then(e => {
-        console.log(e.data);
-
+        setInfos(e.data);
       }).catch(err => {
         console.log(err);
       })
