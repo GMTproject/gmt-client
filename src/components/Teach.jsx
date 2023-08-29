@@ -83,9 +83,9 @@ const Teach = () => { //선생님 페이지
     }
   }
   async function searchingFilter(text) {
-    await axios.get(`${url}/teacher?text=${text}`)
+    await axios.get(`${url}/teachers?name=${text}`)
       .then(e => {
-        console.log(e)
+        console.log(e.data)
       }).catch(err => {
         console.log(err)
       })

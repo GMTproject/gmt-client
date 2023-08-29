@@ -80,7 +80,7 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchi
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       getTokens();
-    } else {
+    } else if (localStorage?.getItem('logininfo')) {
       const t = new Date();
       let calt = new Date(localStorage.getItem('accessExp')) - t;
       calt /= 60000; //분 단위로
