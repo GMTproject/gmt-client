@@ -33,7 +33,9 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchi
             }));
             localStorage.setItem('accessExp', data?.accessExp);
             localStorage.setItem('refreshsExp', data?.refreshExp);
-            window.location.href = '/success';
+            if (requestInfos()) {
+              window.location.href = '/success';
+            }
           });
       }
     } catch (e) {
@@ -80,11 +82,11 @@ const Nav = ({ setCenter, setGoldencrown, setDomitory, setSearchWarning, searchi
     const par = new URLSearchParams(window.location.search).get("code");
     if (par !== null) {
       getTokens();
-    } else if (localStorage?.getItem('logininfo')) {
+    } else {
       const t = new Date();
       let calt = new Date(localStorage.getItem('accessExp')) - t;
       calt /= 60000; //분 단위로
-      if (calt < 0) { //만료 되었을 때
+      if (calt < 0 && localStorage?.getItem('logininfo')) { //만료 되었을 때
         reGetTokens();
       } else {
         requestInfos();
