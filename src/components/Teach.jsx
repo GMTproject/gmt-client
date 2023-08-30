@@ -112,6 +112,7 @@ const Teach = () => { //선생님 페이지
 
   useEffect(e => {
     searchingFilter(searching);
+    //eslint-disable-next-line
   }, [searching, posi]);
   useEffect(e => {
     // if (localStorage?.getItem("logininfo")) {
