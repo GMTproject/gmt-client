@@ -54,7 +54,7 @@ const Teach = () => { //선생님 페이지
       calt /= 60000;
       if (calt >= 0) {
         await axios.get(`${url}/teachers/${toggle ? `filter?free=${query.free}&grade1=${query.grade1}
-      &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : '?name='}`).then(e => {
+      &grade2=${query.grade2}&grade3=${query.grade3}&major=${query.major}&skill=${query.skill}` : `?name=`}`).then(e => {
           const size = document.body.clientWidth > 520 ? 9 : 4;
           let datas = e.data.reverse();
           datas = sort(datas);
@@ -85,11 +85,34 @@ const Teach = () => { //선생님 페이지
   async function searchingFilter(text) {
     await axios.get(`${url}/teachers?name=${text}`)
       .then(e => {
-        setInfos(e.data);
+        const size = document.body.clientWidth > 520 ? 9 : 4;
+        let datas = e.data.reverse();
+        datas = sort(datas);
+        let crntposi = datas.length - (size * posi);
+        setInfos(e => {
+          let topush = [];
+          for (let i = 1; i < 1 + size; i++) {
+            if ((crntposi - i >= 0) && datas[crntposi - i]) {
+              topush.push((crntposi - i >= 0) && datas[crntposi - i]);
+            }
+          }
+          return topush;
+        });
+        setInfolen(e => {
+          let len = [];
+          for (let i = 0; i <= (datas.length - 1) / size; i++) {
+            len.push(i);
+          }
+          return len;
+        });
       }).catch(err => {
         console.log(err);
       })
   }
+
+  useEffect(e => {
+    searchingFilter(searching);
+  }, [searching, posi]);
   useEffect(e => {
     // if (localStorage?.getItem("logininfo")) {
     pushes(posi);
@@ -144,8 +167,9 @@ const Teach = () => { //선생님 페이지
         </div>
         {winWid >= 500 && <div className='right'>
           <input placeholder='찾으시는 선생님을 입력해주세요.' onChange={input => {
-            searchingFilter(input.target.value)
-          }} />
+            setSearching(input.target.value);
+            setPosi(0)
+          }} value={searching} />
           <button><img src={l.search1} alt='search' /></button>
         </div>}
       </div>
@@ -180,7 +204,6 @@ const Teach = () => { //선생님 페이지
           infolen.map((i, n) => {
             return <label key={n} onClick={e => {
               setPosi(i);
-              pushes(i);
             }}>
               <div className={`dot ${posi === i ? 'bold' : ''}`} />
             </label>
