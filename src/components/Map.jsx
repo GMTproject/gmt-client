@@ -51,7 +51,7 @@ const Map = ({ structure, floor, setFloor, setCenter, setDomitory, setGoldencrow
     const BearerToken = JSON.parse(localStorage?.getItem("Tokens"))?.accessToken;
     if (BearerToken) {
       try {
-        await axios.get(`${url}/teachers`,
+        await axios.get(`${url}/teachers?name=`,
           { headers: { Authorization: `Bearer ${BearerToken}` } }).then(e => {
             setInfos(e.data);
           }).catch(e =>
